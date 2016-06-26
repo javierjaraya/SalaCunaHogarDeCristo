@@ -98,7 +98,7 @@ $RunPersona= htmlspecialchars($_REQUEST['runPersona']);
                             <div class="span12">
                                 <div class="social-box social-bordered social-blue">
                                     <div class="header">
-                                        <h4>Menor</h4>
+                                        <h4>Borrar Menor</h4>
                                     </div>
                                     <div class="body" style="text-align: center;">
                                         <div class="row-fluid">
@@ -173,15 +173,6 @@ $RunPersona= htmlspecialchars($_REQUEST['runPersona']);
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
-                                                        <label class="control-label" for="Estado">Estado</label>
-                                                        <div class="controls">
-                                                            <select id="Estado" name="Estado">
-                                                                <option value="1">Deshabilitado</option>
-                                                                <option value="2">Habilitado</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
                                                         <label class="control-label" for="RunApoderado">Run Apoderado</label>
                                                         <div class="controls">
                                                             <input type="text" name="RunApoderado" class="input-xlarge" id="RunApoderado">
@@ -197,9 +188,6 @@ $RunPersona= htmlspecialchars($_REQUEST['runPersona']);
                                                 <input type="hidden" id="accion" name="accion" value="">
                                                 <input type="hidden" id="RunEditar" name="RunEditar" value="<?php echo $RunPersona; ?>">
                                             </form>
-
-
-
                                             <!-- FIN FORMULARIO-->
                                         </div>
                                     </div>
@@ -300,7 +288,6 @@ $RunPersona= htmlspecialchars($_REQUEST['runPersona']);
                             document.getElementById("FechaNacimiento").value = dato.FechaNacimiento;
                             document.getElementById("Telefono").value = dato.Telefono;
                             document.getElementById("Direccion").value = dato.Direccion;
-                            document.getElementById("Estado").value = dato.IdEstado;
                             document.getElementById("FechaMatricula").value = dato.FechaMatricula;
                             document.getElementById("IdNivel").value = dato.IdNivel;                                                 
                             document.getElementById("RunApoderado").value = dato.RunApoderado;

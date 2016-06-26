@@ -136,7 +136,6 @@ if ($accion != null) {
         $FechaNacimiento = htmlspecialchars($_REQUEST['FechaNacimiento']);
         $Telefono = htmlspecialchars($_REQUEST['Telefono']);
         $Direccion = htmlspecialchars($_REQUEST['Direccion']);
-        $IdEstado = htmlspecialchars($_REQUEST['Estado']);
         $RunEditar = htmlspecialchars($_REQUEST['RunEditar']);
         $Clave = htmlspecialchars($_REQUEST['Clave']);
 
@@ -153,7 +152,6 @@ if ($accion != null) {
         $persona->setFechaNacimiento($FechaNacimiento);
         $persona->setTelefono($Telefono);
         $persona->setDireccion($Direccion);
-        $persona->setIdEstado($IdEstado);
 
         $resultPersona = $control->updatePersona($persona);
 

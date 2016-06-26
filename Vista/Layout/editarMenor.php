@@ -99,7 +99,7 @@ $runPersona = htmlspecialchars($_REQUEST['runPersona']);
                             <div class="span12">
                                 <div class="social-box social-bordered social-blue">
                                     <div class="header">
-                                        <h4>Menores Vigentes</h4>
+                                        <h4>Editar Datos Menores Vigentes</h4>
                                     </div>
                                     <div class="body" style="text-align: center;">
                                         <div class="row-fluid">
@@ -187,6 +187,8 @@ $runPersona = htmlspecialchars($_REQUEST['runPersona']);
 
                                                 <input type="hidden" id="accion" name="accion" value="">
                                                 <input type="hidden" id="RunEditar" name="RunEditar" value="<?php echo $runPersona; ?>">
+                                                <input type="hidden" id="RunApoderadoRespaldo" name="RunApoderadoRespaldo" value="">
+
                                             </form>
                                             <!-- FIN FORMULARIO-->
                                         </div>
@@ -291,28 +293,35 @@ $runPersona = htmlspecialchars($_REQUEST['runPersona']);
                                                                             document.getElementById("FechaMatricula").value = dato.FechaMatricula;
                                                                             document.getElementById("IdNivel").value = dato.IdNivel;
                                                                             document.getElementById("RunApoderado").value = dato.RunApoderado;
+                                                                            document.getElementById("RunApoderadoRespaldo").value = dato.RunApoderado;
                                                                         }
                                                                 );
                                                             }
 
                                                             function guardarMenor() {
                                                                 document.getElementById("accion").value = "ACTUALIZAR";
-                                                                if (validar()) {
-                                                                    $('#fm-Menor').form('submit', {
-                                                                        url: "../Servlet/administrarMenor.php",
-                                                                        onSubmit: function () {
-                                                                            return $(this).form('validate');
-                                                                        },
-                                                                        success: function (result) {
-                                                                            console.log(result);
-                                                                            var result = eval('(' + result + ')');
-                                                                            if (result.errorMsg) {
-                                                                                $.messager.alert('Error', result.errorMsg);
-                                                                            } else {
-                                                                                window.location = "administrarMenorDirectora.php";
+                                                                var runApoderado = document.getElementById("RunApoderado").value;
+                                                                var runApoderadoRespaldo = document.getElementById("RunApoderadoRespaldo").value;
+                                                                if (runApoderado == runApoderadoRespaldo) {
+                                                                    if (validar()) {
+                                                                        $('#fm-Menor').form('submit', {
+                                                                            url: "../Servlet/administrarMenor.php",
+                                                                            onSubmit: function () {
+                                                                                return $(this).form('validate');
+                                                                            },
+                                                                            success: function (result) {
+                                                                                console.log(result);
+                                                                                var result = eval('(' + result + ')');
+                                                                                if (result.errorMsg) {
+                                                                                    $.messager.alert('Error', result.errorMsg);
+                                                                                } else {
+                                                                                    window.location = "administrarMenorDirectora.php";
+                                                                                }
                                                                             }
-                                                                        }
-                                                                    });
+                                                                        });
+                                                                    }
+                                                                }else{
+                                                                    
                                                                 }
                                                             }
 
