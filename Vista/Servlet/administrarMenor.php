@@ -18,7 +18,6 @@ if ($accion != null) {
         $FechaNacimiento = htmlspecialchars($_REQUEST['FechaNacimiento']);
         $Telefono = htmlspecialchars($_REQUEST['Telefono']);
         $Direccion = htmlspecialchars($_REQUEST['Direccion']);
-        $IdEstado = htmlspecialchars($_REQUEST['Estado']);
         $FechaMatricula = htmlspecialchars($_REQUEST['FechaMatricula']);
         $IdNivel = htmlspecialchars($_REQUEST['IdNivel']);
         $RunApoderado = htmlspecialchars($_REQUEST['RunApoderado']);
@@ -47,7 +46,7 @@ if ($accion != null) {
                     $persona->setFechaNacimiento($FechaNacimiento);
                     $persona->setTelefono($Telefono);
                     $persona->setDireccion($Direccion);
-                    $persona->setIdEstado($IdEstado);
+                    $persona->setIdEstado(2);
 
                     //VALIDAMOS QUE LA PERSONA EXISTA O ACTUALIZAMOS SUS DATOS
                     $personaAux = $control->getPersonaByID($RunPersona);
@@ -85,24 +84,23 @@ if ($accion != null) {
         //cantidad alumnos
         $RunApoderado = $control->BuscaApoderadoMenor($RunPersona);
         $cantidadMenores = $control->contarMenoresActivos($RunApoderado);
+        $result = false;
         if ($cantidadMenores == 1) {
             $persona->setIdEstado(1); //1 = Inactivo , 2 = Activo
             $resulPersona = $control->updatePersona($persona);
             //Apoderado
-            $PersonaApoderado = getPersonaByID($RunApoderado);
-            $PersonaApoderado = setIdEstado(1); //si es el unico alumno
+            $PersonaApoderado = $control->getPersonaByID($RunApoderado);
+            $PersonaApoderado->setIdEstado(1); //si es el unico alumno
             $resulPersonaApod = $control->updatePersona($PersonaApoderado);
             $resultUsuario = $control->removeUsuario($RunApoderado); //se borra el usuario
+            $result = $resulPersona && $resultUsuario && $resulPersonaApod ? true : false;
         } else {
             if ($cantidadMenores > 1) {
                 $persona->setIdEstado(1); //1 = Inactivo , 2 = Activo
                 $resulPersona = $control->updatePersona($persona);
-            } else {
-                echo json_encode(array('success' => true, 'mensaje' => "No existen menores asociados al apoderado"));
+                $result = $resulPersona;
             }
         }
-
-        $result = $resulPersona && $resultUsuario && $resulPersonaApod ? true : false;
 
         if ($result) {
             echo json_encode(array('success' => true, 'mensaje' => "Apoderado borrado correctamente"));

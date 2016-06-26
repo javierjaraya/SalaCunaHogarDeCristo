@@ -172,15 +172,7 @@ $perfil = $_SESSION["idPerfil"];
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    <div class="control-group">
-                                                        <label class="control-label" for="Estado">Estado</label>
-                                                        <div class="controls">
-                                                            <select id="Estado" name="Estado">
-                                                                <option value="1">Habilitado</option>
-                                                                <option value="2">Deshabilitado</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
+                                                  
                                                     <div class="control-group">
                                                         <label class="control-label" for="RunApoderado">Run Apoderado</label>
                                                         <div class="controls">

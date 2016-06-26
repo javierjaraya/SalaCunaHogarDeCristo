@@ -101,12 +101,12 @@ class MenorDAO {
         $this->conexion->conectar();
         $query = "SELECT m.RunApoderado FROM menor as m WHERE  m.RunPersona = '" . $RunPersona . "' ";
         $result = $this->conexion->ejecutar($query);
-        $menor = new MenorDTO();
+        $RunApoderado = 0;
         while ($fila = $result->fetch_row()) {
-            $menor->setRunApoderado($fila[1]);
+            $RunApoderado = $fila[0];
         }
         $this->conexion->desconectar();
-        return $menor;
+        return $RunApoderado;
     }
      public function contarMenoresActivos($runApoderado){
         $this->conexion->conectar();

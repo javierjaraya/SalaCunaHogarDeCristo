@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<?php
-session_start();
+<?php session_start();
 if ($_SESSION['autentificado'] != "SI") {
     header("Location: ../../../index.php");
 }
@@ -200,7 +199,7 @@ $perfil = $_SESSION["idPerfil"];
             //Menores
             $(function () {
                 cargarMenores();
-            })
+            });
 
             function cargarMenores() {
                 $("#tablaMenores").empty();
@@ -208,7 +207,7 @@ $perfil = $_SESSION["idPerfil"];
                 $.getJSON(
                         url_json,
                         function (datos) {
-                            console.log(datos);
+                            //console.log(datos);
                             $.each(datos, function (k, v) {
                                 var contenido = "<tr>";
                                 contenido += "<td>" + v.RunPersona + "</td>";
@@ -220,8 +219,8 @@ $perfil = $_SESSION["idPerfil"];
                                 contenido += "<td>" + v.RunApoderado + "</td>";
                                 contenido += "<td>" + v.SituacionSocioeconomica + "</td>";
                                 contenido += "<td>";
-                                contenido += "<button type='button' class='btn btn-warning btn-circle icon-pencil'  onclick='editar(" + v.RunPersona + ")'></button>";
-                                contenido += "<button type='button' class='btn btn-danger btn-circle icon-trash'  onclick='borrar(" + v.RunPersona + ")'></button>";
+                                contenido += "<button type='button' class='btn btn-warning btn-circle icon-pencil' onclick='editar(\"" + v.RunPersona + "\")'></button>";
+                                contenido += "<button type='button' class='btn btn-danger btn-circle icon-trash' onclick='borrar(\"" + v.RunPersona + "\")'></button>";
                                 contenido += "</td>";
                                 contenido += "</tr>";
                                 $("#tablaMenores").append(contenido);
@@ -230,7 +229,7 @@ $perfil = $_SESSION["idPerfil"];
                 );
             }
 
-            function editar(RunPersona) {
+            function editar(RunPersona) {               
                 window.location = "editarMenor.php?runPersona=" + RunPersona;
             }
 

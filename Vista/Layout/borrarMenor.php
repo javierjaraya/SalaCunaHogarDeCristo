@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<?php
-session_start();
+<?php session_start();
 if ($_SESSION['autentificado'] != "SI") {
     header("Location: ../../../index.php");
 }
@@ -177,8 +176,8 @@ $RunPersona= htmlspecialchars($_REQUEST['runPersona']);
                                                         <label class="control-label" for="Estado">Estado</label>
                                                         <div class="controls">
                                                             <select id="Estado" name="Estado">
-                                                                <option value="1">Habilitado</option>
-                                                                <option value="2">Deshabilitado</option>
+                                                                <option value="1">Deshabilitado</option>
+                                                                <option value="2">Habilitado</option>
                                                             </select>
                                                         </div>
                                                     </div>

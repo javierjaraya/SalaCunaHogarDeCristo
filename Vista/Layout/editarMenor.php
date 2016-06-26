@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<?php
-session_start();
+<?php session_start();
 if ($_SESSION['autentificado'] != "SI") {
     header("Location: ../../../index.php");
 }
 $perfil = $_SESSION["idPerfil"];
-$RunApoderado = htmlspecialchars($_REQUEST['runApoderado']);
+$RunApoderado = htmlspecialchars($_REQUEST['runPersona']);
 ?>
 <html lang="en">
     <head>
