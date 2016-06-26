@@ -175,8 +175,9 @@ $runPersona = htmlspecialchars($_REQUEST['runPersona']);
 
                                                     <div class="control-group">
                                                         <label class="control-label" for="RunApoderado">Run Apoderado</label>
-                                                        <div class="controls">
-                                                            <input type="text" name="RunApoderado" class="input-xlarge" id="RunApoderado">
+                                                        <div class="controls">                                                            
+                                                            <select id="RunApoderado" name="RunApoderado">                                                                
+                                                            </select>
                                                         </div>
                                                     </div>  
                                                     <div class="form-actions">
@@ -186,8 +187,7 @@ $runPersona = htmlspecialchars($_REQUEST['runPersona']);
                                                 </fieldset>
 
                                                 <input type="hidden" id="accion" name="accion" value="">
-                                                <input type="hidden" id="RunEditar" name="RunEditar" value="<?php echo $runPersona; ?>">
-                                                <input type="hidden" id="RunApoderadoRespaldo" name="RunApoderadoRespaldo" value="">
+                                                <input type="hidden" id="RunEditar" name="RunEditar" value="<?php echo $runPersona; ?>">                                                
 
                                             </form>
                                             <!-- FIN FORMULARIO-->
@@ -269,9 +269,9 @@ $runPersona = htmlspecialchars($_REQUEST['runPersona']);
         <script>
                                                             //APODERADOS
                                                             $(function () {
-                                                                obtenerDatosMenor();
-
-                                                            })
+                                                                cargarApoderados();
+                                                                obtenerDatosMenor();                                                                
+                                                            });
 
                                                             function obtenerDatosMenor() {
                                                                 var runEditar = document.getElementById("RunEditar").value;
@@ -293,36 +293,27 @@ $runPersona = htmlspecialchars($_REQUEST['runPersona']);
                                                                             document.getElementById("FechaMatricula").value = dato.FechaMatricula;
                                                                             document.getElementById("IdNivel").value = dato.IdNivel;
                                                                             document.getElementById("RunApoderado").value = dato.RunApoderado;
-                                                                            document.getElementById("RunApoderadoRespaldo").value = dato.RunApoderado;
                                                                         }
                                                                 );
                                                             }
 
                                                             function guardarMenor() {
                                                                 document.getElementById("accion").value = "ACTUALIZAR";
-                                                                var runApoderado = document.getElementById("RunApoderado").value;
-                                                                var runApoderadoRespaldo = document.getElementById("RunApoderadoRespaldo").value;
-                                                                if (runApoderado == runApoderadoRespaldo) {
-                                                                    if (validar()) {
-                                                                        $('#fm-Menor').form('submit', {
-                                                                            url: "../Servlet/administrarMenor.php",
-                                                                            onSubmit: function () {
-                                                                                return $(this).form('validate');
-                                                                            },
-                                                                            success: function (result) {
-                                                                                console.log(result);
-                                                                                var result = eval('(' + result + ')');
-                                                                                if (result.errorMsg) {
-                                                                                    $.messager.alert('Error', result.errorMsg);
-                                                                                } else {
-                                                                                    window.location = "administrarMenorDirectora.php";
-                                                                                }
-                                                                            }
-                                                                        });
+                                                                $('#fm-Menor').form('submit', {
+                                                                    url: "../Servlet/administrarMenor.php",
+                                                                    onSubmit: function () {
+                                                                        return $(this).form('validate');
+                                                                    },
+                                                                    success: function (result) {
+                                                                        console.log(result);
+                                                                        var result = eval('(' + result + ')');
+                                                                        if (result.errorMsg) {
+                                                                            $.messager.alert('Error', result.errorMsg);
+                                                                        } else {
+                                                                            window.location = "administrarMenorDirectora.php";
+                                                                        }
                                                                     }
-                                                                }else{
-                                                                    
-                                                                }
+                                                                });
                                                             }
 
                                                             function validar() {
@@ -365,6 +356,20 @@ $runPersona = htmlspecialchars($_REQUEST['runPersona']);
                                                                     $.messager.alert("Alerta", "El run ingresado no es valido");
                                                                 }
                                                                 return false;
+                                                            }
+
+                                                            function cargarApoderados() {
+                                                                $("#RunApoderado").empty();
+                                                                var url_json = '../Servlet/administrarApoderado.php?accion=LISTADO';
+                                                                $.getJSON(
+                                                                        url_json,
+                                                                        function (datos) {                                                                            
+                                                                            $.each(datos, function (k, v) {
+                                                                                var contenido = "<option value='" + v.RunPersona + "'>" + v.Nombres + " " + v.Apellidos + "</option>";
+                                                                                $("#RunApoderado").append(contenido);
+                                                                            });
+                                                                        }
+                                                                );
                                                             }
 
         </script>

@@ -277,7 +277,7 @@ $runPersona = $_SESSION["run"];
                 $.getJSON(
                         url_json,
                         function (dato) {  
-                            console.log(dato);
+                            //console.log(dato);
                             document.getElementById("Run").value = dato.RunPersona;
                             document.getElementById("Nombres").value = dato.persona.Nombres;
                             document.getElementById("Apellidos").value = dato.persona.Apellidos;                            
@@ -302,7 +302,7 @@ $runPersona = $_SESSION["run"];
                             return $(this).form('validate');
                         },
                         success: function (result) {
-                            console.log(result);
+                            //console.log(result);
                             var result = eval('(' + result + ')');
                             if (result.errorMsg) {
                                 $.messager.alert('Error', result.errorMsg);

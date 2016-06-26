@@ -138,7 +138,7 @@ class MenorDAO {
     }
      public function contarMenoresActivos($runApoderado){
         $this->conexion->conectar();
-        $query = "SELECT COUNT(*) FROM apoderado a JOIN menor m ON a.RunPersona = m.RunApoderado JOIN persona p ON m.RunPersona = p.RunPersona WHERE p.IdEstado=2";
+        $query = "SELECT COUNT(*) FROM apoderado a JOIN menor m ON a.RunPersona = m.RunApoderado JOIN persona p ON m.RunPersona = p.RunPersona WHERE p.IdEstado=2 AND m.RunApoderado = '".$runApoderado."'";
         $result = $this->conexion->ejecutar($query);
         $cantidad = 0;
         while ($fila = $result->fetch_row()) {

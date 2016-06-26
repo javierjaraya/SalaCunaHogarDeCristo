@@ -289,6 +289,7 @@ $RunApoderado = htmlspecialchars($_REQUEST['runApoderado']);
             function obtenerDatosApoderado() {
                 var runEditar = document.getElementById("RunEditar").value;
                 var url_json = '../Servlet/administrarApoderado.php?accion=BUSCAR_BY_ID&RunPersona=' + runEditar;
+                console.log(url_json);
                 $.getJSON(
                         url_json,
                         function (dato) {

@@ -10,7 +10,7 @@ if ($accion != null) {
         $menors = $control->getAllMenorsHabilitados();
         $json = json_encode($menors);
         echo $json;
-    }else if ($accion == "LISTADOHISTORICO") {
+    } else if ($accion == "LISTADOHISTORICO") {
         $menors = $control->getAllMenorsDesHabilitados();
         $json = json_encode($menors);
         echo $json;
@@ -20,7 +20,7 @@ if ($accion != null) {
         $menors = $control->getAllMenorsHabilitadosByRunApoderado($runApoderado);
         $json = json_encode($menors);
         echo $json;
-    }else if ($accion == "AGREGAR") {
+    } else if ($accion == "AGREGAR") {
         $RunPersona = htmlspecialchars($_REQUEST['Run']);
         $Nombres = htmlspecialchars($_REQUEST['Nombres']);
         $Apellidos = htmlspecialchars($_REQUEST['Apellidos']);
@@ -128,23 +128,25 @@ if ($accion != null) {
         $json = json_encode($menor);
         echo $json;
     } else if ($accion == "ACTUALIZAR") {
-        $RunApoderado = htmlspecialchars($_REQUEST['Run']);
+        $RunMenor = htmlspecialchars($_REQUEST['Run']);
         $Nombres = htmlspecialchars($_REQUEST['Nombres']);
         $Apellidos = htmlspecialchars($_REQUEST['Apellidos']);
+        $IdNivel = htmlspecialchars($_REQUEST['IdNivel']);
         $Sexo = htmlspecialchars($_REQUEST['Sexo']);
-        $SituacionSocioeconomica = htmlspecialchars($_REQUEST['Quintil']);
         $FechaNacimiento = htmlspecialchars($_REQUEST['FechaNacimiento']);
+        $FechaMatricula = htmlspecialchars($_REQUEST['FechaMatricula']);
         $Telefono = htmlspecialchars($_REQUEST['Telefono']);
         $Direccion = htmlspecialchars($_REQUEST['Direccion']);
         $RunEditar = htmlspecialchars($_REQUEST['RunEditar']);
-        $Clave = htmlspecialchars($_REQUEST['Clave']);
+        $RunApoderado = htmlspecialchars($_REQUEST['RunApoderado']);        
 
-        $apoderado = new ApoderadoDTO();
-        $apoderado->setRunPersona($RunEditar);
-        $apoderado->setSituacionSocioeconomica($SituacionSocioeconomica);
-        $resultApoderado = $control->updateApoderado($apoderado);
-
-        $persona = new PersonaDTO();
+        //ACTUALIZAR MENOR
+        $menor = $control->getMenorByID($RunEditar);
+        $menor->setRunPersona($RunEditar);
+        $menor->setFechaMatricula($FechaMatricula);
+        $menor->setIdNivel($IdNivel);
+        
+        $persona = $control->getPersonaByID($RunEditar);
         $persona->setRunPersona($RunEditar);
         $persona->setNombres($Nombres);
         $persona->setApellidos($Apellidos);
@@ -152,20 +154,37 @@ if ($accion != null) {
         $persona->setFechaNacimiento($FechaNacimiento);
         $persona->setTelefono($Telefono);
         $persona->setDireccion($Direccion);
-
-        $resultPersona = $control->updatePersona($persona);
-
-        $usuario = $control->getUsuarioByRun($RunEditar);
-        $usuario->setClave($Clave);
-
-        $resultUsuario = $control->updateUsuario($usuario);
-
-        $result = $resultApoderado && $resultPersona && $resultUsuario ? true : false;
+        
+        $resultMenor = false;
+        $resultPersona = false;
+        if(strcmp($menor->getRunApoderado(),$RunApoderado)== 0) {
+            //ACTUALIZAMOS EL MENOR CON EL MISMO APODERADO
+            $resultPersona = $control->updatePersona($persona);
+            $resultMenor = $control->updateMenor($menor); 
+        }else {
+            //ACTUALIZAMOS EL MENOR CON EL NUEVO APODERADO
+            $runApoderadoAnterior = $menor->getRunApoderado();
+            $menor->setRunApoderado($RunApoderado);
+            
+            $resultPersona = $control->updatePersona($persona);
+            $resultMenor = $control->updateMenor($menor); 
+            
+            //VALIDAMOS QUE EL APODERADO ANTERIOR TENGAS AL MENOR UN MENOR
+            $cantidadMenores = $control->contarMenoresActivos($runApoderadoAnterior);
+            if($cantidadMenores == 0){
+                $personaApoderadoAnterior = $control->getPersonaByID($runApoderadoAnterior);
+                $personaApoderadoAnterior->setIdEstado(1);
+                $control->updatePersona($personaApoderadoAnterior);
+                $control->removeUsuario($runApoderadoAnterior);
+            }
+        }
+        
+        $result = $resultMenor && $resultPersona ? true : false;
 
         if ($result) {
             echo json_encode(array(
                 'success' => true,
-                'mensaje' => "Apoderado actualizada correctamente"
+                'mensaje' => "Menor actualizada correctamente"
             ));
         } else {
             echo json_encode(array('errorMsg' => 'Ha ocurrido un error.'));
