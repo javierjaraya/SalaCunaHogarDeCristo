@@ -285,7 +285,7 @@ $sexo = $_SESSION["sexo"];
                                     <img  width="27" height="27"  class="img-circle" src="../../Files/img/<?php echo $sexo;?>.jpg" alt='amdin user'>&nbsp;<?php echo $nombre;?>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/Vista/public_profile.html"><i class="icon-user icon-white"></i> Perfil</a></li>
+                                    <li><a href="editarMiPefilTrabajadores.php"><i class="icon-user icon-white"></i> Mi Perfil</a></li>
                                     <li><a href="/Vista/login.html"><i class="icon-off icon-white"></i> Logout</a></li>
                                 </ul>
                             </li>

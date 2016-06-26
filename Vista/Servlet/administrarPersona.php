@@ -118,5 +118,10 @@ if ($accion != null) {
         } else {
             echo json_encode(array('errorMsg' => 'Ha ocurrido un error.'));
         }
+    } else if ($accion == "ACTUALIZAR_MI_PERFIL_TRABAJADOR") {
+        $RunPersona = htmlspecialchars($_REQUEST['runPersonaEditar']);
+        $Telefono = htmlspecialchars($_REQUEST['Telefono']);
+        $Direccion = htmlspecialchars($_REQUEST['Direccion']);
+        $clave = htmlspecialchars($_REQUEST['Clave']);
     }
 }

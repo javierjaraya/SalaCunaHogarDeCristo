@@ -5,6 +5,7 @@ class TrabajadorDTO {
     public $Cargo;
     
     public $persona;
+    public $usuario;
 
     public function TrabajadorDTO(){
     }
@@ -40,5 +41,12 @@ class TrabajadorDTO {
     function setPersona($persona) {
         $this->persona = $persona;
     }
+    
+    function getUsuario() {
+        return $this->usuario;
+    }
 
+    function setUsuario($usuario) {
+        $this->usuario = $usuario;
+    }   
 }

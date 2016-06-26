@@ -40,13 +40,30 @@ class TrabajadorDAO {
 
     public function findByID($RunPersona) {
         $this->conexion->conectar();
-        $query = "SELECT * FROM trabajador WHERE  RunPersona = '" . $RunPersona . "' ";
+        $query = "SELECT t.RunPersona, t.Titulo, t.Cargo, p.Nombres, p.Apellidos, p.Sexo, p.FechaNacimiento, p.Telefono, p.Direccion, p.IdEstado, u.Clave, u.IdPerfil FROM trabajador t JOIN persona p ON t.RunPersona = p.RunPersona JOIN usuario u ON u.RunPersona = p.RunPersona WHERE  t.RunPersona = '" . $RunPersona . "' ";
         $result = $this->conexion->ejecutar($query);
         $trabajador = new TrabajadorDTO();
         while ($fila = $result->fetch_row()) {
             $trabajador->setRunPersona($fila[0]);
             $trabajador->setTitulo($fila[1]);
             $trabajador->setCargo($fila[2]);
+            
+            $persona = new PersonaDTO();
+            $persona->setRunPersona($fila[0]);
+            $persona->setNombres($fila[3]);
+            $persona->setApellidos($fila[4]);
+            $persona->setSexo($fila[5]);
+            $persona->setFechaNacimiento($fila[6]);
+            $persona->setTelefono($fila[7]);
+            $persona->setDireccion($fila[8]);
+            $persona->setIdEstado($fila[9]);
+            
+            $usuario = new UsuarioDTO();
+            $usuario->setClave(10);
+            $usuario->setIdPerfil(11);
+            
+            $trabajador->setPersona($persona);
+            $trabajador->setUsuario($usuario);
         }
         $this->conexion->desconectar();
         return $trabajador;
