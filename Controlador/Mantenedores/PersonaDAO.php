@@ -54,6 +54,7 @@ class PersonaDAO{
             $persona->setTelefono($fila[5]);
             $persona->setDireccion($fila[6]);
             $persona->setIdEstado($fila[7]);
+            
         }
         $this->conexion->desconectar();
         return $persona;

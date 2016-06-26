@@ -10,7 +10,13 @@ if ($accion != null) {
         $menors = $control->getAllMenorsHabilitados();
         $json = json_encode($menors);
         echo $json;
-    } else if ($accion == "AGREGAR") {
+    } else if ($accion == "LISTADO_BY_APODERADO") {
+        session_start();
+        $runApoderado = $_SESSION["run"];
+        $menors = $control->getAllMenorsHabilitadosByRunApoderado($runApoderado);
+        $json = json_encode($menors);
+        echo $json;
+    }else if ($accion == "AGREGAR") {
         $RunPersona = htmlspecialchars($_REQUEST['Run']);
         $Nombres = htmlspecialchars($_REQUEST['Nombres']);
         $Apellidos = htmlspecialchars($_REQUEST['Apellidos']);

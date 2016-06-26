@@ -75,21 +75,45 @@ if ($accion != null) {
         $Direccion = htmlspecialchars($_REQUEST['Direccion']);
         $IdEstado = htmlspecialchars($_REQUEST['IdEstado']);
 
-            $persona = new PersonaDTO();
-            $persona->setRunPersona($RunPersona);
-            $persona->setNombres($Nombres);
-            $persona->setApellidos($Apellidos);
-            $persona->setSexo($Sexo);
-            $persona->setFechaNacimiento($FechaNacimiento);
-            $persona->setTelefono($Telefono);
-            $persona->setDireccion($Direccion);
-            $persona->setIdEstado($IdEstado);
+        $persona = new PersonaDTO();
+        $persona->setRunPersona($RunPersona);
+        $persona->setNombres($Nombres);
+        $persona->setApellidos($Apellidos);
+        $persona->setSexo($Sexo);
+        $persona->setFechaNacimiento($FechaNacimiento);
+        $persona->setTelefono($Telefono);
+        $persona->setDireccion($Direccion);
+        $persona->setIdEstado($IdEstado);
 
         $result = $control->updatePersona($persona);
         if ($result) {
             echo json_encode(array(
                 'success' => true,
                 'mensaje' => "Persona actualizada correctamente"
+            ));
+        } else {
+            echo json_encode(array('errorMsg' => 'Ha ocurrido un error.'));
+        }
+    } else if ($accion == "ACTUALIZAR_MI_PERFIL_APODERADO") {
+        $RunPersona = htmlspecialchars($_REQUEST['runPersonaEditar']);
+        $Telefono = htmlspecialchars($_REQUEST['Telefono']);
+        $Direccion = htmlspecialchars($_REQUEST['Direccion']);
+        $clave = htmlspecialchars($_REQUEST['Clave']);
+
+        $persona = $control->getPersonaByID($RunPersona);        
+        $persona->setTelefono($Telefono);
+        $persona->setDireccion($Direccion);
+        
+        $usuario = $control->getUsuarioByRun($RunPersona);
+        $usuario->setClave($clave);
+        
+        $resultPersona = $control->updatePersona($persona);
+        $resulUsuario = $control->updateUsuario($usuario);
+        
+        if($resultPersona && $resulUsuario){
+            echo json_encode(array(
+                'success' => true,
+                'mensaje' => "Datos actualizada correctamente"
             ));
         } else {
             echo json_encode(array('errorMsg' => 'Ha ocurrido un error.'));

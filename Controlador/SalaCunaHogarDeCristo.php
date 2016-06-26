@@ -184,6 +184,10 @@ class SalaCunaHogarDeCristo {
     public function getAllMenorsHabilitados() {
         return $this->menorDAO->findAllHabilitados();
     }
+    
+    public function getAllMenorsHabilitadosByRunApoderado($runApoderado) {
+        return $this->menorDAO->findAllHabilitadosByApoderado($runApoderado);
+    }
 
     public function getAllMenorsDesHabilitados() {
         return $this->menorDAO->findAllDesHabilitados();

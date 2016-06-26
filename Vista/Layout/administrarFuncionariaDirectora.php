@@ -47,9 +47,9 @@ $perfil = $_SESSION["idPerfil"];
         if ($perfil == 1) {
             include '../Menus/directoraSuperior.php';
         } else if ($perfil == 2) {
-            include '../Menus/apoderadoSuperior.php';
-        } else if ($perfil == 3) {
             include '../Menus/educadoraSuperior.php';
+        } else if ($perfil == 3) {
+            include '../Menus/apoderadoSuperior.php';
         }
         ?>
         <!-- FIN MENU SUPERIOR-->
@@ -75,9 +75,9 @@ $perfil = $_SESSION["idPerfil"];
                     if ($perfil == 1) {
                         include '../Menus/directoraLeft.php';
                     } else if ($perfil == 2) {
-                        include '../Menus/apoderadoLeft.php';
-                    } else if ($perfil == 3) {
                         include '../Menus/educadoraLeft.php';
+                    } else if ($perfil == 3) {
+                        include '../Menus/apoderadoLeft.php';
                     }
                     ?>
                     <!-- FIN MENU LEFT-->

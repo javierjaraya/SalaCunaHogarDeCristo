@@ -20,7 +20,7 @@
 
                 </a>
                 <ul class="submenu">
-                    <li><a href="/Vista/users.html"><i class="icon-list icon-2x"></i>Ficha</a></li>
+                    <li><a href="administrarMenorApoderado.php"><i class="icon-list icon-2x"></i>Ver Menores</a></li>
                 </ul>
             </li>
             <li>

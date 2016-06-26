@@ -5,6 +5,7 @@ if ($_SESSION['autentificado'] != "SI") {
     header("Location: ../../../index.php");
 }
 $perfil = $_SESSION["idPerfil"];
+$runPersona = $_SESSION["run"];
 ?>
 <html lang="en">
     <head>
@@ -98,51 +99,52 @@ $perfil = $_SESSION["idPerfil"];
                             <div class="span12">
                                 <div class="social-box social-bordered social-blue">
                                     <div class="header">
-                                        <h4>Menor</h4>
+                                        <h4>Mi perfil</h4>
                                     </div>
                                     <div class="body" style="text-align: center;">
                                         <div class="row-fluid">
                                             <!-- CONTENIDO AQUI -->
 
                                             <!-- INICIO FORMULARIO -->
-                                            <form id="fm-menor" class="form-horizontal well">
+                                            <form id="fm-persona" class="form-horizontal well">
                                                 <fieldset>
-                                                    <legend>Datos Menor</legend>
+                                                    <legend>Mis Datos</legend>
 
                                                     <div class="control-group">
                                                         <label class="control-label" for="Run">Run</label>
                                                         <div class="controls">
-                                                            <input class="input-xlarge focused" id="Run" name="Run" type="text" placeholder="112223334">
+                                                            <input class="input-xlarge focused" id="Run" name="Run" type="text" placeholder="112223334" readonly>
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
                                                         <label class="control-label" for="Nombres">Nombres</label>
                                                         <div class="controls">
-                                                            <input type="text" name="Nombres" class="input-xlarge" id="Nombres">
+                                                            <input type="text" name="Nombres" class="input-xlarge" id="Nombres" readonly>
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
                                                         <label class="control-label" for="Apellidos">Apellidos</label>
                                                         <div class="controls">
-                                                            <input type="text" name="Apellidos" class="input-xlarge" id="Apellidos">
+                                                            <input type="text" name="Apellidos" class="input-xlarge" id="Apellidos" readonly>
                                                         </div>
                                                     </div>    
 
                                                     <div class="control-group">
                                                         <label class="control-label" for="Sexo">Sexo</label>
                                                         <div class="controls">
-                                                            <label class="checkbox">
-                                                                <input type="radio" id="SexoM" name="Sexo" value="Masculino">&nbsp;Masculino
-                                                            </label>
-                                                            <label class="checkbox">
-                                                                <input type="radio" id="SexoF" name="Sexo" value="Femenino">&nbsp;Femenino
-                                                            </label>
+                                                            <input type="text" id="Sexo" name="Sexo" class="input-xlarge" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="Quintil">Quintil</label>
+                                                        <div class="controls">
+                                                            <input type="number" id="Quintil" name="Quintil" class="input-xlarge" readonly>
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
                                                         <label class="control-label" for="FechaNacimiento">Fecha Nacimiento</label>
                                                         <div class="controls">
-                                                            <input type="date" name="FechaNacimiento" class="input-xlarge" id="FechaNacimiento">
+                                                            <input type="date" name="FechaNacimiento" class="input-xlarge" id="FechaNacimiento" readonly>
                                                         </div>
                                                     </div> 
                                                     <div class="control-group">
@@ -158,36 +160,29 @@ $perfil = $_SESSION["idPerfil"];
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
-                                                        <label class="control-label" for="FechaMatricula">Fecha Matricula</label>
+                                                        <label class="control-label" for="Clave">Clave</label>
                                                         <div class="controls">
-                                                            <input type="date" name="FechaMatricula" class="input-xlarge" id="FechaMatricula">
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="control-label" for="IdNivel">Nivel</label>
-                                                        <div class="controls">
-                                                            <select id="IdNivel" name="IdNivel">
-                                                                <option value="1">Menor</option>
-                                                                <option value="2">mayor</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                  
-                                                    <div class="control-group">
-                                                        <label class="control-label" for="RunApoderado">Run Apoderado</label>
-                                                        <div class="controls">
-                                                            <input type="text" name="RunApoderado" class="input-xlarge" id="RunApoderado">
+                                                            <input type="password" name="Clave" class="input-xlarge" id="Clave">
                                                         </div>
                                                     </div>  
-
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="ClaveRepetida">Repetir Clave</label>
+                                                        <div class="controls">
+                                                            <input type="password" name="ClaveRepetida" class="input-xlarge" id="ClaveRepetida">
+                                                        </div>
+                                                    </div>  
                                                     <div class="form-actions">
-                                                        <button type="button" onclick="guardarMenor()" class="btn btn-primary">Guardar Cambios</button>
-                                                        <button type="button" onClick="location.href = 'administrarMenorDirectora.php'" class="btn">Cancelar</button>
+                                                        <button type="button" onclick="guardarCambios()" class="btn btn-primary">Guardar Cambios</button>
+                                                        <button type="button" onClick="location.href = 'administrarApoderadoDirectora.php'" class="btn">Cancelar</button>
                                                     </div>
                                                 </fieldset>
 
                                                 <input type="hidden" id="accion" name="accion" value="">
+                                                <input type="hidden" id="runPersonaEditar" name="runPersonaEditar" value="<?php echo $runPersona; ?>">
                                             </form>
+
+
+
                                             <!-- FIN FORMULARIO-->
                                         </div>
                                     </div>
@@ -240,7 +235,7 @@ $perfil = $_SESSION["idPerfil"];
             <div class="container-fluid m-t-large">
                 <footer>
                     <p>
-                        <span class="pull-left">© <a href="" target="_blank">Sala Cuna Hogar De Cristo</a> 2016</span>
+                        <span class="pull-left">© <a href="" target="_blank">uExel</a> 2013</span>
                         <span class="hidden-phone pull-right">Powered by: <a href="#">uAdmin Dashboard</a></span>
                     </p>
                 </footer>
@@ -261,22 +256,40 @@ $perfil = $_SESSION["idPerfil"];
         --><script src="../../Files/js/chat/sidebar.js"></script>
         <script src="../../Files/js/custom.js"></script>
         <script src="../../Files/js/controlador-chat.js"></script>
-
         
         <!-- Libreria para Validar Rut-->
         <script src="../../Files/js/validarut.js"></script>
         <script>
             //APODERADOS
             $(function () {
+                obtenerDatosPersona();
+            });
 
-            })
+            function obtenerDatosPersona() {
+                var runEditar = document.getElementById("runPersonaEditar").value;
+                var url_json = '../Servlet/administrarApoderado.php?accion=BUSCAR_BY_ID&RunPersona=' + runEditar;
+                $.getJSON(
+                        url_json,
+                        function (dato) {                            
+                            document.getElementById("Run").value = dato.RunPersona;
+                            document.getElementById("Nombres").value = dato.Nombres;
+                            document.getElementById("Apellidos").value = dato.Apellidos;                            
+                            document.getElementById("Sexo").value = dato.Sexo;                            
+                            document.getElementById("Quintil").value = dato.SituacionSocioeconomica;
+                            document.getElementById("FechaNacimiento").value = dato.FechaNacimiento;
+                            document.getElementById("Telefono").value = dato.Telefono;
+                            document.getElementById("Direccion").value = dato.Direccion;                            
+                            document.getElementById("Clave").value = dato.Clave;
+                            document.getElementById("ClaveRepetida").value = dato.Clave;
+                        }
+                );
+            }
 
-            function guardarMenor() {
-                document.getElementById("accion").value = "AGREGAR";
+            function guardarCambios() {
+                document.getElementById("accion").value = "ACTUALIZAR_MI_PERFIL_APODERADO";
                 if (validar()) {
-                    console.log("validado");                    
-                    $('#fm-menor').form('submit', {
-                        url: "../Servlet/administrarMenor.php",
+                    $('#fm-persona').form('submit', {
+                        url: "../Servlet/administrarPersona.php",
                         onSubmit: function () {
                             return $(this).form('validate');
                         },
@@ -286,63 +299,39 @@ $perfil = $_SESSION["idPerfil"];
                             if (result.errorMsg) {
                                 $.messager.alert('Error', result.errorMsg);
                             } else {
-                                $.messager.show({
-                                    title: 'Aviso',
-                                    msg: result.mensaje
-                                });
-                                window.location = "administrarMenorDirectora.php";
+                                window.location = "home.php";
                             }
                         }
                     });
                 }
             }
 
-            function validar() {
-                if (Rut(document.getElementById('Run').value)) {
-                    if (document.getElementById('Nombres').value != "") {
-                        if (document.getElementById('Apellidos').value != "") {
-                            if (document.getElementById('SexoM').checked || document.getElementById('SexoF').checked) {
-                                if (document.getElementById('FechaNacimiento').value != "") {
-                                    if (document.getElementById('Direccion').value != "") {
-                                        var telefono = document.getElementById('Telefono').value;
-                                        if (telefono != "" && telefono.length > 5) {
-                                            if (!isNaN(telefono)) {
-                                                if (document.getElementById('FechaMatricula').value != "") {
-                                                    if (Rut(document.getElementById('RunApoderado').value)) {
-                                                        return true;
-                                                    } else {
-                                                        $.messager.alert("Alerta", "El run del apoderado no es valido");
-                                                    }
-                                                } else {
-                                                    $.messager.alert("Alerta", "Ingrese una fecha de matricula");
-                                                }
-                                            } else {
-                                                $.messager.alert("Alerta", "El telefono contiene caracteres no validos");
-                                            }
-                                        } else {
-                                            $.messager.alert("Alerta", "Debe ingresar una telefono de contacto con al menos 6 digitos");
-                                        }
-                                    } else {
-                                        $.messager.alert("Alerta", "Debe ingresar una direccion");
-                                    }
+            function validar() {                
+                if (document.getElementById('Direccion').value != "") {
+                    var telefono = document.getElementById('Telefono').value;
+                    if (telefono != "" && telefono.length > 5) {
+                        if (!isNaN(telefono)) {
+                            var cadenaPass = document.getElementById('Clave').value;
+                            if (cadenaPass.length >= 4) {
+                                if (cadenaPass == document.getElementById('ClaveRepetida').value) {
+                                    return true;
                                 } else {
-                                    $.messager.alert("Alerta", "Debe ingresar una fecha de nacimiento");
+                                    $.messager.alert("Alerta", "Las contraseñas no coinciden");
                                 }
                             } else {
-                                $.messager.alert("Alerta", "Debe seleccionar su sexo");
+                                $.messager.alert("Alerta", "La contraseña debe tener minimo 4 caracteres");
                             }
                         } else {
-                            $.messager.alert("Alerta", "Debe ingresar sus apellidos");
+                            $.messager.alert("Alerta", "El telefono contiene caracteres no validos");
                         }
                     } else {
-                        $.messager.alert("Alerta", "Debe ingresar sus nombres");
+                        $.messager.alert("Alerta", "Debe ingresar una telefono de contacto con al menos 6 digitos");
                     }
                 } else {
-                    $.messager.alert("Alerta", "El run del menor ingresado no es valido");
+                    $.messager.alert("Alerta", "Debe ingresar una direccion");
                 }
                 return false;
             }
-
 
         </script>
     </body>

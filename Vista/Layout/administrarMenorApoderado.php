@@ -5,6 +5,7 @@ if ($_SESSION['autentificado'] != "SI") {
     header("Location: ../../../index.php");
 }
 $perfil = $_SESSION["idPerfil"];
+//$nombreUsuario = $_SESSION["nombre"];
 ?>
 <html lang="en">
     <head>
@@ -17,7 +18,7 @@ $perfil = $_SESSION["idPerfil"];
         <link id="page_favicon" href="../../Files/img/logo.png" rel="icon" type="image/x-icon" />
         <!-- start: CSS -->
         <link href="../../Files/Complementos/bootstrap/css/bootstrap-flat.css" rel="stylesheet">        
-        <link href="../../Files/Complementos/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">        
+        <link href="../../Files/Complementos/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link  href="../../Files/css/style.css" rel="stylesheet">
 
         <link  href="../../Files/css/chat.css" rel="stylesheet">  
@@ -41,15 +42,15 @@ $perfil = $_SESSION["idPerfil"];
         <script src="../../Files/js/common.js"></script>
 
     </head>
-    <body id='body'>
+    <body >
         <!-- AQUI VA EL MENU SUPERIROR-->
         <?php
         if ($perfil == 1) {
             include '../Menus/directoraSuperior.php';
         } else if ($perfil == 2) {
-            include '../Menus/educadoraSuperior.php.php';
+            include '../Menus/educadoraSuperior.php';
         } else if ($perfil == 3) {
-            include '../Menus/apoderadoSuperior';
+            include '../Menus/apoderadoSuperior.php';
         }
         ?>
         <!-- FIN MENU SUPERIOR-->
@@ -93,17 +94,10 @@ $perfil = $_SESSION["idPerfil"];
                             <div class="span12">
                                 <div class="social-box social-bordered social-blue">
                                     <div class="header">
-                                        <h4>Apoderados</h4>
+                                        <h4>Mis Menores</h4>
                                     </div>
-                                    <div class="body" style="text-align: center;">
-                                        <div>
-                                            <a class="btn btn-success btn-block" style="width: 200px;float: right; margin-bottom: 1%" onClick="location.href = 'agregarApoderado.php'">
-                                                Agregar apoderado <i class="icon-book" ></i>
-                                            </a>
-                                        </div>
+                                    <div class="body" style="text-align: center;">                                        
                                         <div class="row-fluid">
-                                            <!-- CONTENIDO AQUI -->
-
                                             <div class="table-responsive">
                                                 <table class="table">
                                                     <thead> 
@@ -112,13 +106,13 @@ $perfil = $_SESSION["idPerfil"];
                                                             <th>Nombres</th> 
                                                             <th>Apellidos</th> 
                                                             <th>Sexo</th>
-                                                            <th>Direccion</th>
+                                                            <th>Fecha Nacimiento</th>
                                                             <th>Telefono</th>
                                                             <th>Quintil</th>
                                                             <th>Accion</th>
                                                         </tr> 
                                                     </thead>
-                                                    <tbody id="tablaApoderados">
+                                                    <tbody id="tablaMenores">
 
                                                     </tbody>
                                                 </table>
@@ -165,7 +159,6 @@ $perfil = $_SESSION["idPerfil"];
                             </div>
 
                         </aside>
-
                     </div> 
                 </div>  
 
@@ -175,7 +168,7 @@ $perfil = $_SESSION["idPerfil"];
             <div class="container-fluid m-t-large">
                 <footer>
                     <p>
-                        <span class="pull-left">© <a href="" target="_blank">uExel</a> 2013</span>
+                        <span class="pull-left">© <a href="" target="_blank">Sala Cuna Hogar de Cristo</a> 2016</span>
                         <span class="hidden-phone pull-right">Powered by: <a href="#">uAdmin Dashboard</a></span>
                     </p>
                 </footer>
@@ -196,47 +189,45 @@ $perfil = $_SESSION["idPerfil"];
         --><script src="../../Files/js/chat/sidebar.js"></script>
         <script src="../../Files/js/custom.js"></script>
         <script src="../../Files/js/controlador-chat.js"></script>
-
+        
         <script>
-            //APODERADOS
+            //Menores
             $(function () {
-                cargarApoderados();
-            });
-            function cargarApoderados() {
-                $("#tablaApoderados").empty();
-                var url_json = '../Servlet/administrarApoderado.php?accion=LISTADO';
+                cargarMenores();
+            })
+
+            function cargarMenores() {
+                $("#tablaMenores").empty();
+                var url_json = '../Servlet/administrarMenor.php?accion=LISTADO_BY_APODERADO';
                 $.getJSON(
                         url_json,
                         function (datos) {
-                            //console.log(datos);
+                            console.log(datos);
                             $.each(datos, function (k, v) {
                                 var contenido = "<tr>";
                                 contenido += "<td>" + v.RunPersona + "</td>";
                                 contenido += "<td>" + v.Nombres + "</td>";
                                 contenido += "<td>" + v.Apellidos + "</td>";
                                 contenido += "<td>" + v.Sexo + "</td>";
-                                contenido += "<td>" + v.Direccion + "</td>";
+                                contenido += "<td>" + v.FechaNacimiento + "</td>";
                                 contenido += "<td>" + v.Telefono + "</td>";
                                 contenido += "<td>" + v.SituacionSocioeconomica + "</td>";
                                 contenido += "<td>";
-                                contenido += "<button type='button' class='btn btn-warning btn-circle icon-pencil'  onclick='editar(" + v.RunPersona + ")'></button>";
-                                contenido += "<button type='button' class='btn btn-danger btn-circle icon-trash'  onclick='borrar(" + v.RunPersona + ")'></button>";
+                                contenido += "<button type='button' class='btn btn-warning btn-circle icon-list'  onclick='verFicha(" + v.RunPersona + ")'></button>";                                
                                 contenido += "</td>";
                                 contenido += "</tr>";
-                                $("#tablaApoderados").append(contenido);
+                                $("#tablaMenores").append(contenido);
                             });
                         }
                 );
             }
 
-            function editar(RunPersona) {
-                window.location = "editarApoderado.php?runApoderado=" + RunPersona;
-            }
-
-            function borrar(RunPersona) {
-                window.location = "borrarApoderado.php?runApoderado=" + RunPersona;
+            function verFicha(RunPersona) {
+                window.location = "verFichaMenor.php?runPersona=" + RunPersona;
             }
         </script>
+
     </body>
+
 </html>
 

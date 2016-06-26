@@ -21,6 +21,7 @@ $sexo = $_SESSION["sexo"];
             <!-- start: Header Menu -->
             <div class="nav-collapse collapse header-nav">
                 <ul class="nav  pull-right">
+                    <!--
                     <li class="divider-vertical"></li>
                     <li class="dropdown nav-messages">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -28,6 +29,7 @@ $sexo = $_SESSION["sexo"];
                             <i class="icon-envelope"></i>
                         </a>
                         <ul class="dropdown-menu">
+
                             <li class="nav-messages-header">
                                 <a tabindex="-1" href="#">Tiene <strong>8</strong> mensajes nuevos</a>
                             </li>
@@ -83,7 +85,7 @@ $sexo = $_SESSION["sexo"];
                                 <a tabindex="-1" href="/Vista/inbox2.html">Ver todos los mensajes
                                 </a>
                             </li>
-                        </ul>
+                        </ul> 
                     </li>
                     <li class="divider-vertical"></li>
                     <li class="dropdown">
@@ -149,7 +151,7 @@ $sexo = $_SESSION["sexo"];
                                 <a class="dropdown-menu-sub-footer">Ver todas las notificaciones</a>
                             </li>	
                         </ul>
-                    </li>
+                    </li>-->    
                     <!-- start: Message Dropdown -->
                     <li class="divider-vertical"></li>
                     <li class="dropdown">
@@ -157,8 +159,8 @@ $sexo = $_SESSION["sexo"];
                             <img  width="27" height="27"  class="img-circle" src="../../Files/img/<?php echo $sexo;?>.jpg" alt='amdin user'>&nbsp;<?php echo $nombre;?>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/Vista/public_profile.html"><i class="icon-user icon-white"></i> Perfil</a></li>
-                            <li><a href="../Servlet/loginOFF.php"><i class="icon-off icon-white"></i> Logout</a></li>
+                            <li><a href="editarMiPefilApoderado.php"><i class="icon-user icon-white"></i> Mi Perfil</a></li>
+                            <li><a href="../Servlet/loginOFF.php"><i class="icon-off icon-white"></i> Salir</a></li>
                         </ul>
                     </li>
                 </ul>
