@@ -212,101 +212,40 @@ $RunApoderado = htmlspecialchars($_REQUEST['runApoderado']);
                         </div>
                     </div>
                     <div class="span2">
-                        <!--
-                                                <aside class="social-sidebar sidebar-full">
-                                                    <div class="social-sidebar-content">
-                                                        <div class="sidebar-right ">
-                        
-                                                            <div class="chat-users">
-                                                                <div class="no-user">User not found</div>
-                                                                <ul class="user-list">
-                                                                    <li>
-                                                                        <a data-firstname="Cesar" data-lastname="Mendoza" data-status="online" data-userid="1" href="#">
-                                                                            <img class="img-circle" src="../../Files/img/shaan.png" alt="">
-                                                                            <span>shawn kan</span>
-                                                                            <i class="icon-circle user-status online"></i>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a data-firstname="Yadra" data-lastname="Abels" data-status="offline" data-userid="2" href="#">
-                                                                            <img class="img-circle" src="../../Files/img/shaan.png" alt="">
-                                                                            <span>majoo bla</span>
-                                                                            <i class="icon-circle user-status offline"></i>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a data-firstname="Tobei" data-lastname="Tsumura" data-status="online" data-userid="3" href="#">
-                                                                            <img class="img-circle" src="../../Files/img/content/half.png" alt="">
-                                                                            <span>lol man</span>
-                                                                            <i class="icon-circle user-status online"></i>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a data-firstname="John" data-lastname="Doe" data-status="offline" data-userid="4" href="#">
-                                                                            <img class="img-circle" src="../../Files/img/shaan.png" alt="">
-                                                                            <span>John Doe</span>
-                                                                            <i class="icon-circle user-status offline"></i>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a data-firstname="Yadra" data-lastname="Abels" data-status="offline" data-userid="5" href="#">
-                                                                            <img class="img-circle" src="../../Files/img/content/half.png" alt="">
-                                                                            <span>majoo bla</span>
-                                                                            <i class="icon-circle user-status offline"></i>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a data-firstname="Yadra" data-lastname="Abels" data-status="offline" data-userid="6" href="#">
-                                                                            <img class="img-circle" src="../../Files/img/shaan.png" alt="">
-                                                                            <span>majoo bla</span>
-                                                                            <i class="icon-circle user-status offline"></i>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a data-firstname="Yadra" data-lastname="Abels" data-status="offline" data-userid="7" href="#">
-                                                                            <img class="img-circle" src="../../Files/img/content/shaan.png" alt="">
-                                                                            <span>majoo bla</span>
-                                                                            <i class="icon-circle user-status offline"></i>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a data-firstname="Yadra" data-lastname="Abels" data-status="offline" data-userid="8" href="#">
-                                                                            <img class="img-circle" src="../../Files/img/content/half.png" alt="">
-                                                                            <span>majoo bla</span>
-                                                                            <i class="icon-circle user-status offline"></i>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a data-firstname="Yadra" data-lastname="Abels" data-status="offline" data-userid="9" href="#">
-                                                                            <img class="img-circle" src="../../Files/img/content/smile.png" alt="">
-                                                                            <span>majoo bla</span>
-                                                                            <i class="icon-circle user-status offline"></i>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                                <form class="user-filter">
-                                                                    <div class="input-prepend open">
-                                                                        <div class="btn-group dropup">
-                                                                            <button class="btn dropdown-toggle" data-toggle="dropdown">
-                                                                                <i class="icon-cog"></i>
-                                                                            </button>
-                                                                            <ul class="dropdown-menu pull-left">
-                                                                                <li><a href="#">Chat Sounds</a></li>
-                                                                                <li><a href="#">Advanced Settings...</a></li>
-                                                                                <li class="divider"></li>
-                                                                                <li><a href="#">Turn Off Chat</a></li>
-                                                                            </ul>
-                                                                        </div>
-                                                                        <input type="text" class="input-filter" placeholder="Search user...">
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                        
-                                                    </div>
-                        
-                                                </aside>
-                        -->
+                        <!-- VENTANA CONTACTO DE CHAT-->
+                        <aside class="social-sidebar sidebar-full">
+                            <div class="social-sidebar-content">
+                                <div class="sidebar-right ">
+
+                                    <div class="chat-users">
+                                        <div class="no-user">User not found</div>
+                                        <!-- LISTA DE USUARIO CONTECTADOS-->
+                                        <ul class="user-list" id="listaUsuarios">
+
+                                        </ul>
+                                        <!-- FORMULARIO BUSCAR CONTACTO Y CONFIGURACION-->
+                                        <form class="user-filter">
+                                            <div class="input-prepend open">
+                                                <div class="btn-group dropup">
+                                                    <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                                        <i class="icon-cog"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu pull-left">
+                                                        <li><a href="#">Sonido Chat</a></li>
+                                                        <li><a href="#">Configuracion Avanzada...</a></li>
+                                                        <li class="divider"></li>
+                                                        <li><a href="#">Turn Off Chat</a></li>
+                                                    </ul>
+                                                </div>
+                                                <input type="text" class="input-filter" placeholder="Buscar usuario...">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </aside>
                     </div> 
                 </div>  
 
@@ -336,27 +275,8 @@ $RunApoderado = htmlspecialchars($_REQUEST['runApoderado']);
         <script src="../../Files/js/chat/demo-settings.js"></script><!--
         --><script src="../../Files/js/chat/sidebar.js"></script>
         <script src="../../Files/js/custom.js"></script>
-
-        <script>
-                                                            /*<![CDATA[*/
-                                                            $(function () {
-                                                                App.init();
-                                                                SideBar.init({shortenOnClickOutside: false});
-                                                                $.uiPro({
-                                                                    rightMenu: '.rightPanel',
-                                                                    threshold: 15
-                                                                });
-                                                            });
-                                                            /*]]>*/
-        </script>
-        <script>
-            //CHAT
-            $(function () {
-                $(".chat-messages-list .content").slimScroll({start: "bottom", railVisible: true, alwaysVisible: true, height: '400px'});
-                $("#users-list .content").slimScroll({"height": '460px'});
-            });
-        </script>
-        <!-- Chat ends here-->
+        <script src="../../Files/js/controlador-chat.js"></script>
+        
         <!-- Libreria para Validar Rut-->
         <script src="../../Files/js/validarut.js"></script>
         <script>
