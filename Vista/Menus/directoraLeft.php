@@ -14,7 +14,7 @@
             </li>    
             <li>
                 <a class="dropdown-toggle">
-                    <i class="icon-group"onClick="location.href='administrarApoderadoDirectora.php'"></i>
+                    <i class="icon-group" onClick="location.href='administrarApoderadoDirectora.php'"></i>
                     <span>Apoderado</span>
                 </a>
                 
@@ -31,6 +31,12 @@
                     <li><a href="administrarMenoresHistoricos.php"><i class="icon-star"></i>Historicos</a></li>
                 </ul>
                
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="#">
+                    <i class="icon-picture" onClick="location.href='administrarAlbumesTrabajadores.php'"></i>
+                    <span>Galeria</span>
+                </a>
             </li>
 <!--
             <li>

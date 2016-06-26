@@ -36,24 +36,12 @@ $perfil = $_SESSION["idPerfil"];
         <script src="../../Files/js/common.js"></script>
 
         <!--Carrusel-->
-        <link rel="shortcut icon"  href="files/img/icono.png" sizes="16x16">        
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
         <script>
             $('.carousel').carousel({
                 interval: 3000
             })
         </script>
         <!--Fin import carrusel-->
-
 
     </head>
     <body >
@@ -132,28 +120,16 @@ $perfil = $_SESSION["idPerfil"];
                                                 <!-- Wrapper for slides -->
                                                 <div class="carousel-inner">
                                                     <div class="item active">
-                                                        <img src="../../Files/img/b4.jpg" alt="...">
-                                                        <div class="carousel-caption">
-                                                            <h3></h3>
-                                                        </div>
+                                                        <img src="../../Files/img/b4.jpg" alt="...">                                                        
                                                     </div>
                                                     <div class="item">
-                                                        <img src="../../Files/img/b2.jpg" alt="...">
-                                                        <div class="carousel-caption">
-                                                            <h3></h3>
-                                                        </div>
+                                                        <img src="../../Files/img/b2.jpg" alt="...">                                                        
                                                     </div>
                                                     <div class="item">
-                                                        <img src="../../Files/img/b3.jpg" alt="...">
-                                                        <div class="carousel-caption">
-                                                            <h3></h3>
-                                                        </div>
+                                                        <img src="../../Files/img/b3.jpg" alt="...">                                                        
                                                     </div>
                                                     <div class="item">
-                                                        <img src="../../Files/img/b1.jpg" alt="...">
-                                                        <div class="carousel-caption">
-                                                            <h3></h3>
-                                                        </div>
+                                                        <img src="../../Files/img/b1.jpg" alt="...">                                                        
                                                     </div>
                                                 </div>       
 
