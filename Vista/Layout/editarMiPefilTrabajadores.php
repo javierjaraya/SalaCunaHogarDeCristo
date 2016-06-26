@@ -276,7 +276,8 @@ $runPersona = $_SESSION["run"];
                 var url_json = '../Servlet/administrarTrabajador.php?accion=BUSCAR_BY_ID&RunPersona=' + runEditar;                
                 $.getJSON(
                         url_json,
-                        function (dato) {                                   
+                        function (dato) {  
+                            console.log(dato);
                             document.getElementById("Run").value = dato.RunPersona;
                             document.getElementById("Nombres").value = dato.persona.Nombres;
                             document.getElementById("Apellidos").value = dato.persona.Apellidos;                            

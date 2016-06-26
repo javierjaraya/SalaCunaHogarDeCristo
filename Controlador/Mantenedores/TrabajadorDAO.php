@@ -59,8 +59,8 @@ class TrabajadorDAO {
             $persona->setIdEstado($fila[9]);
             
             $usuario = new UsuarioDTO();
-            $usuario->setClave(10);
-            $usuario->setIdPerfil(11);
+            $usuario->setClave($fila[10]);
+            $usuario->setIdPerfil($fila[11]);
             
             $trabajador->setPersona($persona);
             $trabajador->setUsuario($usuario);
