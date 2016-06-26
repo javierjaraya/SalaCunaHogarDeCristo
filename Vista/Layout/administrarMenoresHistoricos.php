@@ -93,15 +93,9 @@ $perfil = $_SESSION["idPerfil"];
                             <div class="span12">
                                 <div class="social-box social-bordered social-blue">
                                     <div class="header">
-                                        <h4>Menores Vigentes</h4>
+                                        <h4>Menores Dados de Baja</h4>
                                     </div>
                                     <div class="body" style="text-align: center;">
-                                        <div>
-                                            <a class="btn btn-success btn-block" style="width: 200px;float: right; margin-bottom: 1%" onClick="location.href='agregarMenor.php'">
-                                                Agregar Menor <i class="icon-book" ></i>
-                                            </a>
-                                        </div>
-                                        
                                         <div class="row-fluid">
                                             <div class="table-responsive">
                                                 <table class="table">
@@ -115,7 +109,6 @@ $perfil = $_SESSION["idPerfil"];
                                                             <th>Telefono</th>
                                                             <th>Apoderado</th>
                                                             <th>Quintil</th>
-                                                            <th>Accion</th>
                                                         </tr> 
                                                     </thead>
                                                     <tbody id="tablaMenores">
@@ -204,7 +197,7 @@ $perfil = $_SESSION["idPerfil"];
 
             function cargarMenores() {
                 $("#tablaMenores").empty();
-                var url_json = '../Servlet/administrarMenor.php?accion=LISTADO';
+                var url_json = '../Servlet/administrarMenor.php?accion=LISTADOHISTORICO';
                 $.getJSON(
                         url_json,
                         function (datos) {
@@ -220,8 +213,6 @@ $perfil = $_SESSION["idPerfil"];
                                 contenido += "<td>" + v.RunApoderado + "</td>";
                                 contenido += "<td>" + v.SituacionSocioeconomica + "</td>";
                                 contenido += "<td>";
-                                contenido += "<button type='button' class='btn btn-warning btn-circle icon-pencil' onclick='editar(\"" + v.RunPersona + "\")'></button>";
-                                contenido += "<button type='button' class='btn btn-danger btn-circle icon-trash' onclick='borrar(\"" + v.RunPersona + "\")'></button>";
                                 contenido += "</td>";
                                 contenido += "</tr>";
                                 $("#tablaMenores").append(contenido);

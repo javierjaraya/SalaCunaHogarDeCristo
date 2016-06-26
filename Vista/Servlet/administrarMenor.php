@@ -10,6 +10,10 @@ if ($accion != null) {
         $menors = $control->getAllMenorsHabilitados();
         $json = json_encode($menors);
         echo $json;
+    }else if ($accion == "LISTADOHISTORICO") {
+        $menors = $control->getAllMenorsDesHabilitados();
+        $json = json_encode($menors);
+        echo $json;
     } else if ($accion == "LISTADO_BY_APODERADO") {
         session_start();
         $runApoderado = $_SESSION["run"];

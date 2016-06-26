@@ -22,10 +22,14 @@
 
             <li>
                 <a class="dropdown-toggle">
-                    <i class="icon-group" onClick="location.href='administrarMenorDirectora.php'"></i>
+                    <i class="icon-group" ></i>
                     <span>Menores</span>
 
                 </a>
+                <ul class="submenu">
+                    <li><a href="administrarMenorDirectora.php"><i class="icon-list icon-2x"></i>Menores</a></li>
+                    <li><a href="administrarMenoresHistoricos.php"><i class="icon-star"></i>Historicos</a></li>
+                </ul>
                
             </li>
 <!--

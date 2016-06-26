@@ -172,7 +172,6 @@ $perfil = $_SESSION["idPerfil"];
                                                             </select>
                                                         </div>
                                                     </div>
-                                                  
                                                     <div class="control-group">
                                                         <label class="control-label" for="RunApoderado">Run Apoderado</label>
                                                         <div class="controls">
