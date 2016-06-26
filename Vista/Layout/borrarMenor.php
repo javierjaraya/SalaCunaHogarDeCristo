@@ -5,7 +5,7 @@ if ($_SESSION['autentificado'] != "SI") {
     header("Location: ../../../index.php");
 }
 $perfil = $_SESSION["idPerfil"];
-$RunMenor = htmlspecialchars($_REQUEST['runMenor']);
+$RunPersona= htmlspecialchars($_REQUEST['runPersona']);
 ?>
 <html lang="en">
     <head>
@@ -99,7 +99,7 @@ $RunMenor = htmlspecialchars($_REQUEST['runMenor']);
                             <div class="span12">
                                 <div class="social-box social-bordered social-blue">
                                     <div class="header">
-                                        <h4>Apoderados</h4>
+                                        <h4>Menor</h4>
                                     </div>
                                     <div class="body" style="text-align: center;">
                                         <div class="row-fluid">
@@ -196,7 +196,7 @@ $RunMenor = htmlspecialchars($_REQUEST['runMenor']);
                                                 </fieldset>
 
                                                 <input type="hidden" id="accion" name="accion" value="">
-                                                <input type="hidden" id="RunEditar" name="RunEditar" value="<?php echo $RunMenor; ?>">
+                                                <input type="hidden" id="RunEditar" name="RunEditar" value="<?php echo $RunApoderado; ?>">
                                             </form>
 
 
@@ -285,6 +285,7 @@ $RunMenor = htmlspecialchars($_REQUEST['runMenor']);
             })
 
             function obtenerDatosMenor() {
+                console.log("aqui");
                 var runEditar = document.getElementById("RunEditar").value;
                 var url_json = '../Servlet/administrarMenor.php?accion=BUSCAR_BY_ID&RunPersona=' + runEditar;
                 $.getJSON(
@@ -311,7 +312,7 @@ $RunMenor = htmlspecialchars($_REQUEST['runMenor']);
             }
 
             function borrarMenor() {
-                document.getElementById("accion").value = "BORRAR";
+                document.getElementById("accion").value = "DESHABILITAR";
 
                 $('#fm-menor').form('submit', {
                     url: "../Servlet/administrarMenor.php",

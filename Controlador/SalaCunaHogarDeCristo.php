@@ -16,6 +16,7 @@ include_once 'Mantenedores/TrabajadorDAO.php';
 include_once 'Mantenedores/UsuarioDAO.php';
 
 class SalaCunaHogarDeCristo {
+
     private static $instancia = NULL;
     private $albumDAO;
     private $apoderadoDAO;
@@ -38,7 +39,7 @@ class SalaCunaHogarDeCristo {
         $this->estadoDAO = new EstadoDAO();
         $this->fotografiaDAO = new FotografiaDAO();
         $this->menorDAO = new MenorDAO();
-        $this->mensajeDAO = new MensajeDAO();       
+        $this->mensajeDAO = new MensajeDAO();
         $this->nivelDAO = new NivelDAO();
         $this->opinionDAO = new OpinionDAO();
         $this->perfilDAO = new PerfilDAO();
@@ -103,7 +104,7 @@ class SalaCunaHogarDeCristo {
     public function getApoderadoLikeAtrr($cadena) {
         return $this->apoderadoDAO->findLikeAtrr($cadena);
     }
-    
+
     public function getApoderadosActivos() {
         return $this->apoderadoDAO->getApoderadosActivos();
     }
@@ -180,6 +181,22 @@ class SalaCunaHogarDeCristo {
         return $this->menorDAO->findLikeAtrr($cadena);
     }
 
+    public function getAllMenorsHabilitados() {
+        return $this->menorDAO->findAllHabilitados();
+    }
+
+    public function getAllMenorsDesHabilitados() {
+        return $this->menorDAO->findAllDesHabilitados();
+    }
+
+    public function BuscaApoderadoMenor($runPersona) {
+        return $this->menorDAO->BuscaApoderado($runPersona);
+    }
+
+    public function contarMenoresActivos($RunApoderado) {
+        return $this->menorDAO->contarMenoresActivos($RunApoderado);
+    }
+
     public function getAllMensajes() {
         return $this->mensajeDAO->findAll();
     }
@@ -203,7 +220,7 @@ class SalaCunaHogarDeCristo {
     public function getMensajeLikeAtrr($cadena) {
         return $this->mensajeDAO->findLikeAtrr($cadena);
     }
-    
+
     public function getMensajesEntreContactos($runDesde, $runPara) {
         return $this->mensajeDAO->findByRunDesdeAndPara($runDesde, $runPara);
     }
@@ -351,7 +368,8 @@ class SalaCunaHogarDeCristo {
     public function getTipoopinionLikeAtrr($cadena) {
         return $this->tipoopinionDAO->findLikeAtrr($cadena);
     }
-    public function getAllopinionPorTipoOpinion($IdTipoOpinion){
+
+    public function getAllopinionPorTipoOpinion($IdTipoOpinion) {
         return $this->opinionDAO->findByTipoOpinion($IdTipoOpinion);
     }
 
@@ -382,6 +400,7 @@ class SalaCunaHogarDeCristo {
     public function getTrabajadoresActivos() {
         return $this->trabajadorDAO->getTrabajadoresActivos();
     }
+
     public function getAllUsuarios() {
         return $this->usuarioDAO->findAll();
     }
@@ -407,4 +426,5 @@ class SalaCunaHogarDeCristo {
     }
 
 }
+
 ?>

@@ -7,7 +7,7 @@ $control = SalaCunaHogarDeCristo::getInstancia();
 $accion = htmlspecialchars($_REQUEST['accion']);
 if ($accion != null) {
     if ($accion == "LISTADO") {
-        $menors = $control->getAllMenors();
+        $menors = $control->getAllMenorsHabilitados();
         $json = json_encode($menors);
         echo $json;
     } else if ($accion == "AGREGAR") {
@@ -38,7 +38,7 @@ if ($accion != null) {
                 $objetctApoderado = $control->getApoderadoByID($RunApoderado);
                 if (($objetctApoderado->getRunPersona() != null || $objetctApoderado->getRunPersona() != "")) {
                     $resultPersona;
-                    
+
                     $persona = new PersonaDTO();
                     $persona->setRunPersona($RunPersona);
                     $persona->setNombres($Nombres);
@@ -79,18 +79,30 @@ if ($accion != null) {
         } else {
             echo json_encode(array('errorMsg' => 'El menor ya existe, intente nuevamente.'));
         }
-    } else if ($accion == "BORRAR") {
+    } else if ($accion == "DESHABILITAR") {
         $RunPersona = htmlspecialchars($_REQUEST['RunEditar']);
-
         $persona = $control->getPersonaByID($RunPersona);
-        $persona->setIdEstado(1); //1 = Inactivo , 2 = Activo
-            
-        //VALIDAR QUE EL APODERADO NO TENGA MENORES
-        $resulPersona = $control->updatePersona($persona);
-        $resultUsuario = $control->removeUsuario($RunPersona);
-        $resultApoderado = $control->removeApoderado($RunPersona);
+        //cantidad alumnos
+        $RunApoderado = $control->BuscaApoderadoMenor($RunPersona);
+        $cantidadMenores = $control->contarMenoresActivos($RunApoderado);
+        if ($cantidadMenores == 1) {
+            $persona->setIdEstado(1); //1 = Inactivo , 2 = Activo
+            $resulPersona = $control->updatePersona($persona);
+            //Apoderado
+            $PersonaApoderado = getPersonaByID($RunApoderado);
+            $PersonaApoderado = setIdEstado(1); //si es el unico alumno
+            $resulPersonaApod = $control->updatePersona($PersonaApoderado);
+            $resultUsuario = $control->removeUsuario($RunApoderado); //se borra el usuario
+        } else {
+            if ($cantidadMenores > 1) {
+                $persona->setIdEstado(1); //1 = Inactivo , 2 = Activo
+                $resulPersona = $control->updatePersona($persona);
+            } else {
+                echo json_encode(array('success' => true, 'mensaje' => "No existen menores asociados al apoderado"));
+            }
+        }
 
-        $result = $resulPersona && $resultUsuario && $resultApoderado ? true : false;
+        $result = $resulPersona && $resultUsuario && $resulPersonaApod ? true : false;
 
         if ($result) {
             echo json_encode(array('success' => true, 'mensaje' => "Apoderado borrado correctamente"));
