@@ -196,7 +196,7 @@ $RunPersona= htmlspecialchars($_REQUEST['runPersona']);
                                                 </fieldset>
 
                                                 <input type="hidden" id="accion" name="accion" value="">
-                                                <input type="hidden" id="RunEditar" name="RunEditar" value="<?php echo $RunApoderado; ?>">
+                                                <input type="hidden" id="RunEditar" name="RunEditar" value="<?php echo $RunPersona; ?>">
                                             </form>
 
 
@@ -284,13 +284,12 @@ $RunPersona= htmlspecialchars($_REQUEST['runPersona']);
 
             })
 
-            function obtenerDatosMenor() {
-                console.log("aqui");
+            function obtenerDatosMenor() {                
                 var runEditar = document.getElementById("RunEditar").value;
                 var url_json = '../Servlet/administrarMenor.php?accion=BUSCAR_BY_ID&RunPersona=' + runEditar;
                 $.getJSON(
                         url_json,
-                        function (dato) {
+                        function (dato) {                            
                             document.getElementById("Run").value = dato.RunPersona;
                             document.getElementById("Nombres").value = dato.Nombres;
                             document.getElementById("Apellidos").value = dato.Apellidos;
@@ -303,10 +302,10 @@ $RunPersona= htmlspecialchars($_REQUEST['runPersona']);
                             document.getElementById("Telefono").value = dato.Telefono;
                             document.getElementById("Direccion").value = dato.Direccion;
                             document.getElementById("Estado").value = dato.IdEstado;
-                            document.getElementById("Nivel").value = dato.IdNivel;
                             document.getElementById("FechaMatricula").value = dato.FechaMatricula;
-                            document.getElementById("Quintil").value = dato.SituacionSocioeconomica;
-
+                            document.getElementById("IdNivel").value = dato.IdNivel;                                                 
+                            document.getElementById("RunApoderado").value = dato.RunApoderado;
+                            
                         }
                 );
             }
