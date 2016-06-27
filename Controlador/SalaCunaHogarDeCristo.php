@@ -157,6 +157,10 @@ class SalaCunaHogarDeCristo {
     public function removeFotografia($IdFotografia) {
         return $this->fotografiaDAO->delete($IdFotografia);
     }
+    
+    public function removeFotografiasByIdAlbum($IdAlbum) {
+        return $this->fotografiaDAO->deleteByIdAlbum($IdAlbum);
+    }
 
     public function updateFotografia($fotografia) {
         return $this->fotografiaDAO->update($fotografia);

@@ -69,10 +69,19 @@ if ($accion != null) {
             echo json_encode(array('success' => false, 'errorMsg' => 'Algunos Fotografias exceden el tamaño maximo permitido.'));
         }        
     } else if ($accion == "BORRAR") {
-        $IdAlbum = htmlspecialchars($_REQUEST['IdAlbum']);
-
-        $result = $control->removeAlbum($IdAlbum);
-        if ($result) {
+        $IdAlbum = htmlspecialchars($_REQUEST['IdAlbum']);              
+        
+        $fotografias = $control->getAllFotografiasByAlbum($IdAlbum);
+        $resultFotografias = $control->removeFotografiasByIdAlbum($IdAlbum);
+        $resultAlbum = $control->removeAlbum($IdAlbum);
+        
+        if($resultFotografias) {
+            foreach ($fotografias as $key => $foto) {
+                unlink("../../" . $foto->getRuta());
+            }
+        }
+        
+        if ($resultAlbum && $resultFotografias) {
             echo json_encode(array('success' => true, 'mensaje' => "Album borrado correctamente"));
         } else {
             echo json_encode(array('errorMsg' => 'Ha ocurrido un error.'));
@@ -90,17 +99,12 @@ if ($accion != null) {
         echo $json;
     } else if ($accion == "ACTUALIZAR") {
         $IdAlbum = htmlspecialchars($_REQUEST['IdAlbum']);
-        $Titulo = htmlspecialchars($_REQUEST['Titulo']);
-        $Fecha = htmlspecialchars($_REQUEST['Fecha']);
-        $Descripcion = htmlspecialchars($_REQUEST['Descripcion']);
-        $RunPersona = htmlspecialchars($_REQUEST['RunPersona']);
+        $Titulo = htmlspecialchars($_REQUEST['Titulo']);        
+        $Descripcion = htmlspecialchars($_REQUEST['Descripcion']);        
 
-        $album = new AlbumDTO();
-        $album->setIdAlbum($IdAlbum);
-        $album->setTitulo($Titulo);
-        $album->setFecha($Fecha);
-        $album->setDescripcion($Descripcion);
-        $album->setRunPersona($RunPersona);
+        $album = $control->getAlbumById($IdAlbum);
+        $album->setTitulo($Titulo);        
+        $album->setDescripcion($Descripcion);        
 
         $result = $control->updateAlbum($album);
         if ($result) {

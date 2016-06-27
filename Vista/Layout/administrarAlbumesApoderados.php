@@ -5,7 +5,6 @@ if ($_SESSION['autentificado'] != "SI") {
     header("Location: ../../../index.php");
 }
 $perfil = $_SESSION["idPerfil"];
-$idAlbum = htmlspecialchars($_REQUEST['id']);
 ?>
 <html lang="en">
     <head>
@@ -20,7 +19,6 @@ $idAlbum = htmlspecialchars($_REQUEST['id']);
         <link href="../../Files/Complementos/bootstrap/css/bootstrap-flat.css" rel="stylesheet">        
         <link href="../../Files/Complementos/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link  href="../../Files/css/style.css" rel="stylesheet">
-
         <link  href="../../Files/css/chat.css" rel="stylesheet">  
         <link href="../../Files/css/chat.plugin.css" rel="stylesheet">
         <link  href="../../Files/js/charts/jquery.easy-pie-chart.css" rel="stylesheet">  
@@ -37,9 +35,13 @@ $idAlbum = htmlspecialchars($_REQUEST['id']);
         <script src="../../Files/Complementos/lib/scroll-slim/jquery.slimscroll.min.js"></script>
         <script src="../../Files/js/common.js"></script>
 
-        <script type="text/javascript" src="../../Files/Complementos/lib/jquery-easyui-1.4.2/jquery.min.js"></script>
-        <script type="text/javascript" src="../../Files/Complementos/lib/jquery-easyui-1.4.2/jquery.easyui.min.js"></script>
-        <script type="text/javascript" src="../../Files/Complementos/lib/jquery-easyui-1.4.2/plugins/jquery.datagrid.js"></script>
+        <!--Carrusel-->
+        <script>
+            $('.carousel').carousel({
+                interval: 3000
+            })
+        </script>
+        <!--Fin import carrusel-->
 
     </head>
     <body >
@@ -85,39 +87,13 @@ $idAlbum = htmlspecialchars($_REQUEST['id']);
 
                     <div id="content" class="span9" >
 
-                        <!-- AQUI VA EL MENU INTERIOR-->                        
-                        <div class="row-fluid">
-                            <div class="span2">
-                                <button class="btn btn-success btn-circle btn-res"><i class="icon-download-alt" onClick="descargar(<?php echo $idAlbum; ?>)"></i>Descargar</button>
-                            </div>                            
-                            <div class="span2">
-                                <button href="" class="btn btn-warning btn-circle btn-res"><i class="icon-edit" onclick="editar()"></i>Editar</button>
-                            </div>
-                            <div class="span2">
-                                <button href="" class="btn btn-danger btn-circle btn-res"><i class="icon-trash" onclick="borrar()"></i>Borrar</button>
-                            </div>
-                        </div>
+                        <!-- AQUI VA EL MENU INTERIOR-->
+                        
                         <!-- FIN MENU INTERIOR-->
 
                         <hr>
-                        <div class="row-fluid">
-                            <div class="span12">
-                                <div class="social-box social-bordered social-blue">
-                                    <div class="header">
-                                        <h4 id="titulo-album"></h4>
-                                    </div>
-                                    <div class="body" style="text-align: center;">
-                                        <div class="row-fluid">
-                                            <!-- CONTENIDO AQUI -->                                                                                          
-                                            <div id="descripcion-album" style="padding-bottom: 10px;"></div>
-                                            <div class="galeria" id="galeria-fotos">                                                
-
-                                            </div>
-                                            <div id="fecha-album" style="padding-top: 10px; text-align: right;"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>                               
+                        <div id="contenedo-album" class="row-fluid">
+                            
                         </div>
                         <div class="row-fluid">
                             <div class="span12 ">
@@ -257,84 +233,56 @@ $idAlbum = htmlspecialchars($_REQUEST['id']);
         <script src="../../Files/js/chat/demo-settings.js"></script><!--
         --><script src="../../Files/js/chat/sidebar.js"></script>
         <script src="../../Files/js/custom.js"></script>
+
         <script src="../../Files/js/controlador-chat.js"></script>
 
+        <script type="text/javascript">
+            $(function () {
+                cargarAlbumes();
+            });
 
-        <input type="hidden" name="idAlbum" id="idAlbum" value="<?php echo $idAlbum; ?>">        
-        <!-- LIBRERIAS GALERIA DE FOTOS -->
-        <script type="text/javascript" src="../../Files/Complementos/lightbox/dist/js/lightbox.js"></script>
-        <link rel="stylesheet" href="../../Files/Complementos/lightbox/dist/css/lightbox.css" type="text/css" />
+            function cargarAlbumes() {
+                var url_json = '../Servlet/administrarAlbum.php?accion=LISTADO';
+                $.getJSON(
+                        url_json,
+                        function (datos) {
+                            //console.log(datos);
+
+                            $("#contenedo-album").empty();
+                            var cont = 0;
+                            var albumes = "";
+                            $.each(datos, function (k, v) {
+                                albumes += "<div class='span4' onClick='abrirAlbum(" + v.IdAlbum + ")'>";
+                                albumes += " <div class='social-box social-bordered social-blue'>";
+                                albumes += "    <div class='header'>";
+                                albumes += "        <h4>" + v.Titulo + "</h4>";
+                                albumes += "    </div>";
+                                albumes += "    <div class='body' style='text-align: center;'>";
+                                albumes += "        <div class='row-fluid'>";
+                                albumes += "          <img src='../../" + v.Ruta + "' width='300px' height='300px'>";
+                                albumes += "        </div>";
+                                albumes += "    </div>";
+                                albumes += "</div>";
+                                albumes += "</div>  ";
+                                cont++;
+                                if (cont == 3) {
+                                    $("#contenedo-album").append("<div class='row-fluid'>" + albumes + "</div>");
+                                    cont = 0;
+                                    albumes = "";
+                                }
+                            });
+                            if (cont > 0) {
+                                $("#contenedo-album").append("<div class='row-fluid'>" + albumes + "</div>");
+                            }
+                        }
+                );
+            }
+
+            function abrirAlbum(id) {
+                window.location = "verAlbumApoderado.php?id=" + id;
+            }
+
+        </script>
     </body>
 
-    <script type="text/javascript">
-
-                                    $(function () {
-                                        cargarFotos();
-                                    });
-
-                                    function cargarFotos() {
-                                        var idAlbum = document.getElementById("idAlbum").value;
-                                        var url_json = '../Servlet/administrarFotografia.php?accion=LISTADO_BY_ALBUM&idAlbum=' + idAlbum;
-                                        $.getJSON(
-                                                url_json,
-                                                function (datos) {
-                                                    $("#titulo-album").empty();
-                                                    $("#titulo-album").append(datos.album.Titulo);
-                                                    $("#descripcion-album").empty();
-                                                    $("#descripcion-album").append(datos.album.Descripcion);
-                                                    $("#fecha-album").empty();
-                                                    $("#fecha-album").append("<small>Fecha Creación: " + datos.album.Fecha + "</small>");
-                                                    $("#galeria-fotos").empty();
-                                                    var cont = 0;
-                                                    var imagenes = "";
-                                                    $.each(datos.fotografias, function (k, v) {
-                                                        imagenes += "<a class='thumbnail span3' href='../../" + v.Ruta + "' rel='lightbox[galeria]' title='" + v.Fecha + "'><img src='../../" + v.Ruta + "' width='300px' height='300px'/></a>";
-                                                        cont++;
-                                                        if (cont == 4) {
-                                                            $("#galeria-fotos").append("<div class='row-fluid' style='padding-bottom: 20px;'>" + imagenes + "</div>");
-                                                            cont = 0;
-                                                            imagenes = "";
-                                                        }
-                                                    });
-                                                    if (cont > 0) {
-                                                        $("#galeria-fotos").append("<div class='row-fluid'>" + imagenes + "</div>");
-                                                    }
-                                                }
-                                        );
-                                    }
-
-                                    function descargar(idAlbum) {
-                                        var idAlbum = document.getElementById("idAlbum").value;
-                                        var url_json = '../Servlet/administrarFotografia.php?accion=LISTADO_BY_ALBUM&idAlbum=' + idAlbum;
-                                        $.ajax({
-                                            async: true, /*false = sincronas (El cliente se bloquea)   || true = asincrona (El cliente sigue funcionando)*/
-                                            url: '../Servlet/administrarFotografia.php',
-                                            type: "post",
-                                            data: "accion=LISTADO_BY_ALBUM&idAlbum=" + idAlbum,
-                                            success: function (data) {
-                                                var data = eval('(' + data + ')');
-                                                $.each(data.fotografias, function (k, v) {
-                                                    //console.log("../../" + v.Ruta);
-                                                    //window.win = open("../../" + v.Ruta);                                                    
-                                                    var link = document.createElement('a');
-                                                    link.href = "../../" + v.Ruta;
-                                                    link.download = "../../" + v.Ruta;
-                                                    document.body.appendChild(link);
-                                                    link.click();
-                                                });
-                                            }
-                                        });
-
-                                    }
-
-                                    function editar() {
-                                        var idAlbum = document.getElementById("idAlbum").value;
-                                        window.location = "editarAlbumTrabajador.php?id=" + idAlbum;
-                                    }
-
-                                    function borrar() {
-                                        var idAlbum = document.getElementById("idAlbum").value;
-                                        window.location = "borrarAlbumTrabajador.php?id=" + idAlbum;
-                                    }
-    </script>
 </html>

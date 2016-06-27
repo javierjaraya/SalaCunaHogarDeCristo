@@ -15,23 +15,15 @@
             </li>    
             <li>
                 <a class="dropdown-toggle" href="#">
-                    <i class="icon-group"></i>
+                    <i class="icon-maxcdn" onClick="location.href = 'administrarMenorApoderado.php'"></i>
                     <span>Menores</span>
-
                 </a>
-                <ul class="submenu">
-                    <li><a href="administrarMenorApoderado.php"><i class="icon-list icon-2x"></i>Ver Menores</a></li>
-                </ul>
             </li>
             <li>
                 <a class="dropdown-toggle" href="#">
-                    <i class="icon-picture"></i>
+                    <i class="icon-picture" onClick="location.href = 'administrarAlbumesApoderados.php'"></i>
                     <span>Galeria</span>
-
                 </a>
-                <ul class="submenu">
-                    <li><a href="/Vista/users.html"><i class="icon-list icon-2x"></i> Albumes</a></li>
-                </ul>
             </li>
         </ul>
     </div>

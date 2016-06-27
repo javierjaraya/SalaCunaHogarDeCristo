@@ -85,18 +85,8 @@ $idAlbum = htmlspecialchars($_REQUEST['id']);
 
                     <div id="content" class="span9" >
 
-                        <!-- AQUI VA EL MENU INTERIOR-->                        
-                        <div class="row-fluid">
-                            <div class="span2">
-                                <button class="btn btn-success btn-circle btn-res"><i class="icon-download-alt" onClick="descargar(<?php echo $idAlbum; ?>)"></i>Descargar</button>
-                            </div>                            
-                            <div class="span2">
-                                <button href="" class="btn btn-warning btn-circle btn-res"><i class="icon-edit" onclick="editar()"></i>Editar</button>
-                            </div>
-                            <div class="span2">
-                                <button href="" class="btn btn-danger btn-circle btn-res"><i class="icon-trash" onclick="borrar()"></i>Borrar</button>
-                            </div>
-                        </div>
+                        <!-- AQUI VA EL MENU INTERIOR-->
+
                         <!-- FIN MENU INTERIOR-->
 
                         <hr>
@@ -104,16 +94,45 @@ $idAlbum = htmlspecialchars($_REQUEST['id']);
                             <div class="span12">
                                 <div class="social-box social-bordered social-blue">
                                     <div class="header">
-                                        <h4 id="titulo-album"></h4>
+                                        <h4>Borrar Album</h4>
                                     </div>
                                     <div class="body" style="text-align: center;">
                                         <div class="row-fluid">
-                                            <!-- CONTENIDO AQUI -->                                                                                          
-                                            <div id="descripcion-album" style="padding-bottom: 10px;"></div>
-                                            <div class="galeria" id="galeria-fotos">                                                
+                                            <!-- CONTENIDO AQUI -->
+
+                                            <!-- INICIO FORMULARIO -->
+                                            <form id="fm-album" method="post" class="form-horizontal well" enctype="multipart/form-data">
+                                                <fieldset>
+                                                    <legend>Datos Album</legend>
+
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="Titulo">Titulo</label>
+                                                        <div class="controls">
+                                                            <input class="input-xlarge focused" id="Titulo" name="Titulo" type="text" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="Descripcion">Descripción</label>
+                                                        <div class="controls">
+                                                            <textarea name="Descripcion" class="input-xlarge" id="Descripcion" rows="5"></textarea>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-actions">
+                                                        <button type="button" onclick="borrarAlbum()" class="btn btn-danger">Borrar Album</button>
+                                                        <button type="button" onClick="location.href = 'administrarAlbumesTrabajadores.php'" class="btn">Cancelar</button>
+                                                    </div>
+                                                </fieldset>
+
+                                                <input type="hidden" id="accion" name="accion" value="">
+                                                <input type="hidden" id="IdAlbum" name="IdAlbum" value="<?php echo $idAlbum;?>">
+                                            </form>
+                                            <div id="visor-imagenes">
 
                                             </div>
-                                            <div id="fecha-album" style="padding-top: 10px; text-align: right;"></div>
+                                            <!-- FIN FORMULARIO-->
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -258,83 +277,44 @@ $idAlbum = htmlspecialchars($_REQUEST['id']);
         --><script src="../../Files/js/chat/sidebar.js"></script>
         <script src="../../Files/js/custom.js"></script>
         <script src="../../Files/js/controlador-chat.js"></script>
-
-
-        <input type="hidden" name="idAlbum" id="idAlbum" value="<?php echo $idAlbum; ?>">        
-        <!-- LIBRERIAS GALERIA DE FOTOS -->
-        <script type="text/javascript" src="../../Files/Complementos/lightbox/dist/js/lightbox.js"></script>
-        <link rel="stylesheet" href="../../Files/Complementos/lightbox/dist/css/lightbox.css" type="text/css" />
     </body>
 
     <script type="text/javascript">
+                                                            $(function () {
+                                                                cargarFotos();
+                                                            });
 
-                                    $(function () {
-                                        cargarFotos();
-                                    });
+                                                            function cargarFotos() {
+                                                                var idAlbum = document.getElementById("IdAlbum").value;
+                                                                var url_json = '../Servlet/administrarAlbum.php?accion=BUSCAR_BY_ID&IdAlbum=' + idAlbum;
+                                                                $.getJSON(
+                                                                        url_json,
+                                                                        function (datos) {                                                                            
+                                                                            document.getElementById("Titulo").value = datos.Titulo;
+                                                                            document.getElementById("Descripcion").value = datos.Descripcion;
+                                                                        }
+                                                                );
+                                                            }
 
-                                    function cargarFotos() {
-                                        var idAlbum = document.getElementById("idAlbum").value;
-                                        var url_json = '../Servlet/administrarFotografia.php?accion=LISTADO_BY_ALBUM&idAlbum=' + idAlbum;
-                                        $.getJSON(
-                                                url_json,
-                                                function (datos) {
-                                                    $("#titulo-album").empty();
-                                                    $("#titulo-album").append(datos.album.Titulo);
-                                                    $("#descripcion-album").empty();
-                                                    $("#descripcion-album").append(datos.album.Descripcion);
-                                                    $("#fecha-album").empty();
-                                                    $("#fecha-album").append("<small>Fecha Creación: " + datos.album.Fecha + "</small>");
-                                                    $("#galeria-fotos").empty();
-                                                    var cont = 0;
-                                                    var imagenes = "";
-                                                    $.each(datos.fotografias, function (k, v) {
-                                                        imagenes += "<a class='thumbnail span3' href='../../" + v.Ruta + "' rel='lightbox[galeria]' title='" + v.Fecha + "'><img src='../../" + v.Ruta + "' width='300px' height='300px'/></a>";
-                                                        cont++;
-                                                        if (cont == 4) {
-                                                            $("#galeria-fotos").append("<div class='row-fluid' style='padding-bottom: 20px;'>" + imagenes + "</div>");
-                                                            cont = 0;
-                                                            imagenes = "";
-                                                        }
-                                                    });
-                                                    if (cont > 0) {
-                                                        $("#galeria-fotos").append("<div class='row-fluid'>" + imagenes + "</div>");
-                                                    }
-                                                }
-                                        );
-                                    }
+                                                            function borrarAlbum() {
+                                                                document.getElementById("accion").value = "BORRAR";
+                                                                var url = "../Servlet/administrarAlbum.php";
+                                                                $('#fm-album').form('submit', {
+                                                                    url: url,
+                                                                    onSubmit: function () {
+                                                                        return $(this).form('validate');
+                                                                    },
+                                                                    success: function (result) {
+                                                                        var idAlbum = document.getElementById("IdAlbum").value;                                                                        
+                                                                        var result = eval('(' + result + ')');
+                                                                        if (result.success) {
+                                                                            window.location = "administrarAlbumesTrabajadores.php";
+                                                                        } else {
+                                                                            $.messager.alert('Error', result.errorMsg);
+                                                                        }
+                                                                    }
+                                                                });
+                                                            }
 
-                                    function descargar(idAlbum) {
-                                        var idAlbum = document.getElementById("idAlbum").value;
-                                        var url_json = '../Servlet/administrarFotografia.php?accion=LISTADO_BY_ALBUM&idAlbum=' + idAlbum;
-                                        $.ajax({
-                                            async: true, /*false = sincronas (El cliente se bloquea)   || true = asincrona (El cliente sigue funcionando)*/
-                                            url: '../Servlet/administrarFotografia.php',
-                                            type: "post",
-                                            data: "accion=LISTADO_BY_ALBUM&idAlbum=" + idAlbum,
-                                            success: function (data) {
-                                                var data = eval('(' + data + ')');
-                                                $.each(data.fotografias, function (k, v) {
-                                                    //console.log("../../" + v.Ruta);
-                                                    //window.win = open("../../" + v.Ruta);                                                    
-                                                    var link = document.createElement('a');
-                                                    link.href = "../../" + v.Ruta;
-                                                    link.download = "../../" + v.Ruta;
-                                                    document.body.appendChild(link);
-                                                    link.click();
-                                                });
-                                            }
-                                        });
-
-                                    }
-
-                                    function editar() {
-                                        var idAlbum = document.getElementById("idAlbum").value;
-                                        window.location = "editarAlbumTrabajador.php?id=" + idAlbum;
-                                    }
-
-                                    function borrar() {
-                                        var idAlbum = document.getElementById("idAlbum").value;
-                                        window.location = "borrarAlbumTrabajador.php?id=" + idAlbum;
-                                    }
     </script>
 </html>

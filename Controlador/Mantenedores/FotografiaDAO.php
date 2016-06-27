@@ -16,6 +16,14 @@ class FotografiaDAO{
         $this->conexion->desconectar();
         return $result;
     }
+    
+    public function deleteByIdAlbum($IdAlbum) {
+        $this->conexion->conectar();
+        $query = "DELETE FROM fotografia WHERE IdAlbum =  ".$IdAlbum." ";
+        $result = $this->conexion->ejecutar($query);
+        $this->conexion->desconectar();
+        return $result;
+    }
 
     public function findAll() {
         $this->conexion->conectar();
