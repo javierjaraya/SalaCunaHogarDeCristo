@@ -2,67 +2,66 @@
     <!-- start: Main Menu -->
     <div id="sidebar-nav">
         <ul id="dashboard-menu">
-            <li class="active">
-                <div class="pointer">
-                    <div class="arrow"></div>
-                    <div class="arrow_border"></div>
-                </div>
+            <li>
                 <a>
-                    <i class="icon-home" onClick="location.href='home.php'"></i>
+                    <i class="icon-home" onClick="location.href = 'home.php'"></i>
                     <span>Home</span>
                 </a>
             </li>    
             <li>
                 <a class="dropdown-toggle">
-                    <i class="icon-group" onClick="location.href='administrarApoderadoDirectora.php'"></i>
-                    <span>Apoderado</span>
+                    <i class="icon-group"></i>
+                    <span>Apoderados</span>
                 </a>
-                
+                <ul class="submenu">
+                    <li><a href="administrarApoderadoDirectora.php"><i class=" icon-folder-open"></i>Apoderados</a></li>
+                    <li><a href="administrarApoderadoHistoricosDirectora.php"><i class="icon-archive"></i>Historicos</a></li>
+                </ul>
             </li>
 
             <li>
                 <a class="dropdown-toggle">
-                    <i class="icon-group" ></i>
+                    <i class="icon-maxcdn" ></i>
                     <span>Menores</span>
 
                 </a>
                 <ul class="submenu">
-                    <li><a href="administrarMenorDirectora.php"><i class="icon-list icon-2x"></i>Menores</a></li>
-                    <li><a href="administrarMenoresHistoricos.php"><i class="icon-star"></i>Historicos</a></li>
+                    <li><a href="administrarMenorDirectora.php"><i class="icon-folder-open"></i>Menores</a></li>
+                    <li><a href="administrarMenoresHistoricos.php"><i class="icon-archive"></i>Historicos</a></li>
                 </ul>
-               
+
             </li>
             <li>
                 <a class="dropdown-toggle" href="#">
-                    <i class="icon-picture" onClick="location.href='administrarAlbumesTrabajadores.php'"></i>
+                    <i class="icon-picture" onClick="location.href = 'administrarAlbumesTrabajadores.php'"></i>
                     <span>Galeria</span>
                 </a>
             </li>
-<!--
-            <li>
-                <a class="dropdown-toggle" href="#">
-                    <i class="icon-group"></i>
-                    <span>Funcionarias</span>
-
-                </a>
-                <ul class="submenu">
-                    <li><a href="agregarFuncionaria.php"><i class="icon-list icon-2x"></i> Agregar</a></li>
-                    <li><a href="administrarFuncionariaDirectora.php"><i class="icon-star"></i> Visualizar</a></li>
-                </ul>
-            </li>
-
+            <!--
+                        <li>
+                            <a class="dropdown-toggle" href="#">
+                                <i class="icon-group"></i>
+                                <span>Funcionarias</span>
             
-            <li>
-                <a class="dropdown-toggle">
-                    <i class="icon-picture"></i>
-                    <span>Galeria</span>
-                </a>
-                <ul class="submenu">
-                    <li><a href="../users.html"><i class="icon-list icon-2x"></i> Agregar</a></li>
-                    <li><a href="../profile_edit.html"><i class="icon-cog"></i> Editar</a></li>
-                    <li><a href="../gallery-grid.html"><i class="icon-star"></i> Visualizar</a></li>
-                </ul>
-            </li>-->
+                            </a>
+                            <ul class="submenu">
+                                <li><a href="agregarFuncionaria.php"><i class="icon-list icon-2x"></i> Agregar</a></li>
+                                <li><a href="administrarFuncionariaDirectora.php"><i class="icon-star"></i> Visualizar</a></li>
+                            </ul>
+                        </li>
+            
+                        
+                        <li>
+                            <a class="dropdown-toggle">
+                                <i class="icon-picture"></i>
+                                <span>Galeria</span>
+                            </a>
+                            <ul class="submenu">
+                                <li><a href="../users.html"><i class="icon-list icon-2x"></i> Agregar</a></li>
+                                <li><a href="../profile_edit.html"><i class="icon-cog"></i> Editar</a></li>
+                                <li><a href="../gallery-grid.html"><i class="icon-star"></i> Visualizar</a></li>
+                            </ul>
+                        </li>-->
         </ul>
     </div>
 </div>

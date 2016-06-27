@@ -112,19 +112,19 @@ $runPersona = htmlspecialchars($_REQUEST['runPersona']);
                                                     <div class="control-group">
                                                         <label class="control-label" for="Run">Run</label>
                                                         <div class="controls">
-                                                            <input class="input-xlarge focused" id="Run" name="Run" type="text" placeholder="112223334">
+                                                            <input class="input-xlarge focused" id="Run" name="Run" type="text" placeholder="112223334" disabled="">
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
                                                         <label class="control-label" for="Nombres">Nombres</label>
                                                         <div class="controls">
-                                                            <input type="text" name="Nombres" class="input-xlarge" id="Nombres">
+                                                            <input type="text" name="Nombres" class="input-xlarge" id="Nombres" disabled="">
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
                                                         <label class="control-label" for="Apellidos">Apellidos</label>
                                                         <div class="controls">
-                                                            <input type="text" name="Apellidos" class="input-xlarge" id="Apellidos">
+                                                            <input type="text" name="Apellidos" class="input-xlarge" id="Apellidos" disabled="">
                                                         </div>
                                                     </div>    
 
@@ -132,17 +132,17 @@ $runPersona = htmlspecialchars($_REQUEST['runPersona']);
                                                         <label class="control-label" for="Sexo">Sexo</label>
                                                         <div class="controls">
                                                             <label class="checkbox">
-                                                                <input type="radio" id="SexoM" name="Sexo" value="Masculino">&nbsp;Masculino
+                                                                <input type="radio" id="SexoM" name="Sexo" value="Masculino" disabled="">&nbsp;Masculino
                                                             </label>
                                                             <label class="checkbox">
-                                                                <input type="radio" id="SexoF" name="Sexo" value="Femenino">&nbsp;Femenino
+                                                                <input type="radio" id="SexoF" name="Sexo" value="Femenino" disabled="">&nbsp;Femenino
                                                             </label>
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
                                                         <label class="control-label" for="FechaNacimiento">Fecha Nacimiento</label>
                                                         <div class="controls">
-                                                            <input type="date" name="FechaNacimiento" class="input-xlarge" id="FechaNacimiento">
+                                                            <input type="date" name="FechaNacimiento" class="input-xlarge" id="FechaNacimiento" disabled="">
                                                         </div>
                                                     </div> 
                                                     <div class="control-group">
@@ -160,7 +160,7 @@ $runPersona = htmlspecialchars($_REQUEST['runPersona']);
                                                     <div class="control-group">
                                                         <label class="control-label" for="FechaMatricula">Fecha Matricula</label>
                                                         <div class="controls">
-                                                            <input type="date" name="FechaMatricula" class="input-xlarge" id="FechaMatricula">
+                                                            <input type="date" name="FechaMatricula" class="input-xlarge" id="FechaMatricula" disabled="">
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
