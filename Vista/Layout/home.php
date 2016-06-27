@@ -131,10 +131,9 @@ $perfil = $_SESSION["idPerfil"];
                                                     <div class="item">
                                                         <img src="../../Files/img/b1.jpg" alt="...">                                                        
                                                     </div>
-                                                </div>       
-
+                                                </div>     
                                                 <!-- Controls -->
-                                                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                                                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev" >
                                                     <span class="glyphicon glyphicon-chevron-left"></span>
                                                 </a>
                                                 <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">

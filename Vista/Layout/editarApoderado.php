@@ -113,19 +113,19 @@ $RunApoderado = htmlspecialchars($_REQUEST['runApoderado']);
                                                     <div class="control-group">
                                                         <label class="control-label" for="Run">Run</label>
                                                         <div class="controls">
-                                                            <input class="input-xlarge focused" id="Run" name="Run" type="text" placeholder="112223334">
+                                                            <input class="input-xlarge focused" id="Run" name="Run" type="text" placeholder="112223334" disabled="">
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
                                                         <label class="control-label" for="Nombres">Nombres</label>
                                                         <div class="controls">
-                                                            <input type="text" name="Nombres" class="input-xlarge" id="Nombres">
+                                                            <input type="text" name="Nombres" class="input-xlarge" id="Nombres" disabled="">
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
                                                         <label class="control-label" for="Apellidos">Apellidos</label>
                                                         <div class="controls">
-                                                            <input type="text" name="Apellidos" class="input-xlarge" id="Apellidos">
+                                                            <input type="text" name="Apellidos" class="input-xlarge" id="Apellidos" disabled="">
                                                         </div>
                                                     </div>    
 
@@ -133,10 +133,10 @@ $RunApoderado = htmlspecialchars($_REQUEST['runApoderado']);
                                                         <label class="control-label" for="Sexo">Sexo</label>
                                                         <div class="controls">
                                                             <label class="checkbox">
-                                                                <input type="radio" id="SexoM" name="Sexo" value="Masculino">&nbsp;Masculino
+                                                                <input type="radio" id="SexoM" name="Sexo" value="Masculino" disabled="">&nbsp;Masculino
                                                             </label>
                                                             <label class="checkbox">
-                                                                <input type="radio" id="SexoF" name="Sexo" value="Femenino">&nbsp;Femenino
+                                                                <input type="radio" id="SexoF" name="Sexo" value="Femenino" disabled="">&nbsp;Femenino
                                                             </label>
                                                         </div>
                                                     </div>
@@ -155,7 +155,7 @@ $RunApoderado = htmlspecialchars($_REQUEST['runApoderado']);
                                                     <div class="control-group">
                                                         <label class="control-label" for="FechaNacimiento">Fecha Nacimiento</label>
                                                         <div class="controls">
-                                                            <input type="date" name="FechaNacimiento" class="input-xlarge" id="FechaNacimiento">
+                                                            <input type="date" name="FechaNacimiento" class="input-xlarge" id="FechaNacimiento" disabled=""> 
                                                         </div>
                                                     </div> 
                                                     <div class="control-group">
@@ -170,15 +170,7 @@ $RunApoderado = htmlspecialchars($_REQUEST['runApoderado']);
                                                             <input type="text" name="Direccion" class="input-xlarge" id="Direccion">
                                                         </div>
                                                     </div>  
-                                                    <div class="control-group">
-                                                        <label class="control-label" for="Estado">Estado</label>
-                                                        <div class="controls">
-                                                            <select id="Estado" name="Estado">
-                                                                <option value="1">Habilitado</option>
-                                                                <option value="2">Deshabilitado</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
+                                                    
                                                     <div class="control-group">
                                                         <label class="control-label" for="Clave">Clave</label>
                                                         <div class="controls">
@@ -305,7 +297,6 @@ $RunApoderado = htmlspecialchars($_REQUEST['runApoderado']);
                             document.getElementById("FechaNacimiento").value = dato.FechaNacimiento;
                             document.getElementById("Telefono").value = dato.Telefono;
                             document.getElementById("Direccion").value = dato.Direccion;
-                            document.getElementById("Estado").value = dato.IdEstado;
                             document.getElementById("Clave").value = dato.Clave;
                             document.getElementById("ClaveRepetida").value = dato.Clave;
                         }
@@ -321,7 +312,7 @@ $RunApoderado = htmlspecialchars($_REQUEST['runApoderado']);
                             return $(this).form('validate');
                         },
                         success: function (result) {
-                            console.log(result);
+                          console.log(result);
                             var result = eval('(' + result + ')');
                             if (result.errorMsg) {
                                 $.messager.alert('Error', result.errorMsg);

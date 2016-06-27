@@ -43,6 +43,54 @@ class ApoderadoDAO {
         $this->conexion->desconectar();
         return $apoderados;
     }
+        public function findAllDeshabilitados() {
+        $this->conexion->conectar();
+        $query = "SELECT a.RunPersona, a.SituacionSocioeconomica, p.Nombres, p.Apellidos, p.Sexo, p.FechaNacimiento, p.Telefono, p.Direccion, p.IdEstado FROM apoderado as a JOIN persona as p ON a.RunPersona = p.RunPersona WHERE p.IdEstado=1";
+        $result = $this->conexion->ejecutar($query);
+        $i = 0;
+        $apoderados = array();
+        while ($fila = $result->fetch_row()) {
+            $apoderado = new ApoderadoDTO();
+            $apoderado->setRunPersona($fila[0]);
+            $apoderado->setSituacionSocioeconomica($fila[1]);
+            $apoderado->setNombres($fila[2]);
+            $apoderado->setApellidos($fila[3]);
+            $apoderado->setSexo($fila[4]);
+            $apoderado->setFechaNacimiento($fila[5]);
+            $apoderado->setTelefono($fila[6]);
+            $apoderado->setDireccion($fila[7]);
+            $apoderado->setIdEstado($fila[8]);
+
+            $apoderados[$i] = $apoderado;
+            $i++;
+        }
+        $this->conexion->desconectar();
+        return $apoderados;
+    }
+       public function findAllHabilitados() {
+        $this->conexion->conectar();
+        $query = "SELECT a.RunPersona, a.SituacionSocioeconomica, p.Nombres, p.Apellidos, p.Sexo, p.FechaNacimiento, p.Telefono, p.Direccion, p.IdEstado FROM apoderado as a JOIN persona as p ON a.RunPersona = p.RunPersona WHERE p.IdEstado=2";
+        $result = $this->conexion->ejecutar($query);
+        $i = 0;
+        $apoderados = array();
+        while ($fila = $result->fetch_row()) {
+            $apoderado = new ApoderadoDTO();
+            $apoderado->setRunPersona($fila[0]);
+            $apoderado->setSituacionSocioeconomica($fila[1]);
+            $apoderado->setNombres($fila[2]);
+            $apoderado->setApellidos($fila[3]);
+            $apoderado->setSexo($fila[4]);
+            $apoderado->setFechaNacimiento($fila[5]);
+            $apoderado->setTelefono($fila[6]);
+            $apoderado->setDireccion($fila[7]);
+            $apoderado->setIdEstado($fila[8]);
+
+            $apoderados[$i] = $apoderado;
+            $i++;
+        }
+        $this->conexion->desconectar();
+        return $apoderados;
+    }
 
     public function findByID($RunPersona) {
         $this->conexion->conectar();

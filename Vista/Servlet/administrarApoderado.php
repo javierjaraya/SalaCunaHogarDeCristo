@@ -6,8 +6,12 @@ $control = SalaCunaHogarDeCristo::getInstancia();
 
 $accion = htmlspecialchars($_REQUEST['accion']);
 if ($accion != null) {
-    if ($accion == "LISTADO") {
-        $apoderados = $control->getAllApoderados();
+    if ($accion == "LISTADOHABILITADOS") {
+        $apoderados = $control->getAllApoderadosHabilitados();
+        $json = json_encode($apoderados);
+        echo $json;
+    }if ($accion == "LISTADODESHABILITADOS") {
+        $apoderados = $control->getAllApoderadosDeshabilitados();
         $json = json_encode($apoderados);
         echo $json;
     } else if ($accion == "AGREGAR") {
@@ -19,7 +23,6 @@ if ($accion != null) {
         $FechaNacimiento = htmlspecialchars($_REQUEST['FechaNacimiento']);
         $Telefono = htmlspecialchars($_REQUEST['Telefono']);
         $Direccion = htmlspecialchars($_REQUEST['Direccion']);
-        $IdEstado = htmlspecialchars($_REQUEST['Estado']);
         $Clave = htmlspecialchars($_REQUEST['Clave']);
 
         //Validamos que el apoderado no exista anteriormente
@@ -43,7 +46,6 @@ if ($accion != null) {
                     $persona->setFechaNacimiento($FechaNacimiento);
                     $persona->setTelefono($Telefono);
                     $persona->setDireccion($Direccion);
-                    $persona->setIdEstado($IdEstado);
 
                     $resultPersona = $control->addPersona($persona);
                 } else {
@@ -55,7 +57,6 @@ if ($accion != null) {
                     $persona->setFechaNacimiento($FechaNacimiento);
                     $persona->setTelefono($Telefono);
                     $persona->setDireccion($Direccion);
-                    $persona->setIdEstado($IdEstado);
 
                     $resultPersona = $control->updatePersona($persona);
                 }
@@ -88,16 +89,16 @@ if ($accion != null) {
         }
     } else if ($accion == "BORRAR") {
         $RunPersona = htmlspecialchars($_REQUEST['RunEditar']);
-        
         $persona = $control->getPersonaByID($RunPersona);
-        $persona->setIdEstado(1);//1 = Incativo , 2 = Activo
-        
-        $resulPersona = $control->updatePersona($persona);
-        $resultUsuario = $control->removeUsuario($RunPersona);
-        $resultApoderado = $control->removeApoderado($RunPersona);
-        
-        $result = $resulPersona && $resultUsuario && $resultApoderado ? true : false;
-        
+        //cantidad alumnos
+        $cantidadMenores = $control->contarMenoresActivos($RunPersona);
+        $result = false;
+        if ($cantidadMenores == 0) {
+            $persona->setIdEstado(1); //1 = Inactivo , 2 = Activo
+            $resulPersona = $control->updatePersona($persona);
+            $resultUsuario = $control->removeUsuario($RunApoderado); //se borra el usuario
+            $result = $resulPersona && $resultUsuario ? true : false;
+        }
         if ($result) {
             echo json_encode(array('success' => true, 'mensaje' => "Apoderado borrado correctamente"));
         } else {
@@ -115,32 +116,21 @@ if ($accion != null) {
         $json = json_encode($apoderado);
         echo $json;
     } else if ($accion == "ACTUALIZAR") {
-        $RunApoderado = htmlspecialchars($_REQUEST['Run']);
-        $Nombres = htmlspecialchars($_REQUEST['Nombres']);
-        $Apellidos = htmlspecialchars($_REQUEST['Apellidos']);
-        $Sexo = htmlspecialchars($_REQUEST['Sexo']);
         $SituacionSocioeconomica = htmlspecialchars($_REQUEST['Quintil']);
-        $FechaNacimiento = htmlspecialchars($_REQUEST['FechaNacimiento']);
         $Telefono = htmlspecialchars($_REQUEST['Telefono']);
         $Direccion = htmlspecialchars($_REQUEST['Direccion']);
-        $IdEstado = htmlspecialchars($_REQUEST['Estado']);
         $RunEditar = htmlspecialchars($_REQUEST['RunEditar']);
         $Clave = htmlspecialchars($_REQUEST['Clave']);
 
-        $apoderado = new ApoderadoDTO();
+        $apoderado = $control->getApoderadoById($RunEditar);
         $apoderado->setRunPersona($RunEditar);
         $apoderado->setSituacionSocioeconomica($SituacionSocioeconomica);
         $resultApoderado = $control->updateApoderado($apoderado);
 
-        $persona = new PersonaDTO();
-        $persona->setRunPersona($RunEditar);
-        $persona->setNombres($Nombres);
-        $persona->setApellidos($Apellidos);
-        $persona->setSexo($Sexo);
-        $persona->setFechaNacimiento($FechaNacimiento);
+        $persona = $control->getPersonaById($RunEditar);
+
         $persona->setTelefono($Telefono);
         $persona->setDireccion($Direccion);
-        $persona->setIdEstado($IdEstado);
 
         $resultPersona = $control->updatePersona($persona);
 
@@ -157,7 +147,7 @@ if ($accion != null) {
                 'mensaje' => "Apoderado actualizada correctamente"
             ));
         } else {
-            echo json_encode(array('errorMsg' => 'Ha ocurrido un error.'));
+            echo json_encode(array('errorMsg' => 'Ha ocurrido un error. AQUI RESULT APODERADO' . $resultApoderado . 'PERSONA' . $resultPersona . 'USUARIO' . $resultUsuario));
         }
     }
 }

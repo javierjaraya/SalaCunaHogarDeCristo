@@ -93,14 +93,10 @@ $perfil = $_SESSION["idPerfil"];
                             <div class="span12">
                                 <div class="social-box social-bordered social-blue">
                                     <div class="header">
-                                        <h4>Apoderados</h4>
+                                        <h4>Apoderados Dados de Baja</h4>
                                     </div>
                                     <div class="body" style="text-align: center;">
-                                        <div>
-                                            <a class="btn btn-success btn-block" style="width: 200px;float: right; margin-bottom: 1%" onClick="location.href = 'agregarApoderado.php'">
-                                                Agregar apoderado <i class="icon-book" ></i>
-                                            </a>
-                                        </div>
+                                       
                                         <div class="row-fluid">
                                             <!-- CONTENIDO AQUI -->
 
@@ -115,7 +111,6 @@ $perfil = $_SESSION["idPerfil"];
                                                             <th>Direccion</th>
                                                             <th>Telefono</th>
                                                             <th>Quintil</th>
-                                                            <th>Accion</th>
                                                         </tr> 
                                                     </thead>
                                                     <tbody id="tablaApoderados">
@@ -204,7 +199,7 @@ $perfil = $_SESSION["idPerfil"];
             });
             function cargarApoderados() {
                 $("#tablaApoderados").empty();
-                var url_json = '../Servlet/administrarApoderado.php?accion=LISTADOHABILITADOS';
+                var url_json = '../Servlet/administrarApoderado.php?accion=LISTADODESHABILITADOS';
                 $.getJSON(
                         url_json,
                         function (datos) {
@@ -219,7 +214,6 @@ $perfil = $_SESSION["idPerfil"];
                                 contenido += "<td>" + v.Telefono + "</td>";
                                 contenido += "<td>" + v.SituacionSocioeconomica + "</td>";
                                 contenido += "<td>";
-                                contenido += "<button type='button' class='btn btn-warning btn-circle icon-pencil'  onclick='editar(" + v.RunPersona + ")'></button>";
                                 contenido += "</td>";
                                 contenido += "</tr>";
                                 $("#tablaApoderados").append(contenido);
@@ -227,8 +221,13 @@ $perfil = $_SESSION["idPerfil"];
                         }
                 );
             }
+
             function editar(RunPersona) {
                 window.location = "editarApoderado.php?runApoderado=" + RunPersona;
+            }
+
+            function borrar(RunPersona) {
+                window.location = "borrarApoderado.php?runApoderado=" + RunPersona;
             }
         </script>
     </body>

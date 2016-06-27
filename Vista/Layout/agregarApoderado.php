@@ -170,15 +170,6 @@ $perfil = $_SESSION["idPerfil"];
                                                         </div>
                                                     </div>  
                                                     <div class="control-group">
-                                                        <label class="control-label" for="Estado">Estado</label>
-                                                        <div class="controls">
-                                                            <select id="Estado" name="Estado">
-                                                                <option value="1">Habilitado</option>
-                                                                <option value="2">Deshabilitado</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="control-group">
                                                         <label class="control-label" for="Clave">Clave</label>
                                                         <div class="controls">
                                                             <input type="password" name="Clave" class="input-xlarge" id="Clave">
@@ -277,82 +268,82 @@ $perfil = $_SESSION["idPerfil"];
         <!-- Libreria para Validar Rut-->
         <script src="../../Files/js/validarut.js"></script>
         <script>
-            //APODERADOS
-            $(function () {
+                                                            //APODERADOS
+                                                            $(function () {
 
-            })
+                                                            })
 
-            function guardarApoderado() {
-                document.getElementById("accion").value = "AGREGAR";
-                if (validar()) {
-                    $('#fm-apoderado').form('submit', {
-                        url: "../Servlet/administrarApoderado.php",
-                        onSubmit: function () {
-                            return $(this).form('validate');
-                        },
-                        success: function (result) {
-                            //console.log(result);
-                            var result = eval('(' + result + ')');
-                            if (result.errorMsg) {
-                                $.messager.alert('Error', result.errorMsg);
-                            } else {
-                                $.messager.show({
-                                    title: 'Aviso',
-                                    msg: result.mensaje
-                                });
-                                window.location = "administrarApoderadoDirectora.php";
-                            }
-                        }
-                    });
-                }
-            }
+                                                            function guardarApoderado() {
+                                                                document.getElementById("accion").value = "AGREGAR";
+                                                                if (validar()) {
+                                                                    $('#fm-apoderado').form('submit', {
+                                                                        url: "../Servlet/administrarApoderado.php",
+                                                                        onSubmit: function () {
+                                                                            return $(this).form('validate');
+                                                                        },
+                                                                        success: function (result) {
+                                                                            //console.log(result);
+                                                                            var result = eval('(' + result + ')');
+                                                                            if (result.errorMsg) {
+                                                                                $.messager.alert('Error', result.errorMsg);
+                                                                            } else {
+                                                                                $.messager.show({
+                                                                                    title: 'Aviso',
+                                                                                    msg: result.mensaje
+                                                                                });
+                                                                                window.location = "administrarApoderadoDirectora.php";
+                                                                            }
+                                                                        }
+                                                                    });
+                                                                }
+                                                            }
 
-            function validar() {
-                if (Rut(document.getElementById('Run').value)) {
-                    if (document.getElementById('Nombres').value != "") {
-                        if (document.getElementById('Apellidos').value != "") {
-                            if (document.getElementById('SexoM').checked || document.getElementById('SexoF').checked) {
-                                if (document.getElementById('FechaNacimiento').value != "") {
-                                    if (document.getElementById('Direccion').value != "") {
-                                        var telefono = document.getElementById('Telefono').value;
-                                        if (telefono != "" && telefono.length > 5) {
-                                            if (!isNaN(telefono)) {
-                                                var cadenaPass = document.getElementById('Clave').value;
-                                                if (cadenaPass.length >= 4) {
-                                                    if (cadenaPass == document.getElementById('ClaveRepetida').value) {
-                                                        return true;
-                                                    } else {
-                                                        $.messager.alert("Alerta", "Las contraseñas no coinciden");
-                                                    }
-                                                } else {
-                                                    $.messager.alert("Alerta", "La contraseña debe tener minimo 4 caracteres");
-                                                }
-                                            } else {
-                                                $.messager.alert("Alerta", "El telefono contiene caracteres no validos");
-                                            }
-                                        } else {
-                                            $.messager.alert("Alerta", "Debe ingresar una telefono de contacto con al menos 6 digitos");
-                                        }
-                                    } else {
-                                        $.messager.alert("Alerta", "Debe ingresar una direccion");
-                                    }
-                                } else {
-                                    $.messager.alert("Alerta", "Debe ingresar una fecha de nacimiento");
-                                }
-                            } else {
-                                $.messager.alert("Alerta", "Debe seleccionar su sexo");
-                            }
-                        } else {
-                            $.messager.alert("Alerta", "Debe ingresar sus apellidos");
-                        }
-                    } else {
-                        $.messager.alert("Alerta", "Debe ingresar sus nombres");
-                    }
-                } else {
-                    $.messager.alert("Alerta", "El run ingresado no es valido");
-                }
-                return false;
-            }
+                                                            function validar() {
+                                                                if (Rut(document.getElementById('Run').value)) {
+                                                                    if (document.getElementById('Nombres').value != "") {
+                                                                        if (document.getElementById('Apellidos').value != "") {
+                                                                            if (document.getElementById('SexoM').checked || document.getElementById('SexoF').checked) {
+                                                                                if (document.getElementById('FechaNacimiento').value != "") {
+                                                                                    if (document.getElementById('Direccion').value != "") {
+                                                                                        var telefono = document.getElementById('Telefono').value;
+                                                                                        if (telefono != "" && telefono.length > 5) {
+                                                                                            if (!isNaN(telefono)) {
+                                                                                                var cadenaPass = document.getElementById('Clave').value;
+                                                                                                if (cadenaPass.length >= 4) {
+                                                                                                    if (cadenaPass == document.getElementById('ClaveRepetida').value) {
+                                                                                                        return true;
+                                                                                                    } else {
+                                                                                                        $.messager.alert("Alerta", "Las contraseñas no coinciden");
+                                                                                                    }
+                                                                                                } else {
+                                                                                                    $.messager.alert("Alerta", "La contraseña debe tener minimo 4 caracteres");
+                                                                                                }
+                                                                                            } else {
+                                                                                                $.messager.alert("Alerta", "El telefono contiene caracteres no validos");
+                                                                                            }
+                                                                                        } else {
+                                                                                            $.messager.alert("Alerta", "Debe ingresar una telefono de contacto con al menos 6 digitos");
+                                                                                        }
+                                                                                    } else {
+                                                                                        $.messager.alert("Alerta", "Debe ingresar una direccion");
+                                                                                    }
+                                                                                } else {
+                                                                                    $.messager.alert("Alerta", "Debe ingresar una fecha de nacimiento");
+                                                                                }
+                                                                            } else {
+                                                                                $.messager.alert("Alerta", "Debe seleccionar su sexo");
+                                                                            }
+                                                                        } else {
+                                                                            $.messager.alert("Alerta", "Debe ingresar sus apellidos");
+                                                                        }
+                                                                    } else {
+                                                                        $.messager.alert("Alerta", "Debe ingresar sus nombres");
+                                                                    }
+                                                                } else {
+                                                                    $.messager.alert("Alerta", "El run ingresado no es valido");
+                                                                }
+                                                                return false;
+                                                            }
 
 
         </script>

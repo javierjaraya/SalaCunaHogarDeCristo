@@ -88,7 +88,12 @@ class SalaCunaHogarDeCristo {
     public function getAllApoderados() {
         return $this->apoderadoDAO->findAll();
     }
-
+     public function getAllApoderadosHabilitados() {
+        return $this->apoderadoDAO->findAllHabilitados();
+    }
+ public function getAllApoderadosDeshabilitados() {
+        return $this->apoderadoDAO->findAllDeshabilitados();
+    }
     public function addApoderado($apoderado) {
         return $this->apoderadoDAO->save($apoderado);
     }

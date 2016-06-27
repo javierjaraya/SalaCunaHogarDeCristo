@@ -128,13 +128,7 @@ if ($accion != null) {
         $json = json_encode($menor);
         echo $json;
     } else if ($accion == "ACTUALIZAR") {
-        $RunMenor = htmlspecialchars($_REQUEST['Run']);
-        $Nombres = htmlspecialchars($_REQUEST['Nombres']);
-        $Apellidos = htmlspecialchars($_REQUEST['Apellidos']);
         $IdNivel = htmlspecialchars($_REQUEST['IdNivel']);
-        $Sexo = htmlspecialchars($_REQUEST['Sexo']);
-        $FechaNacimiento = htmlspecialchars($_REQUEST['FechaNacimiento']);
-        $FechaMatricula = htmlspecialchars($_REQUEST['FechaMatricula']);
         $Telefono = htmlspecialchars($_REQUEST['Telefono']);
         $Direccion = htmlspecialchars($_REQUEST['Direccion']);
         $RunEditar = htmlspecialchars($_REQUEST['RunEditar']);
@@ -148,10 +142,6 @@ if ($accion != null) {
         
         $persona = $control->getPersonaByID($RunEditar);
         $persona->setRunPersona($RunEditar);
-        $persona->setNombres($Nombres);
-        $persona->setApellidos($Apellidos);
-        $persona->setSexo($Sexo);
-        $persona->setFechaNacimiento($FechaNacimiento);
         $persona->setTelefono($Telefono);
         $persona->setDireccion($Direccion);
         
