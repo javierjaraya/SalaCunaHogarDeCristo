@@ -97,46 +97,7 @@ $perfil = $_SESSION["idPerfil"];
 
                         <hr>
                         <div id="contenedo-album" class="row-fluid">
-                            <div class="span4">
-                                <div class="social-box social-bordered social-blue">
-                                    <div class="header">
-                                        <h4>Almbun 1</h4>
-                                    </div>
-                                    <div class="body" style="text-align: center;">
-                                        <div class="row-fluid">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>   
-                            <div class="span4">
-                                <div class="social-box social-bordered social-blue">
-                                    <div class="header">
-                                        <h4>Album 2</h4>
-                                    </div>
-                                    <div class="body" style="text-align: center;">
-                                        <div class="row-fluid">
-
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
-                            <div class="span4">
-                                <div class="social-box social-bordered social-blue">
-                                    <div class="header">
-                                        <h4>Album 3</h4>
-                                    </div>
-                                    <div class="body" style="text-align: center;">
-                                        <div class="row-fluid">
-
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
+                            
                         </div>
                         <div class="row-fluid">
                             <div class="span12 ">
