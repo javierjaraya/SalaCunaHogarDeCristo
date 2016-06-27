@@ -98,7 +98,7 @@ $perfil = $_SESSION["idPerfil"];
                             <div class="span12">
                                 <div class="social-box social-bordered social-blue">
                                     <div class="header">
-                                        <h4>Apoderados</h4>
+                                        <h4>Agregar Apoderado</h4>
                                     </div>
                                     <div class="body" style="text-align: center;">
                                         <div class="row-fluid">
@@ -107,42 +107,42 @@ $perfil = $_SESSION["idPerfil"];
                                             <!-- INICIO FORMULARIO -->
                                             <form id="fm-apoderado" class="form-horizontal well">
                                                 <fieldset>
-                                                    <legend>Datos Apoderado</legend>
+                                                    <legend style="background-color: #d1d1ff;">Datos Apoderado</legend>
 
                                                     <div class="control-group">
-                                                        <label class="control-label" for="Run">Run</label>
+                                                        <label class="control-label" for="RunApoderado">Run Apoderado</label>
                                                         <div class="controls">
-                                                            <input class="input-xlarge focused" id="Run" name="Run" type="text" placeholder="112223334">
+                                                            <input class="input-xlarge focused" id="RunApoderado" name="RunApoderado" type="text" placeholder="112223334">
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
-                                                        <label class="control-label" for="Nombres">Nombres</label>
+                                                        <label class="control-label" for="NombresApoderado">Nombres</label>
                                                         <div class="controls">
-                                                            <input type="text" name="Nombres" class="input-xlarge" id="Nombres">
+                                                            <input type="text" name="NombresApoderado" class="input-xlarge" id="NombresApoderado">
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
-                                                        <label class="control-label" for="Apellidos">Apellidos</label>
+                                                        <label class="control-label" for="ApellidosApoderado">Apellidos</label>
                                                         <div class="controls">
-                                                            <input type="text" name="Apellidos" class="input-xlarge" id="Apellidos">
+                                                            <input type="text" name="ApellidosApoderado" class="input-xlarge" id="ApellidosApoderado">
                                                         </div>
                                                     </div>    
 
                                                     <div class="control-group">
-                                                        <label class="control-label" for="Sexo">Sexo</label>
+                                                        <label class="control-label" for="SexoApoderado">Sexo</label>
                                                         <div class="controls">
                                                             <label class="checkbox">
-                                                                <input type="radio" id="SexoM" name="Sexo" value="Masculino">&nbsp;Masculino
+                                                                <input type="radio" id="SexoMApoderado" name="SexoApoderado" value="Masculino">&nbsp;Masculino
                                                             </label>
                                                             <label class="checkbox">
-                                                                <input type="radio" id="SexoF" name="Sexo" value="Femenino">&nbsp;Femenino
+                                                                <input type="radio" id="SexoFApoderado" name="SexoApoderado" value="Femenino">&nbsp;Femenino
                                                             </label>
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
-                                                        <label class="control-label" for="Quintil">Quintil</label>
+                                                        <label class="control-label" for="QuintilApoderado">Quintil</label>
                                                         <div class="controls">
-                                                            <select id="Quintil" name="Quintil">
+                                                            <select id="QuintilApoderado" name="QuintilApoderado">
                                                                 <option value="1">1</option>
                                                                 <option value="2">2</option>
                                                                 <option value="3">3</option>
@@ -152,21 +152,21 @@ $perfil = $_SESSION["idPerfil"];
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
-                                                        <label class="control-label" for="FechaNacimiento">Fecha Nacimiento</label>
+                                                        <label class="control-label" for="FechaNacimientoApoderado">Fecha Nacimiento</label>
                                                         <div class="controls">
-                                                            <input type="date" name="FechaNacimiento" class="input-xlarge" id="FechaNacimiento">
+                                                            <input type="date" name="FechaNacimientoApoderado" class="input-xlarge" id="FechaNacimientoApoderado">
                                                         </div>
                                                     </div> 
                                                     <div class="control-group">
-                                                        <label class="control-label" for="Telefono">Telefono</label>
+                                                        <label class="control-label" for="TelefonoApoderado">Telefono</label>
                                                         <div class="controls">
-                                                            <input type="text" class="input-xlarge" id="Telefono" name="Telefono">
+                                                            <input type="text" class="input-xlarge" id="TelefonoApoderado" name="TelefonoApoderado">
                                                         </div>
                                                     </div> 
                                                     <div class="control-group">
-                                                        <label class="control-label" for="Direccion">Direccion</label>
+                                                        <label class="control-label" for="DireccionApoderado">Direccion</label>
                                                         <div class="controls">
-                                                            <input type="text" name="Direccion" class="input-xlarge" id="Direccion">
+                                                            <input type="text" name="DireccionApoderado" class="input-xlarge" id="DireccionApoderado">
                                                         </div>
                                                     </div>  
                                                     <div class="control-group">
@@ -181,17 +181,80 @@ $perfil = $_SESSION["idPerfil"];
                                                             <input type="password" name="ClaveRepetida" class="input-xlarge" id="ClaveRepetida">
                                                         </div>
                                                     </div>  
+                                                </fieldset>
+                                                <fieldset>
+                                                    <legend style="background-color: #d1d1ff;">Datos del Menor</legend>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="RunMenor">Run</label>
+                                                        <div class="controls">
+                                                            <input class="input-xlarge focused" id="RunMenor" name="RunMenor" type="text" placeholder="112223334">
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="NombresMenor">Nombres</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="NombresMenor" class="input-xlarge" id="NombresMenor">
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="ApellidosMenor">Apellidos</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="ApellidosMenor" class="input-xlarge" id="ApellidosMenor">
+                                                        </div>
+                                                    </div>    
+
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="SexoMenor">Sexo</label>
+                                                        <div class="controls">
+                                                            <label class="checkbox">
+                                                                <input type="radio" id="SexoMMenor" name="SexoMenor" value="Masculino">&nbsp;Masculino
+                                                            </label>
+                                                            <label class="checkbox">
+                                                                <input type="radio" id="SexoFMenor" name="SexoMenor" value="Femenino">&nbsp;Femenino
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="FechaNacimientoMenor">Fecha Nacimiento</label>
+                                                        <div class="controls">
+                                                            <input type="date" name="FechaNacimientoMenor" class="input-xlarge" id="FechaNacimientoMenor">
+                                                        </div>
+                                                    </div> 
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="TelefonoMenor">Telefono</label>
+                                                        <div class="controls">
+                                                            <input type="text" class="input-xlarge" id="TelefonoMenor" name="TelefonoMenor">
+                                                        </div>
+                                                    </div> 
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="DireccionMenor">Direccion</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="DireccionMenor" class="input-xlarge" id="DireccionMenor">
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="FechaMatriculaMenor">Fecha Matricula</label>
+                                                        <div class="controls">
+                                                            <input type="date" name="FechaMatriculaMenor" class="input-xlarge" id="FechaMatriculaMenor">
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="IdNivelMenor">Nivel</label>
+                                                        <div class="controls">
+                                                            <select id="IdNivelMenor" name="IdNivelMenor">
+                                                                <option value="1">Menor</option>
+                                                                <option value="2">mayor</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
                                                     <div class="form-actions">
-                                                        <button type="button" onclick="guardarApoderado()" class="btn btn-primary">Guardar Cambios</button>
+                                                        <button type="button" onclick="guardarApoderado()" class="btn btn-primary">Guardar Apoderado</button>
                                                         <button type="button" onClick="location.href = 'administrarApoderadoDirectora.php'" class="btn">Cancelar</button>
                                                     </div>
                                                 </fieldset>
 
                                                 <input type="hidden" id="accion" name="accion" value="">
                                             </form>
-
-
-
                                             <!-- FIN FORMULARIO-->
                                         </div>
                                     </div>
@@ -275,7 +338,7 @@ $perfil = $_SESSION["idPerfil"];
 
                                                             function guardarApoderado() {
                                                                 document.getElementById("accion").value = "AGREGAR";
-                                                                if (validar()) {
+                                                                if (validarApoderado() && validarMenor()) {
                                                                     $('#fm-apoderado').form('submit', {
                                                                         url: "../Servlet/administrarApoderado.php",
                                                                         onSubmit: function () {
@@ -298,14 +361,14 @@ $perfil = $_SESSION["idPerfil"];
                                                                 }
                                                             }
 
-                                                            function validar() {
-                                                                if (Rut(document.getElementById('Run').value)) {
-                                                                    if (document.getElementById('Nombres').value != "") {
-                                                                        if (document.getElementById('Apellidos').value != "") {
-                                                                            if (document.getElementById('SexoM').checked || document.getElementById('SexoF').checked) {
-                                                                                if (document.getElementById('FechaNacimiento').value != "") {
-                                                                                    if (document.getElementById('Direccion').value != "") {
-                                                                                        var telefono = document.getElementById('Telefono').value;
+                                                            function validarApoderado() {
+                                                                if (Rut(document.getElementById('RunApoderado').value)) {
+                                                                    if (document.getElementById('NombresApoderado').value != "") {
+                                                                        if (document.getElementById('ApellidosApoderado').value != "") {
+                                                                            if (document.getElementById('SexoMApoderado').checked || document.getElementById('SexoFApoderado').checked) {
+                                                                                if (document.getElementById('FechaNacimientoApoderado').value != "") {
+                                                                                    if (document.getElementById('DireccionApoderado').value != "") {
+                                                                                        var telefono = document.getElementById('TelefonoApoderado').value;
                                                                                         if (telefono != "" && telefono.length > 5) {
                                                                                             if (!isNaN(telefono)) {
                                                                                                 var cadenaPass = document.getElementById('Clave').value;
@@ -341,6 +404,47 @@ $perfil = $_SESSION["idPerfil"];
                                                                     }
                                                                 } else {
                                                                     $.messager.alert("Alerta", "El run ingresado no es valido");
+                                                                }
+                                                                return false;
+                                                            }
+                                                            function validarMenor() {
+                                                                if (Rut(document.getElementById('RunMenor').value)) {
+                                                                    if (document.getElementById('NombresMenor').value != "") {
+                                                                        if (document.getElementById('ApellidosMenor').value != "") {
+                                                                            if (document.getElementById('SexoMMenor').checked || document.getElementById('SexoFMenor').checked) {
+                                                                                if (document.getElementById('FechaNacimientoMenor').value != "") {
+                                                                                    if (document.getElementById('DireccionMenor').value != "") {
+                                                                                        var telefono = document.getElementById('TelefonoMenor').value;
+                                                                                        if (telefono != "" && telefono.length > 5) {
+                                                                                            if (!isNaN(telefono)) {
+                                                                                                if (document.getElementById('FechaMatriculaMenor').value != "") {
+                                                                                                    return true;
+                                                                                                } else {
+                                                                                                    $.messager.alert("Alerta", "Ingrese una fecha de matricula");
+                                                                                                }
+                                                                                            } else {
+                                                                                                $.messager.alert("Alerta", "El telefono contiene caracteres no validos");
+                                                                                            }
+                                                                                        } else {
+                                                                                            $.messager.alert("Alerta", "Debe ingresar una telefono de contacto con al menos 6 digitos");
+                                                                                        }
+                                                                                    } else {
+                                                                                        $.messager.alert("Alerta", "Debe ingresar una direccion");
+                                                                                    }
+                                                                                } else {
+                                                                                    $.messager.alert("Alerta", "Debe ingresar una fecha de nacimiento");
+                                                                                }
+                                                                            } else {
+                                                                                $.messager.alert("Alerta", "Debe seleccionar su sexo");
+                                                                            }
+                                                                        } else {
+                                                                            $.messager.alert("Alerta", "Debe ingresar sus apellidos");
+                                                                        }
+                                                                    } else {
+                                                                        $.messager.alert("Alerta", "Debe ingresar sus nombres");
+                                                                    }
+                                                                } else {
+                                                                    $.messager.alert("Alerta", "El run del menor ingresado no es valido");
                                                                 }
                                                                 return false;
                                                             }
