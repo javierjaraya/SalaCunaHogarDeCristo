@@ -10,7 +10,16 @@ if ($accion != null) {
         $fotografias = $control->getAllFotografias();
         $json = json_encode($fotografias);
         echo $json;
-    } else if ($accion == "AGREGAR") {
+    } if ($accion == "LISTADO_BY_ALBUM") {
+        $IdAlbum = htmlspecialchars($_REQUEST['idAlbum']);
+        $fotografias = $control->getAllFotografiasByAlbum($IdAlbum);
+        $album = $control->getAlbumByID($IdAlbum);
+        $json = json_encode(array(
+            'fotografias' => $fotografias,
+            'album' => $album
+                ));
+        echo $json;
+    }else if ($accion == "AGREGAR") {
         $IdFotografia = htmlspecialchars($_REQUEST['IdFotografia']);
         $NombreImagen = htmlspecialchars($_REQUEST['NombreImagen']);
         $Fecha = htmlspecialchars($_REQUEST['Fecha']);

@@ -19,6 +19,7 @@ $perfil = $_SESSION["idPerfil"];
         <link href="../../Files/Complementos/bootstrap/css/bootstrap-flat.css" rel="stylesheet">        
         <link href="../../Files/Complementos/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link  href="../../Files/css/style.css" rel="stylesheet">
+
         <link  href="../../Files/css/chat.css" rel="stylesheet">  
         <link href="../../Files/css/chat.plugin.css" rel="stylesheet">
         <link  href="../../Files/js/charts/jquery.easy-pie-chart.css" rel="stylesheet">  
@@ -35,13 +36,9 @@ $perfil = $_SESSION["idPerfil"];
         <script src="../../Files/Complementos/lib/scroll-slim/jquery.slimscroll.min.js"></script>
         <script src="../../Files/js/common.js"></script>
 
-        <!--Carrusel-->
-        <script>
-            $('.carousel').carousel({
-                interval: 3000
-            })
-        </script>
-        <!--Fin import carrusel-->
+        <script type="text/javascript" src="../../Files/Complementos/lib/jquery-easyui-1.4.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../../Files/Complementos/lib/jquery-easyui-1.4.2/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="../../Files/Complementos/lib/jquery-easyui-1.4.2/plugins/jquery.datagrid.js"></script>
 
     </head>
     <body >
@@ -88,55 +85,62 @@ $perfil = $_SESSION["idPerfil"];
                     <div id="content" class="span9" >
 
                         <!-- AQUI VA EL MENU INTERIOR-->
-                        <div class="row-fluid">
-                            <div class="span2">
-                                <a href="agregarAlbumTrabajador.php" class="btn btn-warning btn-circle btn-res"><i class="icon-folder-open"></i>Crear Album</a>
-                            </div>
-                        </div>
+
                         <!-- FIN MENU INTERIOR-->
 
                         <hr>
-                        <div id="contenedo-album" class="row-fluid">
-                            <div class="span4">
+                        <div class="row-fluid">
+                            <div class="span12">
                                 <div class="social-box social-bordered social-blue">
                                     <div class="header">
-                                        <h4>Almbun 1</h4>
+                                        <h4>Nuevo Album</h4>
                                     </div>
                                     <div class="body" style="text-align: center;">
                                         <div class="row-fluid">
+                                            <!-- CONTENIDO AQUI -->
+
+                                            <!-- INICIO FORMULARIO -->
+                                            <form id="fm-album" method="post" class="form-horizontal well" enctype="multipart/form-data">
+                                                <fieldset>
+                                                    <legend>Datos Album</legend>
+
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="Titulo">Titulo</label>
+                                                        <div class="controls">
+                                                            <input class="input-xlarge focused" id="Titulo" name="Titulo" type="text" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="Descripcion">Descripción</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="Descripcion" class="input-xlarge" id="Descripcion">
+                                                        </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="Fotografias">Fotografias</label>
+                                                        <div class="controls">
+                                                            <input type="file" id="Fotografias" name="Fotografias[]" multiple="multiple" class="input-xlarge">
+                                                        </div>
+                                                    </div> 
+
+                                                    <div class="form-actions">
+                                                        <button type="button" onclick="guardarAlbum()" class="btn btn-primary">Crear Album</button>
+                                                        <button type="button" onClick="location.href = 'administrarAlbumesTrabajadores.php'" class="btn">Cancelar</button>
+                                                    </div>
+                                                </fieldset>
+
+                                                <input type="hidden" id="accion" name="accion" value="">
+                                            </form>
+                                            <div id="visor-imagenes">
+
+                                            </div>
+                                            <!-- FIN FORMULARIO-->
+
 
                                         </div>
                                     </div>
                                 </div>
-                            </div>   
-                            <div class="span4">
-                                <div class="social-box social-bordered social-blue">
-                                    <div class="header">
-                                        <h4>Album 2</h4>
-                                    </div>
-                                    <div class="body" style="text-align: center;">
-                                        <div class="row-fluid">
-
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
-                            <div class="span4">
-                                <div class="social-box social-bordered social-blue">
-                                    <div class="header">
-                                        <h4>Album 3</h4>
-                                    </div>
-                                    <div class="body" style="text-align: center;">
-                                        <div class="row-fluid">
-
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
+                            </div>                               
                         </div>
                         <div class="row-fluid">
                             <div class="span12 ">
@@ -276,56 +280,29 @@ $perfil = $_SESSION["idPerfil"];
         <script src="../../Files/js/chat/demo-settings.js"></script><!--
         --><script src="../../Files/js/chat/sidebar.js"></script>
         <script src="../../Files/js/custom.js"></script>
-
         <script src="../../Files/js/controlador-chat.js"></script>
-
-        <script type="text/javascript">
-            $(function () {
-                cargarAlbumes();
-            });
-
-            function cargarAlbumes() {
-                var url_json = '../Servlet/administrarAlbum.php?accion=LISTADO';
-                $.getJSON(
-                        url_json,
-                        function (datos) {
-                            //console.log(datos);
-
-                            $("#contenedo-album").empty();
-                            var cont = 0;
-                            var albumes = "";
-                            $.each(datos, function (k, v) {
-                                albumes += "<div class='span4' onClick='abrirAlbum(" + v.IdAlbum + ")'>";
-                                albumes += " <div class='social-box social-bordered social-blue'>";
-                                albumes += "    <div class='header'>";
-                                albumes += "        <h4>" + v.Titulo + "</h4>";
-                                albumes += "    </div>";
-                                albumes += "    <div class='body' style='text-align: center;'>";
-                                albumes += "        <div class='row-fluid'>";
-                                albumes += "          <img src='../../" + v.Ruta + "' width='300px' height='300px'>";
-                                albumes += "        </div>";
-                                albumes += "    </div>";
-                                albumes += "</div>";
-                                albumes += "</div>  ";
-                                cont++;
-                                if (cont == 3) {
-                                    $("#contenedo-album").append("<div class='row-fluid'>" + albumes + "</div>");
-                                    cont = 0;
-                                    albumes = "";
-                                }
-                            });
-                            if (cont > 0) {
-                                $("#contenedo-album").append("<div class='row-fluid'>" + albumes + "</div>");
-                            }
-                        }
-                );
-            }
-
-            function abrirAlbum(id) {
-                window.location = "verAlbumTrabajador.php?id=" + id;
-            }
-
-        </script>
     </body>
 
+    <script type="text/javascript">
+                                                            function guardarAlbum() {
+                                                                document.getElementById("accion").value = "AGREGAR";
+                                                                var url = "../Servlet/administrarAlbum.php";                                                                
+                                                                $('#fm-album').form('submit', {
+                                                                    url: url,                                                                    
+                                                                    onSubmit: function () {
+                                                                        return $(this).form('validate');
+                                                                    },
+                                                                    success: function (result) {  
+                                                                        console.log(result);
+                                                                        var result = eval('(' + result + ')');                                                                       
+                                                                        if (result.success) {
+                                                                            window.location = "administrarAlbumesTrabajadores.php";
+                                                                        } else {
+                                                                            $.messager.alert('Error', result.errorMsg);
+                                                                        }
+                                                                    }
+                                                                });
+                                                            }
+
+    </script>
 </html>

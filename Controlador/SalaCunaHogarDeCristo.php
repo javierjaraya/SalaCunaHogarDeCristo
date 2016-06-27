@@ -80,6 +80,10 @@ class SalaCunaHogarDeCristo {
     public function getAlbumLikeAtrr($cadena) {
         return $this->albumDAO->findLikeAtrr($cadena);
     }
+    
+    public function getIdAlbumDisponible() {
+        return $this->albumDAO->getIdDisponible();
+    }
 
     public function getAllApoderados() {
         return $this->apoderadoDAO->findAll();
@@ -135,6 +139,10 @@ class SalaCunaHogarDeCristo {
 
     public function getAllFotografias() {
         return $this->fotografiaDAO->findAll();
+    }
+    
+    public function getAllFotografiasByAlbum($IdAlbum) {
+        return $this->fotografiaDAO->findAllByIdAlbum($IdAlbum);
     }
 
     public function addFotografia($fotografia) {

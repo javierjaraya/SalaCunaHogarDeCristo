@@ -141,10 +141,10 @@ function ajustarVentanas() {
     });
 }
 
-function refrescarMensajes() {        
+function refrescarMensajes() {
     $.each(ventanasAbiertas, function (k, v) {
-        if (v != undefined){
-            obtenerMensajes(v[0], v[1], v[2]);            
+        if (v != undefined) {
+            obtenerMensajes(v[0], v[1], v[2]);
         }
     });
 }

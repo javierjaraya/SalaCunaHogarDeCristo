@@ -1,0 +1,11 @@
+# Proteger los directorios
+#Options -Indexes
+# Ocultar la extension .php
+#RewriteEngine on
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME}.php -f
+#RewriteRule ^(.*)$ $1.php
+
+#Tamaño maximo de archivos a subir
+php_value post_max_size 50M
+php_value upload_max_filesize 10M

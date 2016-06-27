@@ -37,6 +37,26 @@ class FotografiaDAO{
         return $fotografias;
     }
 
+    public function findAllByIdAlbum($IdAlbum) {
+        $this->conexion->conectar();
+        $query = "SELECT * FROM fotografia WHERE IdAlbum = ".$IdAlbum;
+        $result = $this->conexion->ejecutar($query);
+        $i = 0;
+        $fotografias = array();
+        while ($fila = $result->fetch_row()) {
+            $fotografia = new FotografiaDTO();
+            $fotografia->setIdFotografia($fila[0]);
+            $fotografia->setNombreImagen($fila[1]);
+            $fotografia->setFecha($fila[2]);
+            $fotografia->setRuta($fila[3]);
+            $fotografia->setIdAlbum($fila[4]);
+            $fotografias[$i] = $fotografia;
+            $i++;
+        }
+        $this->conexion->desconectar();
+        return $fotografias;
+    }
+
     public function findByID($IdFotografia) {
         $this->conexion->conectar();
         $query = "SELECT * FROM fotografia WHERE  IdFotografia =  ".$IdFotografia." ";
@@ -75,8 +95,8 @@ class FotografiaDAO{
 
     public function save($fotografia) {
         $this->conexion->conectar();
-        $query = "INSERT INTO fotografia (IdFotografia,NombreImagen,Fecha,Ruta,IdAlbum)"
-                . " VALUES ( ".$fotografia->getIdFotografia()." , '".$fotografia->getNombreImagen()."' , '".$fotografia->getFecha()."' , '".$fotografia->getRuta()."' ,  ".$fotografia->getIdAlbum()." )";
+        $query = "INSERT INTO fotografia (NombreImagen,Fecha,Ruta,IdAlbum)"
+                . " VALUES ('".$fotografia->getNombreImagen()."' , now() , '".$fotografia->getRuta()."' ,  ".$fotografia->getIdAlbum()." )";
         $result = $this->conexion->ejecutar($query);
         $this->conexion->desconectar();
         return $result;

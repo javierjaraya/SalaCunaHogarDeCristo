@@ -5,6 +5,9 @@ class AlbumDTO {
     public $Fecha;
     public $Descripcion;
     public $RunPersona;
+    
+    public $NombresImagen;
+    public $Ruta;
 
     public function AlbumDTO(){
     }
@@ -48,5 +51,20 @@ class AlbumDTO {
     function setRunPersona($RunPersona) {
         return $this->RunPersona = $RunPersona;
     }
+    
+    function getNombresImagen() {
+        return $this->NombresImagen;
+    }
 
+    function getRuta() {
+        return $this->Ruta;
+    }
+
+    function setNombresImagen($NombresImagen) {
+        $this->NombresImagen = $NombresImagen;
+    }
+
+    function setRuta($Ruta) {
+        $this->Ruta = $Ruta;
+    }
 }

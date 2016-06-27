@@ -5,6 +5,7 @@ if ($_SESSION['autentificado'] != "SI") {
     header("Location: ../../../index.php");
 }
 $perfil = $_SESSION["idPerfil"];
+$idAlbum = htmlspecialchars($_REQUEST['id']);
 ?>
 <html lang="en">
     <head>
@@ -19,6 +20,7 @@ $perfil = $_SESSION["idPerfil"];
         <link href="../../Files/Complementos/bootstrap/css/bootstrap-flat.css" rel="stylesheet">        
         <link href="../../Files/Complementos/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link  href="../../Files/css/style.css" rel="stylesheet">
+
         <link  href="../../Files/css/chat.css" rel="stylesheet">  
         <link href="../../Files/css/chat.plugin.css" rel="stylesheet">
         <link  href="../../Files/js/charts/jquery.easy-pie-chart.css" rel="stylesheet">  
@@ -35,13 +37,9 @@ $perfil = $_SESSION["idPerfil"];
         <script src="../../Files/Complementos/lib/scroll-slim/jquery.slimscroll.min.js"></script>
         <script src="../../Files/js/common.js"></script>
 
-        <!--Carrusel-->
-        <script>
-            $('.carousel').carousel({
-                interval: 3000
-            })
-        </script>
-        <!--Fin import carrusel-->
+        <script type="text/javascript" src="../../Files/Complementos/lib/jquery-easyui-1.4.2/jquery.min.js"></script>
+        <script type="text/javascript" src="../../Files/Complementos/lib/jquery-easyui-1.4.2/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="../../Files/Complementos/lib/jquery-easyui-1.4.2/plugins/jquery.datagrid.js"></script>
 
     </head>
     <body >
@@ -88,55 +86,26 @@ $perfil = $_SESSION["idPerfil"];
                     <div id="content" class="span9" >
 
                         <!-- AQUI VA EL MENU INTERIOR-->
-                        <div class="row-fluid">
-                            <div class="span2">
-                                <a href="agregarAlbumTrabajador.php" class="btn btn-warning btn-circle btn-res"><i class="icon-folder-open"></i>Crear Album</a>
-                            </div>
-                        </div>
+
                         <!-- FIN MENU INTERIOR-->
 
                         <hr>
-                        <div id="contenedo-album" class="row-fluid">
-                            <div class="span4">
+                        <div class="row-fluid">
+                            <div class="span12">
                                 <div class="social-box social-bordered social-blue">
                                     <div class="header">
-                                        <h4>Almbun 1</h4>
+                                        <h4 id="titulo-album">Nuevo Album</h4>
                                     </div>
                                     <div class="body" style="text-align: center;">
                                         <div class="row-fluid">
+                                            <!-- CONTENIDO AQUI -->                                              
+                                            <div class="galeria" id="galeria-fotos">                                                
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>   
-                            <div class="span4">
-                                <div class="social-box social-bordered social-blue">
-                                    <div class="header">
-                                        <h4>Album 2</h4>
-                                    </div>
-                                    <div class="body" style="text-align: center;">
-                                        <div class="row-fluid">
-
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
-                            <div class="span4">
-                                <div class="social-box social-bordered social-blue">
-                                    <div class="header">
-                                        <h4>Album 3</h4>
-                                    </div>
-                                    <div class="body" style="text-align: center;">
-                                        <div class="row-fluid">
-
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> 
+                            </div>                               
                         </div>
                         <div class="row-fluid">
                             <div class="span12 ">
@@ -276,56 +245,48 @@ $perfil = $_SESSION["idPerfil"];
         <script src="../../Files/js/chat/demo-settings.js"></script><!--
         --><script src="../../Files/js/chat/sidebar.js"></script>
         <script src="../../Files/js/custom.js"></script>
-
         <script src="../../Files/js/controlador-chat.js"></script>
 
-        <script type="text/javascript">
-            $(function () {
-                cargarAlbumes();
-            });
 
-            function cargarAlbumes() {
-                var url_json = '../Servlet/administrarAlbum.php?accion=LISTADO';
-                $.getJSON(
-                        url_json,
-                        function (datos) {
-                            //console.log(datos);
-
-                            $("#contenedo-album").empty();
-                            var cont = 0;
-                            var albumes = "";
-                            $.each(datos, function (k, v) {
-                                albumes += "<div class='span4' onClick='abrirAlbum(" + v.IdAlbum + ")'>";
-                                albumes += " <div class='social-box social-bordered social-blue'>";
-                                albumes += "    <div class='header'>";
-                                albumes += "        <h4>" + v.Titulo + "</h4>";
-                                albumes += "    </div>";
-                                albumes += "    <div class='body' style='text-align: center;'>";
-                                albumes += "        <div class='row-fluid'>";
-                                albumes += "          <img src='../../" + v.Ruta + "' width='300px' height='300px'>";
-                                albumes += "        </div>";
-                                albumes += "    </div>";
-                                albumes += "</div>";
-                                albumes += "</div>  ";
-                                cont++;
-                                if (cont == 3) {
-                                    $("#contenedo-album").append("<div class='row-fluid'>" + albumes + "</div>");
-                                    cont = 0;
-                                    albumes = "";
-                                }
-                            });
-                            if (cont > 0) {
-                                $("#contenedo-album").append("<div class='row-fluid'>" + albumes + "</div>");
-                            }
-                        }
-                );
-            }
-
-            function abrirAlbum(id) {
-                window.location = "verAlbumTrabajador.php?id=" + id;
-            }
-
-        </script>
+        <input type="hidden" name="idAlbum" id="idAlbum" value="<?php echo $idAlbum; ?>">        
+        <!-- LIBRERIAS GALERIA DE FOTOS -->
+        <script type="text/javascript" src="../../Files/Complementos/lightbox/dist/js/lightbox.js"></script>
+        <link rel="stylesheet" href="../../Files/Complementos/lightbox/dist/css/lightbox.css" type="text/css" />
     </body>
 
+    <script type="text/javascript">
+
+        $(function () {
+            cargarFotos();
+        });
+
+        function cargarFotos() {
+            var idAlbum = document.getElementById("idAlbum").value;
+            var url_json = '../Servlet/administrarFotografia.php?accion=LISTADO_BY_ALBUM&idAlbum=' + idAlbum;
+            $.getJSON(
+                    url_json,
+                    function (datos) {
+                        $("#titulo-album").empty();
+                        $("#titulo-album").append(datos.album.Titulo);
+
+                        $("#galeria-fotos").empty();
+                        var cont = 0;
+                        var imagenes = "";
+                        $.each(datos.fotografias, function (k, v) {
+                            imagenes += "<a class='thumbnail span3' href='../../" + v.Ruta + "' rel='lightbox[galeria]' title='" + v.Fecha + "'><img src='../../" + v.Ruta + "' width='300px' height='300px'/></a>";
+                            cont++;
+                            if (cont == 4) {
+                                $("#galeria-fotos").append("<div class='row-fluid' style='padding-bottom: 20px;'>" + imagenes + "</div>");
+                                cont = 0;
+                                imagenes = "";
+                            }
+                        });
+                        if (cont > 0) {
+                            $("#galeria-fotos").append("<div class='row-fluid'>" + imagenes + "</div>");
+                        }
+                    }
+            );
+        }
+
+    </script>
 </html>
