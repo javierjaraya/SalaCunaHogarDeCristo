@@ -107,8 +107,15 @@ $perfil = $_SESSION["idPerfil"];
                                             <!-- INICIO FORMULARIO -->
                                             <form id="fm-menor" class="form-horizontal well">
                                                 <fieldset>
-                                                    <legend>Datos Menor</legend>
-
+                                                    <legend>Datos Menor</legend>                                                    
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="RunApoderado">Apoderado</label>
+                                                        <div class="controls">                                                            
+                                                            <select id="RunApoderado" name="RunApoderado">                                                                
+                                                            </select>
+                                                            <a href="agregarApoderado.php" class="btn btn-success"><i class="icon-add" onClick=""></i> Agregar</a>                                                                                                                        
+                                                        </div>
+                                                    </div>
                                                     <div class="control-group">
                                                         <label class="control-label" for="Run">Run</label>
                                                         <div class="controls">
@@ -171,14 +178,7 @@ $perfil = $_SESSION["idPerfil"];
                                                                 <option value="2">mayor</option>
                                                             </select>
                                                         </div>
-                                                    </div>
-                                                    <div class="control-group">
-                                                        <label class="control-label" for="RunApoderado">Run Apoderado</label>
-                                                        <div class="controls">
-                                                            <input type="text" name="RunApoderado" class="input-xlarge" id="RunApoderado">
-                                                        </div>
-                                                    </div>  
-
+                                                    </div>                                                    
                                                     <div class="form-actions">
                                                         <button type="button" onclick="guardarMenor()" class="btn btn-primary">Guardar Cambios</button>
                                                         <button type="button" onClick="location.href = 'administrarMenorDirectora.php'" class="btn">Cancelar</button>
@@ -261,88 +261,100 @@ $perfil = $_SESSION["idPerfil"];
         <script src="../../Files/js/custom.js"></script>
         <script src="../../Files/js/controlador-chat.js"></script>
 
-        
+
         <!-- Libreria para Validar Rut-->
         <script src="../../Files/js/validarut.js"></script>
-        <script>
-            //APODERADOS
-            $(function () {
+        <script type="text/javascript">
+                                                            //APODERADOS
+                                                            $(function () {
+                                                                cargarApoderados();
+                                                            });
 
-            })
+                                                            function guardarMenor() {
+                                                                document.getElementById("accion").value = "AGREGAR";
+                                                                if (validar()) {
+                                                                    console.log("validado");
+                                                                    $('#fm-menor').form('submit', {
+                                                                        url: "../Servlet/administrarMenor.php",
+                                                                        onSubmit: function () {
+                                                                            return $(this).form('validate');
+                                                                        },
+                                                                        success: function (result) {
+                                                                            console.log(result);
+                                                                            var result = eval('(' + result + ')');
+                                                                            if (result.errorMsg) {
+                                                                                $.messager.alert('Error', result.errorMsg);
+                                                                            } else {
+                                                                                $.messager.show({
+                                                                                    title: 'Aviso',
+                                                                                    msg: result.mensaje
+                                                                                });
+                                                                                window.location = "administrarMenorDirectora.php";
+                                                                            }
+                                                                        }
+                                                                    });
+                                                                }
+                                                            }
 
-            function guardarMenor() {
-                document.getElementById("accion").value = "AGREGAR";
-                if (validar()) {
-                    console.log("validado");                    
-                    $('#fm-menor').form('submit', {
-                        url: "../Servlet/administrarMenor.php",
-                        onSubmit: function () {
-                            return $(this).form('validate');
-                        },
-                        success: function (result) {
-                            console.log(result);
-                            var result = eval('(' + result + ')');
-                            if (result.errorMsg) {
-                                $.messager.alert('Error', result.errorMsg);
-                            } else {
-                                $.messager.show({
-                                    title: 'Aviso',
-                                    msg: result.mensaje
-                                });
-                                window.location = "administrarMenorDirectora.php";
-                            }
-                        }
-                    });
-                }
-            }
+                                                            function validar() {
+                                                                if (Rut(document.getElementById('Run').value)) {
+                                                                    if (document.getElementById('Nombres').value != "") {
+                                                                        if (document.getElementById('Apellidos').value != "") {
+                                                                            if (document.getElementById('SexoM').checked || document.getElementById('SexoF').checked) {
+                                                                                if (document.getElementById('FechaNacimiento').value != "") {
+                                                                                    if (document.getElementById('Direccion').value != "") {
+                                                                                        var telefono = document.getElementById('Telefono').value;
+                                                                                        if (telefono != "" && telefono.length > 5) {
+                                                                                            if (!isNaN(telefono)) {
+                                                                                                if (document.getElementById('FechaMatricula').value != "") {
+                                                                                                    if (Rut(document.getElementById('RunApoderado').value)) {
+                                                                                                        return true;
+                                                                                                    } else {
+                                                                                                        $.messager.alert("Alerta", "El run del apoderado no es valido");
+                                                                                                    }
+                                                                                                } else {
+                                                                                                    $.messager.alert("Alerta", "Ingrese una fecha de matricula");
+                                                                                                }
+                                                                                            } else {
+                                                                                                $.messager.alert("Alerta", "El telefono contiene caracteres no validos");
+                                                                                            }
+                                                                                        } else {
+                                                                                            $.messager.alert("Alerta", "Debe ingresar una telefono de contacto con al menos 6 digitos");
+                                                                                        }
+                                                                                    } else {
+                                                                                        $.messager.alert("Alerta", "Debe ingresar una direccion");
+                                                                                    }
+                                                                                } else {
+                                                                                    $.messager.alert("Alerta", "Debe ingresar una fecha de nacimiento");
+                                                                                }
+                                                                            } else {
+                                                                                $.messager.alert("Alerta", "Debe seleccionar su sexo");
+                                                                            }
+                                                                        } else {
+                                                                            $.messager.alert("Alerta", "Debe ingresar sus apellidos");
+                                                                        }
+                                                                    } else {
+                                                                        $.messager.alert("Alerta", "Debe ingresar sus nombres");
+                                                                    }
+                                                                } else {
+                                                                    $.messager.alert("Alerta", "El run del menor ingresado no es valido");
+                                                                }
+                                                                return false;
+                                                            }
 
-            function validar() {
-                if (Rut(document.getElementById('Run').value)) {
-                    if (document.getElementById('Nombres').value != "") {
-                        if (document.getElementById('Apellidos').value != "") {
-                            if (document.getElementById('SexoM').checked || document.getElementById('SexoF').checked) {
-                                if (document.getElementById('FechaNacimiento').value != "") {
-                                    if (document.getElementById('Direccion').value != "") {
-                                        var telefono = document.getElementById('Telefono').value;
-                                        if (telefono != "" && telefono.length > 5) {
-                                            if (!isNaN(telefono)) {
-                                                if (document.getElementById('FechaMatricula').value != "") {
-                                                    if (Rut(document.getElementById('RunApoderado').value)) {
-                                                        return true;
-                                                    } else {
-                                                        $.messager.alert("Alerta", "El run del apoderado no es valido");
-                                                    }
-                                                } else {
-                                                    $.messager.alert("Alerta", "Ingrese una fecha de matricula");
-                                                }
-                                            } else {
-                                                $.messager.alert("Alerta", "El telefono contiene caracteres no validos");
-                                            }
-                                        } else {
-                                            $.messager.alert("Alerta", "Debe ingresar una telefono de contacto con al menos 6 digitos");
-                                        }
-                                    } else {
-                                        $.messager.alert("Alerta", "Debe ingresar una direccion");
-                                    }
-                                } else {
-                                    $.messager.alert("Alerta", "Debe ingresar una fecha de nacimiento");
-                                }
-                            } else {
-                                $.messager.alert("Alerta", "Debe seleccionar su sexo");
-                            }
-                        } else {
-                            $.messager.alert("Alerta", "Debe ingresar sus apellidos");
-                        }
-                    } else {
-                        $.messager.alert("Alerta", "Debe ingresar sus nombres");
-                    }
-                } else {
-                    $.messager.alert("Alerta", "El run del menor ingresado no es valido");
-                }
-                return false;
-            }
-
-
+                                                            function cargarApoderados() {
+                                                                $("#RunApoderado").empty();
+                                                                var url_json = '../Servlet/administrarApoderado.php?accion=LISTADOHABILITADOS';
+                                                                $.getJSON(
+                                                                        url_json,
+                                                                        function (datos) {
+                                                                            $.each(datos, function (k, v) {
+                                                                                var contenido = "<option value='" + v.RunPersona + "'>" + v.Nombres + " " + v.Apellidos + "</option>";
+                                                                                $("#RunApoderado").append(contenido);
+                                                                            });
+                                                                        }
+                                                                );
+                                                            }
         </script>
     </body>
 </html>
