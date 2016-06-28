@@ -67,7 +67,12 @@ function abrirVentana(id, nombres, run, paso) {
         $("body").append(contenido);
         cantidadVentanasAbiertas++;
         ventanasAbiertas[id] = [id, nombres, run];
-        obtenerMensajes(id, nombres, run)
+        obtenerMensajes(id, nombres, run);
+
+        //POSICIONAR EL FINAL DEL SCRROL
+        $("#m" + id).animate({
+            scrollTop: 290
+        }, 2000);
     }
 }
 
@@ -111,6 +116,10 @@ function obtenerMensajes(id, nombres, runDestino) {
                     }
                     $("#m" + id).append(contenido);
                 });
+                //POSICIONAR EL FINAL DEL SCRROL
+                $("#m" + id).animate({
+                    scrollTop: 290
+                }, 2000);
             }
     );
 }
@@ -156,13 +165,13 @@ function obtenerNotificacionesMensajesNoLeidos() {
             url_json,
             function (datos) {
                 var indicador = "";
-                if(datos.cantidad > 0){
+                if (datos.cantidad > 0) {
                     indicador = datos.cantidad;
                 }
                 $("#n-new-mensajes-sup").empty();
                 $("#n-new-mensajes-sup").append(indicador);
-                                
-                
+
+
                 var contenido = "<li class='nav-messages-header'>";
                 contenido += "           <a tabindex='-1' href='#'>Tiene <strong>" + datos.cantidad + "</strong> mensajes nuevos</a>";
                 contenido += "        </li>    ";
@@ -179,11 +188,11 @@ function obtenerNotificacionesMensajesNoLeidos() {
                     contenido += "            <a>";
                     contenido += "                <img src='../../Files/img/Femenino.jpg' alt='User'>";
                     contenido += "                <div>";
-                    contenido += "                    <small class='pull-right'>"+hora[0]+"</small>";
-                    contenido += "                    <strong>"+nombres[0]+apellidos[0]+"</strong>";
+                    contenido += "                    <small class='pull-right'>" + hora[0] + "</small>";
+                    contenido += "                    <strong>" + nombres[0] + apellidos[0] + "</strong>";
                     contenido += "                </div>";
                     contenido += "                <div>";
-                    contenido += "                    "+mensaje+"...";
+                    contenido += "                    " + mensaje + "...";
                     contenido += "                </div>";
                     contenido += "            </a>";
                     contenido += "        </li> ";
