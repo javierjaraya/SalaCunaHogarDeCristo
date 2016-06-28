@@ -10,18 +10,18 @@ if ($accion != null) {
         $mensajes = $control->getAllMensajes();
         $json = json_encode($mensajes);
         echo $json;
-    } else if ($accion == "AGREGAR") {        
+    } else if ($accion == "AGREGAR") {
         $runPara = htmlspecialchars($_REQUEST['runPara']);
         $texto = htmlspecialchars($_REQUEST['texto']);
         session_start();
         $runDesde = $_SESSION['run'];
 
-        $mensaje = new MensajeDTO();        
+        $mensaje = new MensajeDTO();
         $mensaje->setRunDesde($runDesde);
-        $mensaje->setRunPara($runPara);       
+        $mensaje->setRunPara($runPara);
         $mensaje->setMensaje($texto);
-        $mensaje->setEstado(0);//0 = no visto   1 = visto
-        
+        $mensaje->setEstado(0); //0 = no visto   1 = visto
+
         echo json_encode($mensaje);
 
         $result = $control->addMensaje($mensaje);
@@ -83,7 +83,7 @@ if ($accion != null) {
         //1 = directora   2 = parvularia  3 = apoderado
         session_start();
         $perfil = $_SESSION['idPerfil'];
-        
+
         $usuarios = array();
         $i = 0;
         if ($perfil == 3) {
@@ -125,11 +125,13 @@ if ($accion != null) {
         $runDesde = $_SESSION['run'];
 
         $mensajes = $control->getMensajesEntreContactos($runDesde, $runPara);
-        
-        for($i = 0; $i < count($mensajes); $i++){            
+
+        for ($i = 0; $i < count($mensajes); $i++) {
             //Marcaar mensaje como leido
-            $mensaje = $mensajes[$i];            
-            $result = $control->marcarLeidoMensajeLiedo($mensaje->getIdMensaje(),1);             
+            $mensaje = $mensajes[$i];
+            if ($mensaje->getRunPara() == $runDesde) {
+                $result = $control->marcarLeidoMensajeLiedo($mensaje->getIdMensaje(), 1);
+            }
         }
 
         echo json_encode(array('mensajes' => $mensajes));
