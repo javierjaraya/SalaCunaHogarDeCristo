@@ -13,6 +13,9 @@ class TrabajadorDTO {
     public $Telefono;
     public $Direccion;
     public $IdEstado;
+    
+    public $persona;
+    public $usuario;
 
     public function TrabajadorDTO(){
     }
@@ -104,4 +107,20 @@ class TrabajadorDTO {
     function setCargo($Cargo) {
         return $this->Cargo = $Cargo;
     }   
+    
+    function getPersona() {
+        return $this->persona;
+    }
+
+    function setPersona($persona) {
+        $this->persona = $persona;
+    }
+    
+    function getUsuario() {
+        return $this->usuario;
+    }
+
+    function setUsuario($usuario) {
+        $this->usuario = $usuario;
+    }
 }

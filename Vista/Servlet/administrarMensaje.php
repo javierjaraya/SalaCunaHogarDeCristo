@@ -83,7 +83,7 @@ if ($accion != null) {
         //1 = directora   2 = parvularia  3 = apoderado
         session_start();
         $perfil = $_SESSION['idPerfil'];
-
+        
         $usuarios = array();
         $i = 0;
         if ($perfil == 3) {
