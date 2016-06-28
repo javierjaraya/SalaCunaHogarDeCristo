@@ -46,65 +46,74 @@ if ($accion != null) {
                 $apoderado->setRunPersona($RunApoderado);
                 $apoderado->setSituacionSocioeconomica($SituacionSocioeconomicaApoderado);
                 $menor = new MenorDTO();
+                $menor->setRunPersona($RunMenor);
                 $menor->setFechaMatricula($FechaMatriculaMenor);
                 $menor->setIdNivel($IdNivelMenor);
                 $menor->setRunApoderado($RunApoderado);
                 //Validamos que la persona no sea un trabajador
                 $objectA = $control->getTrabajadorByID($RunApoderado);
                 $objectM = $control->getTrabajadorByID($RunMenor);
-                if (($objectA->getRunPersona() == null || $objectA->getRunPersona() == "") && ($objectM->getRunPersona() == null || $objectM->getRunPersona() == "")) {//si no es trabajador
-                    $resultPersonaApoderado;
-                    $resultPersonaMenor;
-                    //VALIDAMOS QUE LA PERSONA EXISTA O ACTUALIZAMOS SUS DATOS
-                    $personaAuxApoderado = $control->getPersonaByID($RunApoderado);
-                    $personaAuxMenor = $control->getPersonaByID($RunMenor);
-                    $persona = new PersonaDTO();
-                    $persona->setRunPersona($RunApoderado);
-                    $persona->setNombres($NombresApoderado);
-                    $persona->setApellidos($ApellidosApoderado);
-                    $persona->setSexo($SexoApoderado);
-                    $persona->setFechaNacimiento($FechaNacimientoApoderado);
-                    $persona->setTelefono($TelefonoApoderado);
-                    $persona->setDireccion($DireccionApoderado);
+                if (($objectA->getRunPersona() == null || $objectA->getRunPersona() == "")) {//si no es trabajador
+                    if ($objectM->getRunPersona() == null || $objectM->getRunPersona() == "") {
+                        $resultPersonaApoderado;
+                        $resultPersonaMenor;
+                        //VALIDAMOS QUE LA PERSONA EXISTA O ACTUALIZAMOS SUS DATOS
+                        $personaAuxApoderado = $control->getPersonaByID($RunApoderado);
+                        $personaAuxMenor = $control->getPersonaByID($RunMenor);
 
-                    $personaMenor = new PersonaDTO();
-                    $personaMenor->setRunPersona($RunMenor);
-                    $personaMenor->setNombres($NombresMenor);
-                    $personaMenor->setApellidos($ApellidosMenor);
-                    $personaMenor->setSexo($SexoMenor);
-                    $personaMenor->setFechaNacimiento($FechaNacimientoMenor);
-                    $personaMenor->setTelefono($TelefonoMenor);
-                    $personaMenor->setDireccion($DireccionMenor);
+                        $persona = new PersonaDTO();
+                        $persona->setRunPersona($RunApoderado);
+                        $persona->setNombres($NombresApoderado);
+                        $persona->setApellidos($ApellidosApoderado);
+                        $persona->setSexo($SexoApoderado);
+                        $persona->setFechaNacimiento($FechaNacimientoApoderado);
+                        $persona->setTelefono($TelefonoApoderado);
+                        $persona->setDireccion($DireccionApoderado);
+                        $persona->setIdEstado(2);
 
-                    if (($personaAuxApoderado->getRunPersona() == null || $personaAuxApoderado->getRunPersona() == "")) {//Si la persona Apoderado no existe
-                        $resultPersonaApoderado = $control->addPersona($persona);
+                        $personaMenor = new PersonaDTO();
+                        $personaMenor->setRunPersona($RunMenor);
+                        $personaMenor->setNombres($NombresMenor);
+                        $personaMenor->setApellidos($ApellidosMenor);
+                        $personaMenor->setSexo($SexoMenor);
+                        $personaMenor->setFechaNacimiento($FechaNacimientoMenor);
+                        $personaMenor->setTelefono($TelefonoMenor);
+                        $personaMenor->setDireccion($DireccionMenor);
+                        $personaMenor->setIdEstado(2);
+                                               
+                        $usuario = new UsuarioDTO();
+                        $usuario->setIdPerfil(3); //1 = Directo , 2 = Trabajador, 3 = Apoderado
+                        $usuario->setClave($Clave);
+                        $usuario->setRunPersona($RunApoderado);
+
+                        if (($personaAuxApoderado->getRunPersona() == null || $personaAuxApoderado->getRunPersona() == "")) {//Si la persona Apoderado no existe
+                            $resultPersonaApoderado = $control->addPersona($persona);
+                        } else {
+                            $resultPersonaApoderado = $control->updatePersona($persona);
+                        }
+                        
+                        if (($personaAuxMenor->getRunPersona() == null || $personaAuxMenor->getRunPersona() == "")) {//Si la persona Menor no existe
+                            $resultPersonaMenor = $control->addPersona($personaMenor);
+                        } else {
+                            $resultPersonaMenor = $control->updatePersona($personaMenor);
+                        }
+                        //GUARDAMOS EL APODERADO y menor
+                        $resultApoderado = $control->addApoderado($apoderado);
+                        $resultMenor = $control->addMenor($menor);
+                        $resulUsuario = $control->addUsuario($usuario);
+
+                        $result = $resultPersonaMenor && $resultPersonaApoderado && $resultApoderado && $resulUsuario && $resultMenor ? true : false;
+
+                        if ($result) {
+                            echo json_encode(array(
+                                'success' => true,
+                                'mensaje' => "Apoderado ingresada correctamente"
+                            ));
+                        } else {
+                            echo json_encode(array('errorMsg' => 'Ha ocurrido un error.Persona menor :' . $resultPersonaMenor . '. Persona apoder: ' . $resultPersonaApoderado . '. apoder ' . $resultApoderado . ' usuario ' . $resulUsuario . ' menor ' . $resultMenor));
+                        }
                     } else {
-                        $resultPersona = $control->updatePersona($persona);
-                    }
-                    if (($personaAuxMenor->getRunPersona() == null || $personaAuxMenor->getRunPersona() == "")) {//Si la persona Menor no existe
-                        $resultPersonaMenor = $control->addPersona($personaMenor);
-                    } else {
-                        $resultPersona = $control->updatePersona($personaMenor);
-                    }
-                    //GUARDAMOS EL APODERADO y menor
-                    $resultApoderado = $control->addApoderado($apoderado);
-                    $resultMenor = $control->addMenor($menor);
-
-                    $usuario = new UsuarioDTO();
-                    $usuario->setIdPerfil(3); //1 = Directo , 2 = Trabajador, 3 = Apoderado
-                    $usuario->setClave($Clave);
-                    $usuario->setRunPersona($RunApoderado);
-                    $resulUsuario = $control->addUsuario($usuario);
-
-                    $result = $resultPersonaMenor && $resultPersonaApoderado && $resultApoderado && $resulUsuario && $resultMenor ? true : false;
-
-                    if ($result) {
-                        echo json_encode(array(
-                            'success' => true,
-                            'mensaje' => "Apoderado ingresada correctamente"
-                        ));
-                    } else {
-                        echo json_encode(array('errorMsg' => 'Ha ocurrido un error.Persona menor :'.$resultPersonaMenor.'. Persona apoder: '.$resultPersonaApoderado.'. apoder '.$resultApoderado.' usuario '.$resulUsuario.' menor '.$resultMenor ));
+                        echo json_encode(array('errorMsg' => 'El run que intenta poner como menor es un trabajador, no puede ser menor.'));
                     }
                 } else {
                     echo json_encode(array('errorMsg' => 'El o la persona es un trabajador, no puede ser apoderado.'));
