@@ -100,14 +100,24 @@ class MensajeDAO {
         $this->conexion->desconectar();
         return $result;
     }
+    
+    public function marcarLeido($idMensaje,$estado){
+        $this->conexion->conectar();
+        $query = "UPDATE mensaje SET "
+                . "  estado =  " . $estado . " "
+                . " WHERE  idMensaje =  " . $idMensaje . " ";
+        $result = $this->conexion->ejecutar($query);
+        $this->conexion->desconectar();
+        return $result;
+    }
 
     public function findByRunDesdeAndPara($runDesde, $runPara) {
         $this->conexion->conectar();
         $query = "SELECT m.idMensaje, m.runDesde, m.runPara,m.hora, m.mensaje, m.estado, p.Nombres as nombresDesde, p.Apellidos as apellidosDesde, pp.Nombres as nombresPara, pp.Apellidos as apellidosPara "
                 . " FROM mensaje m JOIN persona p ON m.runDesde = p.runPersona  "
                 . " JOIN persona pp ON m.runPara = pp.runPersona "
-                . " WHERE (m.runDesde = '".$runDesde."' AND m.runPara = '".$runPara."') "
-                . " OR (m.runDesde = '".$runPara."' AND m.runPara = '".$runDesde."') "
+                . " WHERE (m.runDesde = '" . $runDesde . "' AND m.runPara = '" . $runPara . "') "
+                . " OR (m.runDesde = '" . $runPara . "' AND m.runPara = '" . $runDesde . "') "
                 . " ORDER BY m.hora";
         $result = $this->conexion->ejecutar($query);
         $i = 0;
@@ -120,15 +130,45 @@ class MensajeDAO {
             $mensaje->setHora($fila[3]);
             $mensaje->setMensaje($fila[4]);
             $mensaje->setEstado($fila[5]);
-            
+
             $mensaje->setNombreDesde($fila[6]);
             $mensaje->setApellidosDesde($fila[7]);
             $mensaje->setNombrePara($fila[8]);
             $mensaje->setApallidosPara($fila[9]);
-            
+
             $mensajes[$i] = $mensaje;
             $i++;
-            
+        }
+        $this->conexion->desconectar();
+        return $mensajes;
+    }
+
+    public function obtenerMensajesNoLeidosByRun($runPara) {
+        $this->conexion->conectar();
+        $query = "SELECT m.idMensaje, m.runDesde, m.runPara,m.hora, m.mensaje, m.estado, p.Nombres as nombresDesde, p.Apellidos as apellidosDesde, pp.Nombres as nombresPara, pp.Apellidos as apellidosPara "
+                . " FROM mensaje m JOIN persona p ON m.runDesde = p.runPersona "
+                . " JOIN persona pp ON m.runPara = pp.runPersona "
+                . " WHERE m.estado = 0 AND m.runPara = '".$runPara."' "
+                . " ORDER BY m.hora";
+        $result = $this->conexion->ejecutar($query);
+        $i = 0;
+        $mensajes = array();
+        while ($fila = $result->fetch_row()) {
+            $mensaje = new MensajeDTO();
+            $mensaje->setIdMensaje($fila[0]);
+            $mensaje->setRunDesde($fila[1]);
+            $mensaje->setRunPara($fila[2]);
+            $mensaje->setHora($fila[3]);
+            $mensaje->setMensaje($fila[4]);
+            $mensaje->setEstado($fila[5]);
+
+            $mensaje->setNombreDesde($fila[6]);
+            $mensaje->setApellidosDesde($fila[7]);
+            $mensaje->setNombrePara($fila[8]);
+            $mensaje->setApallidosPara($fila[9]);
+
+            $mensajes[$i] = $mensaje;
+            $i++;
         }
         $this->conexion->desconectar();
         return $mensajes;

@@ -21,137 +21,18 @@ $sexo = $_SESSION["sexo"];
             <!-- start: Header Menu -->
             <div class="nav-collapse collapse header-nav">
                 <ul class="nav  pull-right">
-                    <!--
-                    <li class="divider-vertical"></li>
+                    <!-- NOTIFICACION MENSAJES-->
                     <li class="dropdown nav-messages">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="badge">8</span>
+                            <span class="badge" id="n-new-mensajes-sup"></span>
                             <i class="icon-envelope"></i>
                         </a>
-                        <ul class="dropdown-menu">
-
+                        <ul class="dropdown-menu" id="descripcion-nuevos-mensajes">
                             <li class="nav-messages-header">
-                                <a tabindex="-1" href="#">Tiene <strong>8</strong> mensajes nuevos</a>
-                            </li>
-                            <li class="nav-message-body">
-                                <a>
-                                    <img src="../../Files/img/content/shaan.png" alt="User">
-                                    <div>
-                                        <small class="pull-right">Just Now</small>
-                                        <strong>majoo bla</strong>
-                                    </div>
-                                    <div>
-                                        Lorem ipsum dolor sit amet, consectetur...
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="nav-message-body">
-                                <a>
-                                    <img src="../../Files/img/content/half.png" alt="User">
-                                    <div>
-                                        <small class="pull-right">Just Now</small>
-                                        <strong>shawn kan</strong>
-                                    </div>
-                                    <div>
-                                        Lorem ipsum dolor sit amet, consectetur...
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="nav-message-body">
-                                <a>
-                                    <img src="../../Files/img/content/smile.png" alt="User">
-                                    <div>
-                                        <small class="pull-right">Just Now</small>
-                                        <strong>John Doe</strong>
-                                    </div>
-                                    <div>
-                                        Lorem ipsum dolor sit amet, consectetur...
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="nav-message-body">
-                                <a>
-                                    <img src="../../Files/img/content/shaan.png" alt="User">
-                                    <div>
-                                        <small class="pull-right">Just Now</small>
-                                        <strong>lol man</strong>
-                                    </div>
-                                    <div>
-                                        Lorem ipsum dolor sit amet, consectetur...
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="nav-messages-footer">
-                                <a tabindex="-1" href="/Vista/inbox2.html">Ver todos los mensajes
-                                </a>
-                            </li>
-                        </ul> 
-                    </li>
-                    <li class="divider-vertical"></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <span class="badge">9</span>
-                            <i class="icon-bell icon-white warning-sign"></i>
-                        </a>
-                        <ul class="dropdown-menu notifications">
-                            <li>
-                                <a href="#"> <span >Tiene 11 notificaciones</span></a>
-                            </li>	
-                            <li>
-                                <a href="#">
-                                    + <i class="icon-user icon-white icon-2x"></i> <span class="message">New user registration</span> <span class="time">1 min</span> 
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    + <i class="icon-user icon-white icon-2x"></i> <span class="message">New comment</span> <span class="time">7 min</span> 
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    + <i class="icon-user icon-white icon-2x"></i> <span class="message">New comment</span> <span class="time">8 min</span> 
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    + <i class="icon-user icon-white icon-2x"></i> <span class="message">New comment</span> <span class="time">16 min</span> 
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    + <i class="icon-user icon-white icon-2x"></i> <span class="message">New user registration</span> <span class="time">36 min</span> 
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    + <i class="icon-user icon-white icon-2x"></i> <span class="message">2 items sold</span> <span class="time">1 hour</span> 
-                                </a>
-                            </li>
-                            <li class="warning">
-                                <a href="#">
-                                    - <i class="icon-user icon-white icon-2x"></i> <span class="message">User deleted account</span> <span class="time">2 hour</span> 
-                                </a>
-                            </li>
-                            <li class="warning">
-                                <a href="#">
-                                    - <i class="icon-user icon-white icon-2x"></i> <span class="message">Transaction was canceled</span> <span class="time">6 hour</span> 
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    + <i class="icon-user icon-white icon-2x"></i> <span class="message">New comment</span> <span class="time">yesterday</span> 
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    + <i class="icon-user icon-white icon-2x"></i> <span class="message">New user registration</span> <span class="time">yesterday</span> 
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-menu-sub-footer">Ver todas las notificaciones</a>
-                            </li>	
+                                <a tabindex="-1" href="#">No tienes mensajes nuevos</a>
+                            </li>                          
                         </ul>
-                    </li>-->    
+                    </li>   
                     <!-- start: Message Dropdown -->
                     <li class="divider-vertical"></li>
                     <li class="dropdown">

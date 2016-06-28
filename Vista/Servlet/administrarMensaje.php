@@ -20,7 +20,7 @@ if ($accion != null) {
         $mensaje->setRunDesde($runDesde);
         $mensaje->setRunPara($runPara);       
         $mensaje->setMensaje($texto);
-        $mensaje->setEstado(1);
+        $mensaje->setEstado(0);//0 = no visto   1 = visto
         
         echo json_encode($mensaje);
 
@@ -125,9 +125,22 @@ if ($accion != null) {
         $runDesde = $_SESSION['run'];
 
         $mensajes = $control->getMensajesEntreContactos($runDesde, $runPara);
+        
+        for($i = 0; $i < count($mensajes); $i++){            
+            //Marcaar mensaje como leido
+            $mensaje = $mensajes[$i];            
+            $result = $control->marcarLeidoMensajeLiedo($mensaje->getIdMensaje(),1);             
+        }
 
+        echo json_encode(array('mensajes' => $mensajes));
+    } else if ($accion == "OBTENER_MENSAJES_NO_LEIDOS") {
+        session_start();
+        $runPara = $_SESSION['run'];
+        $mensajes = $control->getMensajesNoLeidosByRunPara($runPara);
+        $count = count($mensajes);
         echo json_encode(array(
-            'mensajes' => $mensajes
+            'mensajes' => $mensajes,
+            'cantidad' => $count
         ));
     }
 }

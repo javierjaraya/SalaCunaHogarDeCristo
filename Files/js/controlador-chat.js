@@ -150,4 +150,49 @@ function refrescarMensajes() {
 }
 setInterval(refrescarMensajes, 3000);
 
+function obtenerNotificacionesMensajesNoLeidos() {
+    var url_json = '../Servlet/administrarMensaje.php?accion=OBTENER_MENSAJES_NO_LEIDOS';
+    $.getJSON(
+            url_json,
+            function (datos) {
+                var indicador = "";
+                if(datos.cantidad > 0){
+                    indicador = datos.cantidad;
+                }
+                $("#n-new-mensajes-sup").empty();
+                $("#n-new-mensajes-sup").append(indicador);
+                                
+                
+                var contenido = "<li class='nav-messages-header'>";
+                contenido += "           <a tabindex='-1' href='#'>Tiene <strong>" + datos.cantidad + "</strong> mensajes nuevos</a>";
+                contenido += "        </li>    ";
+                $("#descripcion-nuevos-mensajes").empty();
+                $("#descripcion-nuevos-mensajes").append(contenido);
+                $.each(datos.mensajes, function (k, v) {
+                    //console.log(v);
+                    var hora = v.hora.split(" ");
+                    var nombres = v.nombreDesde.split(" ");
+                    var apellidos = v.apellidosDesde.split(" ");
+                    var mensaje = v.mensaje.substring(0, 40);
+                    // onClick='abrirVentana(" + v.runDesde + ",\"" + nombres[0] + apellidos[0]+"\"," + v.runDesde + " ,false)'
+                    contenido = "  <li class='nav-message-body'>";
+                    contenido += "            <a>";
+                    contenido += "                <img src='../../Files/img/Femenino.jpg' alt='User'>";
+                    contenido += "                <div>";
+                    contenido += "                    <small class='pull-right'>"+hora[0]+"</small>";
+                    contenido += "                    <strong>"+nombres[0]+apellidos[0]+"</strong>";
+                    contenido += "                </div>";
+                    contenido += "                <div>";
+                    contenido += "                    "+mensaje+"...";
+                    contenido += "                </div>";
+                    contenido += "            </a>";
+                    contenido += "        </li> ";
+                    $("#descripcion-nuevos-mensajes").append(contenido);
+
+                });
+            }
+    );
+}
+setInterval(obtenerNotificacionesMensajesNoLeidos, 3000);
+
 

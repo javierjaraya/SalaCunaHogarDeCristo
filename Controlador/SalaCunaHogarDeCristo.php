@@ -234,6 +234,10 @@ class SalaCunaHogarDeCristo {
         return $this->mensajeDAO->update($mensaje);
     }
 
+    public function marcarLeidoMensajeLiedo($idMensaje,$estado) {
+        return $this->mensajeDAO->marcarLeido($idMensaje,$estado);
+    }
+
     public function getMensajeByID($idMensaje) {
         return $this->mensajeDAO->findByID($idMensaje);
     }
@@ -246,6 +250,10 @@ class SalaCunaHogarDeCristo {
         return $this->mensajeDAO->findByRunDesdeAndPara($runDesde, $runPara);
     }
 
+    public function getMensajesNoLeidosByRunPara($runPara){
+        return $this->mensajeDAO->obtenerMensajesNoLeidosByRun($runPara);
+    }
+    
     public function getAllNivels() {
         return $this->nivelDAO->findAll();
     }
