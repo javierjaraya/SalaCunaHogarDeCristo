@@ -174,7 +174,7 @@ $runPersona = htmlspecialchars($_REQUEST['runPersona']);
                                                     </div>
 
                                                     <div class="control-group">
-                                                        <label class="control-label" for="RunApoderado">Run Apoderado</label>
+                                                        <label class="control-label" for="RunApoderado">Apoderado</label>
                                                         <div class="controls">                                                            
                                                             <select id="RunApoderado" name="RunApoderado">                                                                
                                                             </select>
@@ -360,7 +360,7 @@ $runPersona = htmlspecialchars($_REQUEST['runPersona']);
 
                                                             function cargarApoderados() {
                                                                 $("#RunApoderado").empty();
-                                                                var url_json = '../Servlet/administrarApoderado.php?accion=LISTADO';
+                                                                var url_json = '../Servlet/administrarApoderado.php?accion=LISTADOHABILITADOS';
                                                                 $.getJSON(
                                                                         url_json,
                                                                         function (datos) {                                                                            
