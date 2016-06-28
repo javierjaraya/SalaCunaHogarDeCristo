@@ -93,7 +93,7 @@ $perfil = $_SESSION["idPerfil"];
                             <div class="span12">
                                 <div class="social-box social-bordered social-blue">
                                     <div class="header">
-                                        <h4>Apoderados</h4>
+                                        <h4>Funcionarias</h4>
                                     </div>
                                     <div class="body" style="text-align: center;">
                                         <div class="row-fluid">
@@ -108,11 +108,13 @@ $perfil = $_SESSION["idPerfil"];
                                                             <th>Sexo</th>
                                                             <th>Direccion</th>
                                                             <th>Telefono</th>
-                                                            <th>Quintil</th>
+                                                            <th>Titulo</th>
+                                                            <th>Cargo</th>
+                                                            <th>Nivel</th>
                                                             <th>Accion</th>
                                                         </tr> 
                                                     </thead>
-                                                    <tbody id="tablaApoderados">
+                                                    <tbody id="tablaFuncionarias">
 
                                                     </tbody>
                                                 </table>
@@ -189,20 +191,19 @@ $perfil = $_SESSION["idPerfil"];
         --><script src="../../Files/js/chat/sidebar.js"></script>
         <script src="../../Files/js/custom.js"></script>
         <script src="../../Files/js/controlador-chat.js"></script>
-        
+
         <script>
-            //APODERADOS
             $(function () {
-                cargarApoderados();
+                cargarFuncionarias();
             })
 
-            function cargarApoderados() {
-                $("#tablaApoderados").empty();
-                var url_json = '../Servlet/administrarApoderado.php?accion=LISTADO';
+            function cargarFuncionarias() {
+                $("#tablaFuncionarias").empty();
+                var url_json = '../Servlet/administrarTrabajador.php?accion=LISTADO';
                 $.getJSON(
                         url_json,
                         function (datos) {
-                            //console.log(datos);
+                            console.log(datos);
                             $.each(datos, function (k, v) {
                                 var contenido = "<tr>";
                                 contenido += "<td>" + v.RunPersona + "</td>";
@@ -211,24 +212,25 @@ $perfil = $_SESSION["idPerfil"];
                                 contenido += "<td>" + v.Sexo + "</td>";
                                 contenido += "<td>" + v.Direccion + "</td>";
                                 contenido += "<td>" + v.Telefono + "</td>";
-                                contenido += "<td>" + v.SituacionSocioeconomica + "</td>";                                
+                                contenido += "<td>" + v.Titulo + "</td>";
+                                contenido += "<td>" + v.Cargo + "</td>";
+                                contenido += "<td>" + v.IdNivel + "</td>";
                                 contenido += "<td>";
                                 contenido += "<button type='button' class='btn btn-warning btn-circle icon-pencil'  onclick='editar(" + v.RunPersona + ")'></button>";
                                 contenido += "<button type='button' class='btn btn-danger btn-circle icon-trash'  onclick='borrar(" + v.RunPersona + ")'></button>";
                                 contenido += "</td>";
                                 contenido += "</tr>";
-                                $("#tablaApoderados").append(contenido);
+                                $("#tablaFuncionarias").append(contenido);
                             });
                         }
                 );
             }
-            
-            function editar(RunPersona){
-            
+
+            function editar(RunPersona) {
             }
-            
-            function borrar(RunPersona){
-                
+
+            function borrar(RunPersona) {
+
             }
         </script>
     </body>

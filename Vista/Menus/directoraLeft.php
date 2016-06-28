@@ -33,35 +33,20 @@
             </li>
             <li>
                 <a class="dropdown-toggle" href="#">
+                    <i class="icon-certificate"></i>
+                    <span>Funcionarias</span>
+
+                </a>
+                <ul class="submenu">
+                    <li><a href="administrarFuncionariaDirectora.php"><i class="icon-folder-open"></i> Visualizar</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="dropdown-toggle" href="#">
                     <i class="icon-picture" onClick="location.href = 'administrarAlbumesTrabajadores.php'"></i>
                     <span>Galeria</span>
                 </a>
             </li>
-            <!--
-                        <li>
-                            <a class="dropdown-toggle" href="#">
-                                <i class="icon-group"></i>
-                                <span>Funcionarias</span>
-            
-                            </a>
-                            <ul class="submenu">
-                                <li><a href="agregarFuncionaria.php"><i class="icon-list icon-2x"></i> Agregar</a></li>
-                                <li><a href="administrarFuncionariaDirectora.php"><i class="icon-star"></i> Visualizar</a></li>
-                            </ul>
-                        </li>
-            
-                        
-                        <li>
-                            <a class="dropdown-toggle">
-                                <i class="icon-picture"></i>
-                                <span>Galeria</span>
-                            </a>
-                            <ul class="submenu">
-                                <li><a href="../users.html"><i class="icon-list icon-2x"></i> Agregar</a></li>
-                                <li><a href="../profile_edit.html"><i class="icon-cog"></i> Editar</a></li>
-                                <li><a href="../gallery-grid.html"><i class="icon-star"></i> Visualizar</a></li>
-                            </ul>
-                        </li>-->
         </ul>
     </div>
 </div>
