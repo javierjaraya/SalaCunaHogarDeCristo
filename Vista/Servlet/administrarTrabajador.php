@@ -89,9 +89,15 @@ if ($accion != null) {
             echo json_encode(array('errorMsg' => 'El o la trabajador ya existe, intento nuevamente.'));
         }
     } else if ($accion == "BORRAR") {
-        $RunPersona = htmlspecialchars($_REQUEST['RunPersona']);
-
-        $result = $control->removeTrabajador($RunPersona);
+        $RunPersona = htmlspecialchars($_REQUEST['RunEditar']);
+        $persona = $control->getPersonaById($RunPersona);
+        $persona->setIdEstado(1);
+        
+        $resultPersona = $control->updatePersona($persona);
+        $resultUsuario = $control->RemoveUsuario($RunPersona);
+        
+        $result = $resultPersona && $resultUsuario ? true : false;
+        
         if ($result) {
             echo json_encode(array('success' => true, 'mensaje' => "Trabajador borrado correctamente"));
         } else {

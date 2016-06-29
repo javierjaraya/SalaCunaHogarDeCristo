@@ -148,46 +148,46 @@ $RunPersona = htmlspecialchars($_REQUEST['runPersona']);
                                                     <div class="control-group">
                                                         <label class="control-label" for="Telefono">Telefono</label>
                                                         <div class="controls">
-                                                            <input type="text" class="input-xlarge" id="Telefono" name="Telefono">
+                                                            <input type="text" class="input-xlarge" id="Telefono" name="Telefono" disabled="">
                                                         </div>
                                                     </div> 
                                                     <div class="control-group">
                                                         <label class="control-label" for="Direccion">Direccion</label>
                                                         <div class="controls">
-                                                            <input type="text" name="Direccion" class="input-xlarge" id="Direccion">
+                                                            <input type="text" name="Direccion" class="input-xlarge" id="Direccion" disabled="">
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
                                                         <label class="control-label" for="Titulo">Titulo</label>
                                                         <div class="controls">
-                                                            <input type="text" name="Titulo" class="input-xlarge" id="Titulo">
+                                                            <input type="text" name="Titulo" class="input-xlarge" id="Titulo" disabled="">
                                                         </div>
                                                     </div>     
                                                     <div class="control-group">
                                                         <label class="control-label" for="Cargo">Cargo</label>
                                                         <div class="controls">
-                                                            <input type="text" name="Cargo" class="input-xlarge" id="Cargo">
+                                                            <input type="text" name="Cargo" class="input-xlarge" id="Cargo" disabled="">
                                                         </div>
                                                     </div> 
                                                     <div class="control-group">
                                                         <label class="control-label" for="IdNivel">Nivel</label>
                                                         <div class="controls">
                                                             <select id="IdNivel" name="IdNivel">
-                                                                <option value="1">Menor</option>
-                                                                <option value="2">mayor</option>
+                                                                <option value="1" disabled="">Menor</option>
+                                                                <option value="2" disabled="">mayor</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
                                                         <label class="control-label" for="Clave">Clave</label>
                                                         <div class="controls">
-                                                            <input type="password" name="Clave" class="input-xlarge" id="Clave">
+                                                            <input type="password" name="Clave" class="input-xlarge" id="Clave" disabled="">
                                                         </div>
                                                     </div>  
                                                     <div class="control-group">
                                                         <label class="control-label" for="ClaveRepetida">Repetir Clave</label>
                                                         <div class="controls">
-                                                            <input type="password" name="ClaveRepetida" class="input-xlarge" id="ClaveRepetida">
+                                                            <input type="password" name="ClaveRepetida" class="input-xlarge" id="ClaveRepetida" disabled="">
                                                         </div>
                                                     </div>  
                                                     <div class="form-actions">
@@ -287,10 +287,11 @@ $RunPersona = htmlspecialchars($_REQUEST['runPersona']);
 
                                                             function obtenerDatosFuncionaria() {
                                                                 var runEditar = document.getElementById("RunEditar").value;
-                                                                var url_json = '../Servlet/administrarFuncionaria.php?accion=BUSCAR_BY_ID&RunPersona=' + runEditar;
+                                                                var url_json = '../Servlet/administrarTrabajador.php?accion=BUSCAR_BY_ID&RunPersona=' + runEditar;
                                                                 $.getJSON(
                                                                         url_json,
                                                                         function (dato) {
+                                                                            console.log(dato);
                                                                             document.getElementById("Run").value = dato.RunPersona;
                                                                             document.getElementById("Nombres").value = dato.persona.Nombres;
                                                                             document.getElementById("Apellidos").value = dato.persona.Apellidos;
@@ -315,7 +316,7 @@ $RunPersona = htmlspecialchars($_REQUEST['runPersona']);
                                                                 document.getElementById("accion").value = "BORRAR";
 
                                                                 $('#fm-Funcionaria').form('submit', {
-                                                                    url: "../Servlet/administrarFuncionaria.php",
+                                                                    url: "../Servlet/administrarTrabajador.php",
                                                                     onSubmit: function () {
                                                                         return $(this).form('validate');
                                                                     },

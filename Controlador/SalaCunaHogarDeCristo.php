@@ -358,8 +358,8 @@ class SalaCunaHogarDeCristo {
         return $this->pertenecerDAO->save($pertenecer);
     }
 
-    public function removePertenecer($IdNivel) {
-        return $this->pertenecerDAO->delete($IdNivel);
+    public function removePertenecer($RunPersona) {
+        return $this->pertenecerDAO->delete($RunPersona);
     }
 
     public function updatePertenecer($pertenecer) {
