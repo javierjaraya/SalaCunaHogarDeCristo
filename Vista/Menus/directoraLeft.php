@@ -38,7 +38,8 @@
 
                 </a>
                 <ul class="submenu">
-                    <li><a href="administrarFuncionariaDirectora.php"><i class="icon-folder-open"></i> Visualizar</a></li>
+                    <li><a href="administrarFuncionariaDirectora.php"><i class="icon-folder-open"></i> Funcionarios</a></li>
+                    <li><a href="administrarFuncionariaDirectoraHistoricos.php"><i class="icon-archive"></i>Historicos</a></li>
                 </ul>
             </li>
             <li>

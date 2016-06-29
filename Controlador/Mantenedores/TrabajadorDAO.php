@@ -47,19 +47,76 @@ class TrabajadorDAO {
         return $trabajadores;
     }
 
+    public function findAllHabilitados() {
+        $this->conexion->conectar();
+        $query = "SELECT t.RunPersona, p.Nombres, p.Apellidos, p.Sexo, p.FechaNacimiento, p.Telefono, p.Direccion, t.Titulo, t.Cargo, pe.IdNivel, "
+                . "p.IdEstado FROM trabajador as t JOIN persona as p ON t.RunPersona = p.RunPersona JOIN pertenecer as "
+                . "pe ON pe.RunPersona = t.RunPersona WHERE p.IdEstado=2";
+        $result = $this->conexion->ejecutar($query);
+        $i = 0;
+        $trabajadores = array();
+        while ($fila = $result->fetch_row()) {
+            $trabajador = new TrabajadorDTO();
+            $trabajador->setRunPersona($fila[0]);
+            $trabajador->setNombres($fila[1]);
+            $trabajador->setApellidos($fila[2]);
+            $trabajador->setSexo($fila[3]);
+            $trabajador->setFechaNacimiento($fila[4]);
+            $trabajador->setTelefono($fila[5]);
+            $trabajador->setDireccion($fila[6]);
+            $trabajador->setTitulo($fila[7]);
+            $trabajador->setCargo($fila[8]);
+            $trabajador->setIdNivel($fila[9]);
+            $trabajador->setIdEstado($fila[10]);
+            $trabajadores[$i] = $trabajador;
+            $i++;
+        }
+        $this->conexion->desconectar();
+        return $trabajadores;
+    }
+
+    public function findAllDesHabilitados() {
+        $this->conexion->conectar();
+        $query = "SELECT t.RunPersona, p.Nombres, p.Apellidos, p.Sexo, p.FechaNacimiento, p.Telefono, p.Direccion, t.Titulo, t.Cargo, pe.IdNivel, "
+                . "p.IdEstado FROM trabajador as t JOIN persona as p ON t.RunPersona = p.RunPersona JOIN pertenecer as pe ON pe.RunPersona = t.RunPersona WHERE p.IdEstado=1";
+        $result = $this->conexion->ejecutar($query);
+        $i = 0;
+        $trabajadores = array();
+        while ($fila = $result->fetch_row()) {
+            $trabajador = new TrabajadorDTO();
+            $trabajador->setRunPersona($fila[0]);
+            $trabajador->setNombres($fila[1]);
+            $trabajador->setApellidos($fila[2]);
+            $trabajador->setSexo($fila[3]);
+            $trabajador->setFechaNacimiento($fila[4]);
+            $trabajador->setTelefono($fila[5]);
+            $trabajador->setDireccion($fila[6]);
+            $trabajador->setTitulo($fila[7]);
+            $trabajador->setCargo($fila[8]);
+            $trabajador->setIdNivel($fila[9]);
+            $trabajador->setIdEstado($fila[10]);
+            $trabajadores[$i] = $trabajador;
+            $i++;
+        }
+        $this->conexion->desconectar();
+        return $trabajadores;
+    }
+
     public function findByID($RunPersona) {
         $this->conexion->conectar();
-        $query = "SELECT t.RunPersona, t.Titulo, t.Cargo, p.Nombres, p.Apellidos, p.Sexo, p.FechaNacimiento, p.Telefono, p.Direccion, p.IdEstado,"
-                . " u.Clave, u.IdPerfil FROM trabajador t JOIN persona p ON t.RunPersona = p.RunPersona JOIN usuario u ON u.RunPersona = p.RunPersona"
-                . " WHERE  t.RunPersona = '" . $RunPersona . "' ";
+        $query = "SELECT t.RunPersona, t.Titulo, t.Cargo, p.Nombres, p.Apellidos, p.Sexo, p.FechaNacimiento, p.Telefono, p.Direccion, p.IdEstado, u.Clave,"
+                . " u.IdPerfil, pe.IdNivel FROM trabajador as t JOIN persona as p ON t.RunPersona = p.RunPersona JOIN usuario as u "
+                . "ON t.RunPersona = u.RunPersona JOIN pertenecer as pe ON pe.RunPersona = t.RunPersona WHERE t.RunPersona = '" . $RunPersona . "'";
         $result = $this->conexion->ejecutar($query);
         $trabajador = new TrabajadorDTO();
+        $persona = new PersonaDTO();
+        $usuario = new UsuarioDTO();
+        $pertenece = new PertenecerDTO();
         while ($fila = $result->fetch_row()) {
             $trabajador->setRunPersona($fila[0]);
             $trabajador->setTitulo($fila[1]);
             $trabajador->setCargo($fila[2]);
-
-            $persona = new PersonaDTO();
+            
             $persona->setRunPersona($fila[0]);
             $persona->setNombres($fila[3]);
             $persona->setApellidos($fila[4]);
@@ -69,12 +126,16 @@ class TrabajadorDAO {
             $persona->setDireccion($fila[8]);
             $persona->setIdEstado($fila[9]);
 
-            $usuario = new UsuarioDTO();
             $usuario->setClave($fila[10]);
             $usuario->setIdPerfil($fila[11]);
 
+            
+            $pertenece->setIdNivel($fila[12]);
+            $pertenece->setRunPersona($fila[0]);
+
             $trabajador->setPersona($persona);
             $trabajador->setUsuario($usuario);
+            $trabajador->setPertenece($pertenece);
         }
         $this->conexion->desconectar();
         return $trabajador;

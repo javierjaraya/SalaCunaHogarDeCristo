@@ -16,6 +16,7 @@ class TrabajadorDTO {
     
     public $persona;
     public $usuario;
+    public $pertenece;
 
     public function TrabajadorDTO(){
     }
@@ -123,4 +124,14 @@ class TrabajadorDTO {
     function setUsuario($usuario) {
         $this->usuario = $usuario;
     }
+    
+    function getPertenece() {
+        return $this->pertenece;
+    }
+
+    function setPertenece($pertenece) {
+        $this->pertenece = $pertenece;
+    }
+
+
 }

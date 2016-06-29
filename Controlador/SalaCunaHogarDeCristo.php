@@ -405,6 +405,12 @@ class SalaCunaHogarDeCristo {
     public function getAllTrabajadors() {
         return $this->trabajadorDAO->findAll();
     }
+    public function getAllTrabajadorsHabilitados() {
+        return $this->trabajadorDAO->findAllHabilitados();
+    }
+    public function getAllTrabajadorsDesHabilitados() {
+        return $this->trabajadorDAO->findAllDesHabilitados();
+    }
 
     public function addTrabajador($trabajador) {
         return $this->trabajadorDAO->save($trabajador);

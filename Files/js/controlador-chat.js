@@ -71,7 +71,7 @@ function abrirVentana(id, nombres, run, paso) {
 
         //POSICIONAR EL FINAL DEL SCRROL
         $("#m" + id).animate({
-            scrollTop: 290
+            scrollTop: 2900
         }, 2000);
     }
 }
@@ -118,7 +118,7 @@ function obtenerMensajes(id, nombres, runDestino) {
                 });
                 //POSICIONAR EL FINAL DEL SCRROL
                 $("#m" + id).animate({
-                    scrollTop: 290
+                    scrollTop: 2900
                 }, 2000);
             }
     );

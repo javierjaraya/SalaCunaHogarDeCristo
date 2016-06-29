@@ -96,11 +96,6 @@ $perfil = $_SESSION["idPerfil"];
                                         <h4>Funcionarias</h4>
                                     </div>
                                     <div class="body" style="text-align: center;">
-                                        <div>
-                                            <a class="btn btn-success btn-block" style="width: 200px;float: right; margin-bottom: 1%" onClick="location.href='agregarFuncionaria.php'">
-                                                Agregar Funcionaria <i class="icon-book" ></i>
-                                            </a>
-                                        </div>
                                         <div class="row-fluid">
                                             <!-- CONTENIDO AQUI -->
                                             <div class="table-responsive">
@@ -116,7 +111,7 @@ $perfil = $_SESSION["idPerfil"];
                                                             <th>Titulo</th>
                                                             <th>Cargo</th>
                                                             <th>Nivel</th>
-                                                            <th>Accion</th>
+                                                           <!-- <th>Accion</th>-->
                                                         </tr> 
                                                     </thead>
                                                     <tbody id="tablaFuncionarias">
@@ -204,7 +199,7 @@ $perfil = $_SESSION["idPerfil"];
 
             function cargarFuncionarias() {
                 $("#tablaFuncionarias").empty();
-                var url_json = '../Servlet/administrarTrabajador.php?accion=LISTADOHABILITADOS';
+                var url_json = '../Servlet/administrarTrabajador.php?accion=LISTADODESHABILITADOS';
                 $.getJSON(
                         url_json,
                         function (datos) {
@@ -221,8 +216,8 @@ $perfil = $_SESSION["idPerfil"];
                                 contenido += "<td>" + v.Cargo + "</td>";
                                 contenido += "<td>" + v.IdNivel + "</td>";
                                 contenido += "<td>";
-                                contenido += "<button type='button' class='btn btn-warning btn-circle icon-pencil'  onclick='editar(" + v.RunPersona + ")'></button>";
-                                contenido += "<button type='button' class='btn btn-danger btn-circle icon-trash'  onclick='borrar(" + v.RunPersona + ")'></button>";
+                                /* contenido += "<button type='button' class='btn btn-warning btn-circle icon-pencil'  onclick='editar(" + v.RunPersona + ")'></button>";
+                                 contenido += "<button type='button' class='btn btn-danger btn-circle icon-trash'  onclick='borrar(" + v.RunPersona + ")'></button>";*/
                                 contenido += "</td>";
                                 contenido += "</tr>";
                                 $("#tablaFuncionarias").append(contenido);
@@ -231,12 +226,12 @@ $perfil = $_SESSION["idPerfil"];
                 );
             }
 
-            function editar(RunPersona) {               
-              window.location = "editarFuncionaria.php?runPersona=" + RunPersona;
+            function editar(RunPersona) {
+                // window.location = "editarFuncionaria.php?runPersona=" + RunPersona;
             }
 
             function borrar(RunPersona) {
-              window.location = "borrarFuncionaria.php?runPersona=" + RunPersona;
+                //  window.location = "borrarFuncionaria.php?runPersona=" + RunPersona;
             }
         </script>
     </body>
