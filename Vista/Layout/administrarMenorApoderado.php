@@ -143,18 +143,12 @@ $perfil = $_SESSION["idPerfil"];
                                         <!-- FORMULARIO BUSCAR CONTACTO Y CONFIGURACION-->
                                         <form class="user-filter">
                                             <div class="input-prepend open">
-                                                <div class="btn-group dropup">
+                                                <!--<div class="btn-group dropup">
                                                     <button class="btn dropdown-toggle" data-toggle="dropdown">
-                                                        <i class="icon-cog"></i>
+                                                        <i class="icon-search"></i>
                                                     </button>
-                                                    <ul class="dropdown-menu pull-left">
-                                                        <li><a href="#">Sonido Chat</a></li>
-                                                        <li><a href="#">Configuracion Avanzada...</a></li>
-                                                        <li class="divider"></li>
-                                                        <li><a href="#">Turn Off Chat</a></li>
-                                                    </ul>
-                                                </div>
-                                                <input type="text" class="input-filter" placeholder="Buscar usuario...">
+                                                </div>-->
+                                                <input type="text" class="input-filter" placeholder="" disabled="" style="width: 208px;">
                                             </div>
                                         </form>
                                     </div>
