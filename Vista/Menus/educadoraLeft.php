@@ -11,21 +11,10 @@
                     <i class="icon-home"></i>
                     <span>Home</span>
                 </a>
-            </li>    
-            <li>
+            </li>          
+             <li>
                 <a class="dropdown-toggle" href="#">
-                    <i class="icon-group"></i>
-                    <span>Usuarios</span>
-                </a>
-                <ul class="submenu">
-                    <li><a href="/Vista/users.html"><i class="icon-list icon-2x"></i> Ver usuarios</a></li>
-                    <li><a href="/Vista/profile_edit.html"><i class="icon-cog"></i> Configuracion</a></li>
-                    <li><a href="/Vista/public_profile.html"><i class="icon-star"></i> Ver perfil</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="/Vista/gallery-grid.html">
-                    <i class="icon-picture"></i>
+                    <i class="icon-picture" onClick="location.href = 'administrarAlbumesTrabajadores.php'"></i>
                     <span>Galeria</span>
                 </a>
             </li>

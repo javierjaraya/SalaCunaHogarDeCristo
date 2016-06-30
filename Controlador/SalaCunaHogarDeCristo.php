@@ -358,8 +358,8 @@ class SalaCunaHogarDeCristo {
         return $this->pertenecerDAO->save($pertenecer);
     }
 
-    public function removePertenecer($IdNivel) {
-        return $this->pertenecerDAO->delete($IdNivel);
+    public function removePertenecer($RunPersona) {
+        return $this->pertenecerDAO->delete($RunPersona);
     }
 
     public function updatePertenecer($pertenecer) {
@@ -404,6 +404,12 @@ class SalaCunaHogarDeCristo {
 
     public function getAllTrabajadors() {
         return $this->trabajadorDAO->findAll();
+    }
+    public function getAllTrabajadorsHabilitados() {
+        return $this->trabajadorDAO->findAllHabilitados();
+    }
+    public function getAllTrabajadorsDesHabilitados() {
+        return $this->trabajadorDAO->findAllDesHabilitados();
     }
 
     public function addTrabajador($trabajador) {

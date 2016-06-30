@@ -1,4 +1,4 @@
-<div class="row-fluid">
+<!--<div class="row-fluid">
 
     <div class="span2">
         <a href="#" class="btn btn-primary btn-circle btn-res active"><i class="icon-lightbulb"></i>Buzon</a>
@@ -10,4 +10,4 @@
         <a href="#" class="btn btn-circle btn-res"><i class="icon-envelope-alt"></i>Mensajes</a>
     </div>
 
-</div> 
+</div> -->

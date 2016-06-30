@@ -35,6 +35,9 @@ $perfil = $_SESSION["idPerfil"];
         <script src="../../Files/Complementos/lib/scroll-slim/jquery.slimscroll.min.js"></script>
         <script src="../../Files/js/common.js"></script>
 
+        <link rel="stylesheet" type="text/css" href="../../Files/Complementos/lib/jquery-easyui-1.4.2/themes/default/easyui.css">
+        <link rel="stylesheet" type="text/css" href="../../Files/Complementos/lib/jquery-easyui-1.4.2/themes/icon.css">
+        <link rel="stylesheet" type="text/css" href="../../Files/Complementos/lib/jquery-easyui-1.4.2/demo/demo.css">
         <!--Carrusel-->
         <script>
             $('.carousel').carousel({

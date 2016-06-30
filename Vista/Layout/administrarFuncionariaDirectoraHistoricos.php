@@ -45,15 +45,15 @@ $perfil = $_SESSION["idPerfil"];
         <link rel="stylesheet" type="text/css" href="../../Files/Complementos/lib/jquery-easyui-1.4.2/demo/demo.css">
 
     </head>
-    <body id='body'>
+    <body >
         <!-- AQUI VA EL MENU SUPERIROR-->
         <?php
         if ($perfil == 1) {
             include '../Menus/directoraSuperior.php';
         } else if ($perfil == 2) {
-            include '../Menus/educadoraSuperior.php.php';
+            include '../Menus/educadoraSuperior.php';
         } else if ($perfil == 3) {
-            include '../Menus/apoderadoSuperior';
+            include '../Menus/apoderadoSuperior.php';
         }
         ?>
         <!-- FIN MENU SUPERIOR-->
@@ -97,13 +97,11 @@ $perfil = $_SESSION["idPerfil"];
                             <div class="span12">
                                 <div class="social-box social-bordered social-blue">
                                     <div class="header">
-                                        <h4>Apoderados Dados de Baja</h4>
+                                        <h4>Funcionarias</h4>
                                     </div>
                                     <div class="body" style="text-align: center;">
-                                       
                                         <div class="row-fluid">
                                             <!-- CONTENIDO AQUI -->
-
                                             <div class="table-responsive">
                                                 <table class="table">
                                                     <thead> 
@@ -114,10 +112,13 @@ $perfil = $_SESSION["idPerfil"];
                                                             <th>Sexo</th>
                                                             <th>Direccion</th>
                                                             <th>Telefono</th>
-                                                            <th>Quintil</th>
+                                                            <th>Titulo</th>
+                                                            <th>Cargo</th>
+                                                            <th>Nivel</th>
+                                                           <!-- <th>Accion</th>-->
                                                         </tr> 
                                                     </thead>
-                                                    <tbody id="tablaApoderados">
+                                                    <tbody id="tablaFuncionarias">
 
                                                     </tbody>
                                                 </table>
@@ -164,7 +165,6 @@ $perfil = $_SESSION["idPerfil"];
                             </div>
 
                         </aside>
-
                     </div> 
                 </div>  
 
@@ -197,17 +197,17 @@ $perfil = $_SESSION["idPerfil"];
         <script src="../../Files/js/controlador-chat.js"></script>
 
         <script>
-            //APODERADOS
             $(function () {
-                cargarApoderados();
-            });
-            function cargarApoderados() {
-                $("#tablaApoderados").empty();
-                var url_json = '../Servlet/administrarApoderado.php?accion=LISTADODESHABILITADOS';
+                cargarFuncionarias();
+            })
+
+            function cargarFuncionarias() {
+                $("#tablaFuncionarias").empty();
+                var url_json = '../Servlet/administrarTrabajador.php?accion=LISTADODESHABILITADOS';
                 $.getJSON(
                         url_json,
                         function (datos) {
-                            //console.log(datos);
+                            console.log(datos);
                             $.each(datos, function (k, v) {
                                 var contenido = "<tr>";
                                 contenido += "<td>" + v.RunPersona + "</td>";
@@ -216,22 +216,26 @@ $perfil = $_SESSION["idPerfil"];
                                 contenido += "<td>" + v.Sexo + "</td>";
                                 contenido += "<td>" + v.Direccion + "</td>";
                                 contenido += "<td>" + v.Telefono + "</td>";
-                                contenido += "<td>" + v.SituacionSocioeconomica + "</td>";
+                                contenido += "<td>" + v.Titulo + "</td>";
+                                contenido += "<td>" + v.Cargo + "</td>";
+                                contenido += "<td>" + v.IdNivel + "</td>";
                                 contenido += "<td>";
+                                /* contenido += "<button type='button' class='btn btn-warning btn-circle icon-pencil'  onclick='editar(" + v.RunPersona + ")'></button>";
+                                 contenido += "<button type='button' class='btn btn-danger btn-circle icon-trash'  onclick='borrar(" + v.RunPersona + ")'></button>";*/
                                 contenido += "</td>";
                                 contenido += "</tr>";
-                                $("#tablaApoderados").append(contenido);
+                                $("#tablaFuncionarias").append(contenido);
                             });
                         }
                 );
             }
 
             function editar(RunPersona) {
-                window.location = "editarApoderado.php?runApoderado=" + RunPersona;
+                // window.location = "editarFuncionaria.php?runPersona=" + RunPersona;
             }
 
             function borrar(RunPersona) {
-                window.location = "borrarApoderado.php?runApoderado=" + RunPersona;
+                //  window.location = "borrarFuncionaria.php?runPersona=" + RunPersona;
             }
         </script>
     </body>

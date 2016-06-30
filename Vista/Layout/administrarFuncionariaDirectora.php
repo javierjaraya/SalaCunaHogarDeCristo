@@ -39,6 +39,10 @@ $perfil = $_SESSION["idPerfil"];
 
         <script src="../../Files/Complementos/lib/scroll-slim/jquery.slimscroll.min.js"></script>
         <script src="../../Files/js/common.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="../../Files/Complementos/lib/jquery-easyui-1.4.2/themes/default/easyui.css">
+        <link rel="stylesheet" type="text/css" href="../../Files/Complementos/lib/jquery-easyui-1.4.2/themes/icon.css">
+        <link rel="stylesheet" type="text/css" href="../../Files/Complementos/lib/jquery-easyui-1.4.2/demo/demo.css">
 
     </head>
     <body >
@@ -96,6 +100,11 @@ $perfil = $_SESSION["idPerfil"];
                                         <h4>Funcionarias</h4>
                                     </div>
                                     <div class="body" style="text-align: center;">
+                                        <div>
+                                            <a class="btn btn-success btn-block" style="width: 200px;float: right; margin-bottom: 1%" onClick="location.href='agregarFuncionaria.php'">
+                                                Agregar Funcionaria <i class="icon-book" ></i>
+                                            </a>
+                                        </div>
                                         <div class="row-fluid">
                                             <!-- CONTENIDO AQUI -->
                                             <div class="table-responsive">
@@ -199,7 +208,7 @@ $perfil = $_SESSION["idPerfil"];
 
             function cargarFuncionarias() {
                 $("#tablaFuncionarias").empty();
-                var url_json = '../Servlet/administrarTrabajador.php?accion=LISTADO';
+                var url_json = '../Servlet/administrarTrabajador.php?accion=LISTADOHABILITADOS';
                 $.getJSON(
                         url_json,
                         function (datos) {
@@ -226,11 +235,12 @@ $perfil = $_SESSION["idPerfil"];
                 );
             }
 
-            function editar(RunPersona) {
+            function editar(RunPersona) {               
+              window.location = "editarFuncionaria.php?runPersona=" + RunPersona;
             }
 
             function borrar(RunPersona) {
-
+              window.location = "borrarFuncionaria.php?runPersona=" + RunPersona;
             }
         </script>
     </body>

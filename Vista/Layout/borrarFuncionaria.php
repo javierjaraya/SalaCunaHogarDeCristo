@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<?php session_start();
+<?php
+session_start();
 if ($_SESSION['autentificado'] != "SI") {
     header("Location: ../../../index.php");
 }
 $perfil = $_SESSION["idPerfil"];
-$RunPersona= htmlspecialchars($_REQUEST['runPersona']);
+$RunPersona = htmlspecialchars($_REQUEST['runPersona']);
 ?>
 <html lang="en">
     <head>
@@ -101,33 +102,32 @@ $RunPersona= htmlspecialchars($_REQUEST['runPersona']);
                             <div class="span12">
                                 <div class="social-box social-bordered social-blue">
                                     <div class="header">
-                                        <h4>Borrar Menor</h4>
+                                        <h4>Borrar Funcionaria</h4>
                                     </div>
                                     <div class="body" style="text-align: center;">
                                         <div class="row-fluid">
                                             <!-- CONTENIDO AQUI -->
 
                                             <!-- INICIO FORMULARIO -->
-                                            <form id="fm-menor" class="form-horizontal well">
+                                            <form id="fm-Funcionaria" class="form-horizontal well">
                                                 <fieldset>
-                                                    <legend>Datos Menor</legend>
-
+                                                    <legend>Datos Funcionarias</legend>
                                                     <div class="control-group">
                                                         <label class="control-label" for="Run">Run</label>
                                                         <div class="controls">
-                                                            <input class="input-xlarge focused" id="Run" name="Run" type="text" placeholder="112223334">
+                                                            <input class="input-xlarge focused" id="Run" name="Run" type="text" placeholder="112223334" disabled="">
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
                                                         <label class="control-label" for="Nombres">Nombres</label>
                                                         <div class="controls">
-                                                            <input type="text" name="Nombres" class="input-xlarge" id="Nombres">
+                                                            <input type="text" name="Nombres" class="input-xlarge" id="Nombres" disabled="">
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
                                                         <label class="control-label" for="Apellidos">Apellidos</label>
                                                         <div class="controls">
-                                                            <input type="text" name="Apellidos" class="input-xlarge" id="Apellidos">
+                                                            <input type="text" name="Apellidos" class="input-xlarge" id="Apellidos" disabled="">
                                                         </div>
                                                     </div>    
 
@@ -135,55 +135,66 @@ $RunPersona= htmlspecialchars($_REQUEST['runPersona']);
                                                         <label class="control-label" for="Sexo">Sexo</label>
                                                         <div class="controls">
                                                             <label class="checkbox">
-                                                                <input type="radio" id="SexoM" name="Sexo" value="Masculino">&nbsp;Masculino
+                                                                <input type="radio" id="SexoM" name="Sexo" value="Masculino" disabled="">&nbsp;Masculino
                                                             </label>
                                                             <label class="checkbox">
-                                                                <input type="radio" id="SexoF" name="Sexo" value="Femenino">&nbsp;Femenino
+                                                                <input type="radio" id="SexoF" name="Sexo" value="Femenino" disabled="">&nbsp;Femenino
                                                             </label>
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
                                                         <label class="control-label" for="FechaNacimiento">Fecha Nacimiento</label>
                                                         <div class="controls">
-                                                            <input type="date" name="FechaNacimiento" class="input-xlarge" id="FechaNacimiento">
+                                                            <input type="date" name="FechaNacimiento" class="input-xlarge" id="FechaNacimiento" disabled="">
                                                         </div>
                                                     </div> 
                                                     <div class="control-group">
                                                         <label class="control-label" for="Telefono">Telefono</label>
                                                         <div class="controls">
-                                                            <input type="text" class="input-xlarge" id="Telefono" name="Telefono">
+                                                            <input type="text" class="input-xlarge" id="Telefono" name="Telefono" disabled="">
                                                         </div>
                                                     </div> 
                                                     <div class="control-group">
                                                         <label class="control-label" for="Direccion">Direccion</label>
                                                         <div class="controls">
-                                                            <input type="text" name="Direccion" class="input-xlarge" id="Direccion">
+                                                            <input type="text" name="Direccion" class="input-xlarge" id="Direccion" disabled="">
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
-                                                        <label class="control-label" for="FechaMatricula">Fecha Matricula</label>
+                                                        <label class="control-label" for="Titulo">Titulo</label>
                                                         <div class="controls">
-                                                            <input type="date" name="FechaMatricula" class="input-xlarge" id="FechaMatricula">
+                                                            <input type="text" name="Titulo" class="input-xlarge" id="Titulo" disabled="">
                                                         </div>
-                                                    </div>
+                                                    </div>     
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="Cargo">Cargo</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="Cargo" class="input-xlarge" id="Cargo" disabled="">
+                                                        </div>
+                                                    </div> 
                                                     <div class="control-group">
                                                         <label class="control-label" for="IdNivel">Nivel</label>
                                                         <div class="controls">
                                                             <select id="IdNivel" name="IdNivel">
-                                                                <option value="1">Menor</option>
-                                                                <option value="2">mayor</option>
+                                                                <option value="1" disabled="">Menor</option>
+                                                                <option value="2" disabled="">mayor</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
-                                                        <label class="control-label" for="RunApoderado">Run Apoderado</label>
+                                                        <label class="control-label" for="Clave">Clave</label>
                                                         <div class="controls">
-                                                            <input type="text" name="RunApoderado" class="input-xlarge" id="RunApoderado">
+                                                            <input type="password" name="Clave" class="input-xlarge" id="Clave" disabled="">
                                                         </div>
                                                     </div>  
-
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="ClaveRepetida">Repetir Clave</label>
+                                                        <div class="controls">
+                                                            <input type="password" name="ClaveRepetida" class="input-xlarge" id="ClaveRepetida" disabled="">
+                                                        </div>
+                                                    </div>  
                                                     <div class="form-actions">
-                                                        <button type="button" onclick="borrarMenor()" class="btn btn-danger">Borrar Menor</button>
+                                                        <button type="button" onclick="borrarFuncionaria()" class="btn btn-danger">Borrar Funcionaria</button>
                                                         <button type="button" onclick="cancelar()" class="btn">Cancelar</button>
                                                     </div>
                                                 </fieldset>
@@ -191,6 +202,9 @@ $RunPersona= htmlspecialchars($_REQUEST['runPersona']);
                                                 <input type="hidden" id="accion" name="accion" value="">
                                                 <input type="hidden" id="RunEditar" name="RunEditar" value="<?php echo $RunPersona; ?>">
                                             </form>
+
+
+
                                             <!-- FIN FORMULARIO-->
                                         </div>
                                     </div>
@@ -264,64 +278,66 @@ $RunPersona= htmlspecialchars($_REQUEST['runPersona']);
         --><script src="../../Files/js/chat/sidebar.js"></script>
         <script src="../../Files/js/custom.js"></script>
         <script src="../../Files/js/controlador-chat.js"></script>
-               
+
         <!-- Libreria para Validar Rut-->
         <script src="../../Files/js/validarut.js"></script>
         <script>
-            //APODERADOS
-            $(function () {
-                obtenerDatosMenor();
+                                                            //APODERADOS
+                                                            $(function () {
+                                                                obtenerDatosFuncionaria();
 
-            })
+                                                            })
 
-            function obtenerDatosMenor() {                
-                var runEditar = document.getElementById("RunEditar").value;
-                var url_json = '../Servlet/administrarMenor.php?accion=BUSCAR_BY_ID&RunPersona=' + runEditar;
-                $.getJSON(
-                        url_json,
-                        function (dato) {                            
-                            document.getElementById("Run").value = dato.RunPersona;
-                            document.getElementById("Nombres").value = dato.Nombres;
-                            document.getElementById("Apellidos").value = dato.Apellidos;
-                            if (dato.Sexo.localeCompare("Femenino") == 0) {
-                                document.getElementById("SexoF").checked = true;
-                            } else {
-                                document.getElementById("SexoM").checked = true;
-                            }
-                            document.getElementById("FechaNacimiento").value = dato.FechaNacimiento;
-                            document.getElementById("Telefono").value = dato.Telefono;
-                            document.getElementById("Direccion").value = dato.Direccion;
-                            document.getElementById("FechaMatricula").value = dato.FechaMatricula;
-                            document.getElementById("IdNivel").value = dato.IdNivel;                                                 
-                            document.getElementById("RunApoderado").value = dato.RunApoderado;
-                            
-                        }
-                );
-            }
+                                                            function obtenerDatosFuncionaria() {
+                                                                var runEditar = document.getElementById("RunEditar").value;
+                                                                var url_json = '../Servlet/administrarTrabajador.php?accion=BUSCAR_BY_ID&RunPersona=' + runEditar;
+                                                                $.getJSON(
+                                                                        url_json,
+                                                                        function (dato) {
+                                                                            console.log(dato);
+                                                                            document.getElementById("Run").value = dato.RunPersona;
+                                                                            document.getElementById("Nombres").value = dato.persona.Nombres;
+                                                                            document.getElementById("Apellidos").value = dato.persona.Apellidos;
+                                                                            if (dato.persona.Sexo.localeCompare("Femenino") == 0) {
+                                                                                document.getElementById("SexoF").checked = true;
+                                                                            } else {
+                                                                                document.getElementById("SexoM").checked = true;
+                                                                            }
+                                                                            document.getElementById("FechaNacimiento").value = dato.persona.FechaNacimiento;
+                                                                            document.getElementById("Telefono").value = dato.persona.Telefono;
+                                                                            document.getElementById("Direccion").value = dato.persona.Direccion;
+                                                                            document.getElementById("Titulo").value = dato.Titulo;
+                                                                            document.getElementById("Cargo").value = dato.Cargo;
+                                                                            document.getElementById("IdNivel").value = dato.pertenece.IdNivel;
+                                                                            document.getElementById("Clave").value = dato.usuario.Clave;
+                                                                            document.getElementById("ClaveRepetida").value = dato.usuario.Clave;
+                                                                        }
+                                                                );
+                                                            }
 
-            function borrarMenor() {
-                document.getElementById("accion").value = "DESHABILITAR";
+                                                            function borrarFuncionaria() {
+                                                                document.getElementById("accion").value = "BORRAR";
 
-                $('#fm-menor').form('submit', {
-                    url: "../Servlet/administrarMenor.php",
-                    onSubmit: function () {
-                        return $(this).form('validate');
-                    },
-                    success: function (result) {
-                        console.log(result);
-                        var result = eval('(' + result + ')');
-                        if (result.errorMsg) {
-                            $.messager.alert('Error', result.errorMsg);
-                        } else {
-                            window.location = "administrarMenorDirectora.php";
-                        }
-                    }
-                });
-            }
+                                                                $('#fm-Funcionaria').form('submit', {
+                                                                    url: "../Servlet/administrarTrabajador.php",
+                                                                    onSubmit: function () {
+                                                                        return $(this).form('validate');
+                                                                    },
+                                                                    success: function (result) {
+                                                                        console.log(result);
+                                                                        var result = eval('(' + result + ')');
+                                                                        if (result.errorMsg) {
+                                                                            $.messager.alert('Error', result.errorMsg);
+                                                                        } else {
+                                                                            window.location = "administrarFuncionariaDirectora.php";
+                                                                        }
+                                                                    }
+                                                                });
+                                                            }
 
-            function cancelar() {
-                window.location = "administrarMenorDirectora.php";
-            }
+                                                            function cancelar() {
+                                                                window.location = "administrarFuncionariaDirectora.php";
+                                                            }
 
         </script>
     </body>

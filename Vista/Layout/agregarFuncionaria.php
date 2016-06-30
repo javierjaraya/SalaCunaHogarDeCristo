@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<?php session_start();
+<?php
+session_start();
 if ($_SESSION['autentificado'] != "SI") {
     header("Location: ../../../index.php");
 }
 $perfil = $_SESSION["idPerfil"];
-$RunPersona= htmlspecialchars($_REQUEST['runPersona']);
 ?>
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
         <!-- start: Meta -->
         <meta charset="utf-8">
         <title>Sala cuna Hogar de Cristo</title>
@@ -26,7 +25,6 @@ $RunPersona= htmlspecialchars($_REQUEST['runPersona']);
         <link  href="../../Files/Complementos/lib/selectize/selectize.css" rel="stylesheet">  
         <link  href="../../Files/css/component.css" rel="stylesheet"> 
         <link  href="../../Files/css/style-responsive.css" rel="stylesheet">
-
 
         <script src="../../Files/js/jquery.js"></script>
         <script src="../../Files/Complementos/lib/selectize/selectize.js"></script>        
@@ -45,9 +43,12 @@ $RunPersona= htmlspecialchars($_REQUEST['runPersona']);
         <script type="text/javascript" src="../../Files/Complementos/lib/jquery-easyui-1.4.2/jquery.easyui.min.js"></script>
         <script type="text/javascript" src="../../Files/Complementos/lib/jquery-easyui-1.4.2/plugins/jquery.datagrid.js"></script>
 
+
         <link rel="stylesheet" type="text/css" href="../../Files/Complementos/lib/jquery-easyui-1.4.2/themes/default/easyui.css">
         <link rel="stylesheet" type="text/css" href="../../Files/Complementos/lib/jquery-easyui-1.4.2/themes/icon.css">
         <link rel="stylesheet" type="text/css" href="../../Files/Complementos/lib/jquery-easyui-1.4.2/demo/demo.css">
+
+
     </head>
     <body >
         <!-- AQUI VA EL MENU SUPERIROR-->
@@ -101,17 +102,16 @@ $RunPersona= htmlspecialchars($_REQUEST['runPersona']);
                             <div class="span12">
                                 <div class="social-box social-bordered social-blue">
                                     <div class="header">
-                                        <h4>Borrar Menor</h4>
+                                        <h4>Agregar Funcionaria</h4>
                                     </div>
                                     <div class="body" style="text-align: center;">
                                         <div class="row-fluid">
                                             <!-- CONTENIDO AQUI -->
 
                                             <!-- INICIO FORMULARIO -->
-                                            <form id="fm-menor" class="form-horizontal well">
+                                            <form id="fm-Funcionaria" class="form-horizontal well">
                                                 <fieldset>
-                                                    <legend>Datos Menor</legend>
-
+                                                    <legend>Datos Funcionaria</legend>                                                    
                                                     <div class="control-group">
                                                         <label class="control-label" for="Run">Run</label>
                                                         <div class="controls">
@@ -161,11 +161,17 @@ $RunPersona= htmlspecialchars($_REQUEST['runPersona']);
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
-                                                        <label class="control-label" for="FechaMatricula">Fecha Matricula</label>
+                                                        <label class="control-label" for="Titulo">Titulo</label>
                                                         <div class="controls">
-                                                            <input type="date" name="FechaMatricula" class="input-xlarge" id="FechaMatricula">
+                                                            <input type="text" name="Titulo" class="input-xlarge" id="Titulo">
                                                         </div>
-                                                    </div>
+                                                    </div>     
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="Cargo">Cargo</label>
+                                                        <div class="controls">
+                                                            <input type="text" name="Cargo" class="input-xlarge" id="Cargo">
+                                                        </div>
+                                                    </div> 
                                                     <div class="control-group">
                                                         <label class="control-label" for="IdNivel">Nivel</label>
                                                         <div class="controls">
@@ -176,20 +182,24 @@ $RunPersona= htmlspecialchars($_REQUEST['runPersona']);
                                                         </div>
                                                     </div>
                                                     <div class="control-group">
-                                                        <label class="control-label" for="RunApoderado">Run Apoderado</label>
+                                                        <label class="control-label" for="Clave">Clave</label>
                                                         <div class="controls">
-                                                            <input type="text" name="RunApoderado" class="input-xlarge" id="RunApoderado">
+                                                            <input type="password" name="Clave" class="input-xlarge" id="Clave">
                                                         </div>
                                                     </div>  
-
+                                                    <div class="control-group">
+                                                        <label class="control-label" for="ClaveRepetida">Repetir Clave</label>
+                                                        <div class="controls">
+                                                            <input type="password" name="ClaveRepetida" class="input-xlarge" id="ClaveRepetida">
+                                                        </div>
+                                                    </div>  
                                                     <div class="form-actions">
-                                                        <button type="button" onclick="borrarMenor()" class="btn btn-danger">Borrar Menor</button>
-                                                        <button type="button" onclick="cancelar()" class="btn">Cancelar</button>
+                                                        <button type="button" onclick="guardarFuncionaria()" class="btn btn-primary">Guardar Cambios</button>
+                                                        <button type="button" onClick="location.href = 'administrarFuncionariaDirectora.php'" class="btn">Cancelar</button>
                                                     </div>
                                                 </fieldset>
 
                                                 <input type="hidden" id="accion" name="accion" value="">
-                                                <input type="hidden" id="RunEditar" name="RunEditar" value="<?php echo $RunPersona; ?>">
                                             </form>
                                             <!-- FIN FORMULARIO-->
                                         </div>
@@ -243,7 +253,7 @@ $RunPersona= htmlspecialchars($_REQUEST['runPersona']);
             <div class="container-fluid m-t-large">
                 <footer>
                     <p>
-                        <span class="pull-left">© <a href="" target="_blank">uExel</a> 2013</span>
+                        <span class="pull-left">© <a href="" target="_blank">Sala Cuna Hogar De Cristo</a> 2016</span>
                         <span class="hidden-phone pull-right">Powered by: <a href="#">uAdmin Dashboard</a></span>
                     </p>
                 </footer>
@@ -264,64 +274,95 @@ $RunPersona= htmlspecialchars($_REQUEST['runPersona']);
         --><script src="../../Files/js/chat/sidebar.js"></script>
         <script src="../../Files/js/custom.js"></script>
         <script src="../../Files/js/controlador-chat.js"></script>
-               
+
+
         <!-- Libreria para Validar Rut-->
         <script src="../../Files/js/validarut.js"></script>
-        <script>
-            //APODERADOS
-            $(function () {
-                obtenerDatosMenor();
+        <script type="text/javascript">
 
-            })
+                                                            $(function () {
+                                                            });
 
-            function obtenerDatosMenor() {                
-                var runEditar = document.getElementById("RunEditar").value;
-                var url_json = '../Servlet/administrarMenor.php?accion=BUSCAR_BY_ID&RunPersona=' + runEditar;
-                $.getJSON(
-                        url_json,
-                        function (dato) {                            
-                            document.getElementById("Run").value = dato.RunPersona;
-                            document.getElementById("Nombres").value = dato.Nombres;
-                            document.getElementById("Apellidos").value = dato.Apellidos;
-                            if (dato.Sexo.localeCompare("Femenino") == 0) {
-                                document.getElementById("SexoF").checked = true;
-                            } else {
-                                document.getElementById("SexoM").checked = true;
-                            }
-                            document.getElementById("FechaNacimiento").value = dato.FechaNacimiento;
-                            document.getElementById("Telefono").value = dato.Telefono;
-                            document.getElementById("Direccion").value = dato.Direccion;
-                            document.getElementById("FechaMatricula").value = dato.FechaMatricula;
-                            document.getElementById("IdNivel").value = dato.IdNivel;                                                 
-                            document.getElementById("RunApoderado").value = dato.RunApoderado;
-                            
-                        }
-                );
-            }
+                                                            function guardarFuncionaria() {
+                                                                document.getElementById("accion").value = "AGREGAR";
+                                                                if (validar()) {
+                                                                    console.log("validado");
+                                                                    $('#fm-Funcionaria').form('submit', {
+                                                                        url: "../Servlet/administrarTrabajador.php",
+                                                                        onSubmit: function () {
+                                                                            return $(this).form('validate');
+                                                                        },
+                                                                        success: function (result) {
+                                                                            console.log(result);
+                                                                            var result = eval('(' + result + ')');
+                                                                            if (result.errorMsg) {
+                                                                                $.messager.alert('Error', result.errorMsg);
+                                                                            } else {
+                                                                                $.messager.show({
+                                                                                    title: 'Aviso',
+                                                                                    msg: result.mensaje
+                                                                                });
+                                                                                window.location = "administrarFuncionariaDirectora.php";
+                                                                            }
+                                                                        }
+                                                                    });
+                                                                }
+                                                            }
 
-            function borrarMenor() {
-                document.getElementById("accion").value = "DESHABILITAR";
-
-                $('#fm-menor').form('submit', {
-                    url: "../Servlet/administrarMenor.php",
-                    onSubmit: function () {
-                        return $(this).form('validate');
-                    },
-                    success: function (result) {
-                        console.log(result);
-                        var result = eval('(' + result + ')');
-                        if (result.errorMsg) {
-                            $.messager.alert('Error', result.errorMsg);
-                        } else {
-                            window.location = "administrarMenorDirectora.php";
-                        }
-                    }
-                });
-            }
-
-            function cancelar() {
-                window.location = "administrarMenorDirectora.php";
-            }
+                                                            function validar() {
+                                                                if (Rut(document.getElementById('Run').value)) {
+                                                                    if (document.getElementById('Nombres').value != "") {
+                                                                        if (document.getElementById('Apellidos').value != "") {
+                                                                            if (document.getElementById('SexoM').checked || document.getElementById('SexoF').checked) {
+                                                                                if (document.getElementById('FechaNacimiento').value != "") {
+                                                                                    if (document.getElementById('Direccion').value != "") {
+                                                                                        var telefono = document.getElementById('Telefono').value;
+                                                                                        if (telefono != "" && telefono.length > 5) {
+                                                                                            if (!isNaN(telefono)) {
+                                                                                                if (document.getElementById('Titulo').value != "") {
+                                                                                                    if (document.getElementById('Cargo').value) {
+                                                                                                        var cadenaPass = document.getElementById('Clave').value;
+                                                                                                        if (cadenaPass.length >= 4) {
+                                                                                                            if (cadenaPass == document.getElementById('ClaveRepetida').value) {
+                                                                                                                return true;
+                                                                                                            } else {
+                                                                                                                $.messager.alert("Alerta", "Las contraseñas no coinciden");
+                                                                                                            }
+                                                                                                        } else {
+                                                                                                            $.messager.alert("Alerta", "La contraseña debe tener minimo 4 caracteres");
+                                                                                                        }
+                                                                                                    } else {
+                                                                                                        $.messager.alert("Alerta", "El Cargo no es valido");
+                                                                                                    }
+                                                                                                } else {
+                                                                                                    $.messager.alert("Alerta", "El Titulo no es valido");
+                                                                                                }
+                                                                                            } else {
+                                                                                                $.messager.alert("Alerta", "El telefono contiene caracteres no validos");
+                                                                                            }
+                                                                                        } else {
+                                                                                            $.messager.alert("Alerta", "Debe ingresar una telefono de contacto con al menos 6 digitos");
+                                                                                        }
+                                                                                    } else {
+                                                                                        $.messager.alert("Alerta", "Debe ingresar una direccion");
+                                                                                    }
+                                                                                } else {
+                                                                                    $.messager.alert("Alerta", "Debe ingresar una fecha de nacimiento");
+                                                                                }
+                                                                            } else {
+                                                                                $.messager.alert("Alerta", "Debe seleccionar su sexo");
+                                                                            }
+                                                                        } else {
+                                                                            $.messager.alert("Alerta", "Debe ingresar sus apellidos");
+                                                                        }
+                                                                    } else {
+                                                                        $.messager.alert("Alerta", "Debe ingresar sus nombres");
+                                                                    }
+                                                                } else {
+                                                                    $.messager.alert("Alerta", "El run del menor ingresado no es valido");
+                                                                }
+                                                                return false;
+                                                            }
 
         </script>
     </body>

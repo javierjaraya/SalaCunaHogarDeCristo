@@ -9,9 +9,9 @@ class PertenecerDAO{
         $this->conexion = new ConexionMySQL();
     }
 
-    public function delete($IdNivel) {
+    public function delete($RunPersona) {
         $this->conexion->conectar();
-        $query = "DELETE FROM pertenecer WHERE  IdNivel =  ".$IdNivel." ";
+        $query = "DELETE FROM pertenecer WHERE  runPersona =  ".$RunPersona." ";
         $result = $this->conexion->ejecutar($query);
         $this->conexion->desconectar();
         return $result;
