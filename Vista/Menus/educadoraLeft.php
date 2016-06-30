@@ -7,7 +7,7 @@
                     <div class="arrow"></div>
                     <div class="arrow_border"></div>
                 </div>
-                <a href="index.php">
+                <a href="home.php">
                     <i class="icon-home"></i>
                     <span>Home</span>
                 </a>
