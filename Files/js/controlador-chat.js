@@ -71,11 +71,6 @@ function abrirVentana(id, nombres, run, paso) {
         cantidadVentanasAbiertas++;
         ventanasAbiertas[id] = [id, nombres, run, 0];
         obtenerMensajes(id, nombres, run);
-
-        //POSICIONAR EL FINAL DEL SCRROL
-        $("#m" + id).animate({
-            scrollTop: 2900
-        }, 2000);
     }
 }
 
