@@ -283,8 +283,7 @@ $RunApoderado = htmlspecialchars($_REQUEST['runApoderado']);
 
             function obtenerDatosApoderado() {
                 var runEditar = document.getElementById("RunEditar").value;
-                var url_json = '../Servlet/administrarApoderado.php?accion=BUSCAR_BY_ID&RunPersona=' + runEditar;
-                console.log(url_json);
+                var url_json = '../Servlet/administrarApoderado.php?accion=BUSCAR_BY_ID&RunPersona=' + runEditar;                
                 $.getJSON(
                         url_json,
                         function (dato) {
@@ -315,7 +314,7 @@ $RunApoderado = htmlspecialchars($_REQUEST['runApoderado']);
                             return $(this).form('validate');
                         },
                         success: function (result) {
-                          console.log(result);
+                          //console.log(result);
                             var result = eval('(' + result + ')');
                             if (result.errorMsg) {
                                 $.messager.alert('Error', result.errorMsg);

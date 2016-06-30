@@ -277,14 +277,14 @@ $perfil = $_SESSION["idPerfil"];
                                                             function guardarMenor() {
                                                                 document.getElementById("accion").value = "AGREGAR";
                                                                 if (validar()) {
-                                                                    console.log("validado");
+                                                                    //console.log("validado");
                                                                     $('#fm-menor').form('submit', {
                                                                         url: "../Servlet/administrarMenor.php",
                                                                         onSubmit: function () {
                                                                             return $(this).form('validate');
                                                                         },
                                                                         success: function (result) {
-                                                                            console.log(result);
+                                                                            //console.log(result);
                                                                             var result = eval('(' + result + ')');
                                                                             if (result.errorMsg) {
                                                                                 $.messager.alert('Error', result.errorMsg);

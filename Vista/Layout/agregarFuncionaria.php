@@ -286,14 +286,14 @@ $perfil = $_SESSION["idPerfil"];
                                                             function guardarFuncionaria() {
                                                                 document.getElementById("accion").value = "AGREGAR";
                                                                 if (validar()) {
-                                                                    console.log("validado");
+                                                                    //console.log("validado");
                                                                     $('#fm-Funcionaria').form('submit', {
                                                                         url: "../Servlet/administrarTrabajador.php",
                                                                         onSubmit: function () {
                                                                             return $(this).form('validate');
                                                                         },
                                                                         success: function (result) {
-                                                                            console.log(result);
+                                                                            //console.log(result);
                                                                             var result = eval('(' + result + ')');
                                                                             if (result.errorMsg) {
                                                                                 $.messager.alert('Error', result.errorMsg);

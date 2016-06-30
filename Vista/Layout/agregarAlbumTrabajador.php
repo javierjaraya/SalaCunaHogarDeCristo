@@ -297,7 +297,7 @@ $perfil = $_SESSION["idPerfil"];
                                                                         return $(this).form('validate');
                                                                     },
                                                                     success: function (result) {  
-                                                                        console.log(result);
+                                                                        //console.log(result);
                                                                         var result = eval('(' + result + ')');                                                                       
                                                                         if (result.success) {
                                                                             window.location = "administrarAlbumesTrabajadores.php";

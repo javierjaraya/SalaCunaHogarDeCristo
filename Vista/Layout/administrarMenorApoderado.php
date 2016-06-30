@@ -206,7 +206,7 @@ $perfil = $_SESSION["idPerfil"];
                 $.getJSON(
                         url_json,
                         function (datos) {
-                            console.log(datos);
+                            //console.log(datos);
                             $.each(datos, function (k, v) {
                                 var contenido = "<tr>";
                                 contenido += "<td>" + v.RunPersona + "</td>";
