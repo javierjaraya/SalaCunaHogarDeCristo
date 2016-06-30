@@ -16,6 +16,7 @@ $(function () {
     cargarListaUsuarios();
 });
 
+var contactos = new Array();
 function cargarListaUsuarios() {
     $("#listaUsuarios").empty();
     var url_json = '../Servlet/administrarMensaje.php?accion=OBTIENE_LISTA_CONTACTOS_HTML';
@@ -24,8 +25,9 @@ function cargarListaUsuarios() {
             function (datos) {
                 var count = 1;
                 //data-status = online o  offline
-                $.each(datos.usuarios, function (k, v) {
-
+                $.each(datos.usuarios, function (k, v) {                    
+                    //var runID = (v.Run.substring(0, v.Run.length-1));   
+                    contactos[count] = v.Run;                    
                     var nombreResumen = v.Nombres.split(" ")[0] + " " + v.Apellidos.split(" ")[0];
                     var contenido = "<li onclick='abrirVentana(" + count + ",\"" + nombreResumen + "\"," + v.Run + " ,false)'>"
                     contenido += "    <a data-firstname='" + v.Nombres.split(" ")[0] + "' data-lastname='" + v.Apellidos.split(" ")[0] + "' data-status='online' data-userid='" + count + "' href='#'>";
@@ -40,6 +42,7 @@ function cargarListaUsuarios() {
             }
     );
 }
+
 var cantidadVentanasAbiertas = 0;
 var ventanasAbiertas = new Array();
 function abrirVentana(id, nombres, run, paso) {
@@ -66,13 +69,8 @@ function abrirVentana(id, nombres, run, paso) {
                 + "</div>";
         $("body").append(contenido);
         cantidadVentanasAbiertas++;
-        ventanasAbiertas[id] = [id, nombres, run];
+        ventanasAbiertas[id] = [id, nombres, run, 0];
         obtenerMensajes(id, nombres, run);
-
-        //POSICIONAR EL FINAL DEL SCRROL
-        $("#m" + id).animate({
-            scrollTop: 290
-        }, 2000);
     }
 }
 
@@ -84,17 +82,18 @@ function enviarMensaje(id, runDestino) {
                 document.getElementById("f" + id).reset();//RESETEAMOS LA CASILLA
                 var contenido = "<div class='ui-chatbox-msg' style='display: block; max-width: 200px;'><b>Yo: </b><span>" + texto.trim() + "</span></div>";
                 $("#m" + id).append(contenido);//AGREGAMOS EL TEXTO A LA VENTANA
-
+                var nuevaPos = $("#m" + id).height() * 10;
+                $("#m" + id).animate({
+                    scrollTop: nuevaPos
+                }, 1000);
                 //SE ENVIA EL MENSAJE
                 var url_json = '../Servlet/administrarMensaje.php?accion=AGREGAR&runPara=' + runDestino + "&texto=" + texto.trim();
                 $.getJSON(
                         url_json,
                         function (datos) {
                             var datos = eval(datos);
-                            console.log(datos);
                         }
                 );
-
             }
         }
     });
@@ -116,10 +115,18 @@ function obtenerMensajes(id, nombres, runDestino) {
                     }
                     $("#m" + id).append(contenido);
                 });
-                //POSICIONAR EL FINAL DEL SCRROL
-                $("#m" + id).animate({
-                    scrollTop: 290
-                }, 2000);
+                //array.indexOf(searchElement);
+                //Cuando sea abra la ventana por primera vez automoticamente el scrrol baja al final                                   
+                if (ventanasAbiertas[id] != undefined) {
+                    if (datos.mensajes.length > ventanasAbiertas[id][3]) {
+                        ventanasAbiertas[id][3] = datos.mensajes.length;
+                        //POSICIONAR EL FINAL DEL SCRROL                        
+                        var nuevaPos = $("#m" + id).height() * 10;
+                        $("#m" + id).animate({
+                            scrollTop: nuevaPos
+                        }, 1000);
+                    }
+                }
             }
     );
 }
@@ -177,19 +184,18 @@ function obtenerNotificacionesMensajesNoLeidos() {
                 contenido += "        </li>    ";
                 $("#descripcion-nuevos-mensajes").empty();
                 $("#descripcion-nuevos-mensajes").append(contenido);
-                $.each(datos.mensajes, function (k, v) {
-                    //console.log(v);
+                $.each(datos.mensajes, function (k, v) {                    
                     var hora = v.hora.split(" ");
                     var nombres = v.nombreDesde.split(" ");
                     var apellidos = v.apellidosDesde.split(" ");
                     var mensaje = v.mensaje.substring(0, 40);
                     // onClick='abrirVentana(" + v.runDesde + ",\"" + nombres[0] + apellidos[0]+"\"," + v.runDesde + " ,false)'
-                    contenido = "  <li class='nav-message-body'>";
+                    contenido = "  <li class='nav-message-body' onclick=\"abrirNotificacion('"+v.runDesde+"','" + nombres[0] + " " + apellidos[0] + "')\">";
                     contenido += "            <a>";
                     contenido += "                <img src='../../Files/img/Femenino.jpg' alt='User'>";
                     contenido += "                <div>";
                     contenido += "                    <small class='pull-right'>" + hora[0] + "</small>";
-                    contenido += "                    <strong>" + nombres[0] + apellidos[0] + "</strong>";
+                    contenido += "                    <strong>" + nombres[0] + " " + apellidos[0] + "</strong>";
                     contenido += "                </div>";
                     contenido += "                <div>";
                     contenido += "                    " + mensaje + "...";
@@ -204,4 +210,7 @@ function obtenerNotificacionesMensajesNoLeidos() {
 }
 setInterval(obtenerNotificacionesMensajesNoLeidos, 3000);
 
-
+function abrirNotificacion(runContacto,nombre) {
+    var id = contactos.indexOf(runContacto);        
+    abrirVentana(id, nombre, runContacto, true);
+}
