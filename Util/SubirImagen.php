@@ -3,7 +3,7 @@
 /**
  * Description of SubirImagen
  *
- * @author javier
+ * @author joseline
  */
 class SubirImagen {
 

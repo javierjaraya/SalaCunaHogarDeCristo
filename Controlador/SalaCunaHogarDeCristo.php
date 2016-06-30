@@ -282,6 +282,24 @@ class SalaCunaHogarDeCristo {
         return $this->opinionDAO->findAll();
     }
 
+    
+    public function getAllOpinionsAvisos() {
+        return $this->opinionDAO->findAllAvisos();
+    }
+    public function getAllOpinionsEmergencias() {
+        return $this->opinionDAO->findAllEmergencias();
+    }
+    public function getAllOpinionsFelicitaciones() {
+        return $this->opinionDAO->findAllFelicitaciones();
+    }
+    public function getAllOpinionsSugerencias() {
+        return $this->opinionDAO->findAllSugerencias();
+    }
+    public function getAllOpinionsReclamos() {
+        return $this->opinionDAO->findAllReclamos();
+    }
+    
+    
     public function addOpinion($opinion) {
         return $this->opinionDAO->save($opinion);
     }

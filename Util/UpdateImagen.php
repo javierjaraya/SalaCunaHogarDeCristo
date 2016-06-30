@@ -9,7 +9,7 @@
 /**
  * Description of UpdateImagen
  *
- * @author javie
+ * @author joseline
  */
 class UpdateImagen {
 

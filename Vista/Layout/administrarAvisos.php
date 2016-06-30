@@ -39,7 +39,7 @@ $perfil = $_SESSION["idPerfil"];
 
         <script src="../../Files/Complementos/lib/scroll-slim/jquery.slimscroll.min.js"></script>
         <script src="../../Files/js/common.js"></script>
-        
+
         <link rel="stylesheet" type="text/css" href="../../Files/Complementos/lib/jquery-easyui-1.4.2/themes/default/easyui.css">
         <link rel="stylesheet" type="text/css" href="../../Files/Complementos/lib/jquery-easyui-1.4.2/themes/icon.css">
         <link rel="stylesheet" type="text/css" href="../../Files/Complementos/lib/jquery-easyui-1.4.2/demo/demo.css">
@@ -97,14 +97,9 @@ $perfil = $_SESSION["idPerfil"];
                             <div class="span12">
                                 <div class="social-box social-bordered social-blue">
                                     <div class="header">
-                                        <h4>Apoderados</h4>
+                                        <h4>Avisos</h4>
                                     </div>
                                     <div class="body" style="text-align: center;">
-                                        <div>
-                                            <a class="btn btn-success btn-block" style="width: 200px;float: right; margin-bottom: 1%" onClick="location.href = 'agregarApoderado.php'">
-                                                Agregar apoderado <i class="icon-book" ></i>
-                                            </a>
-                                        </div>
                                         <div class="row-fluid">
                                             <!-- CONTENIDO AQUI -->
 
@@ -112,17 +107,13 @@ $perfil = $_SESSION["idPerfil"];
                                                 <table class="table">
                                                     <thead> 
                                                         <tr> 
-                                                            <th>Run</th> 
+                                                            <th>Fecha</th> 
+                                                            <th>Descripcion</th> 
                                                             <th>Nombres</th> 
-                                                            <th>Apellidos</th> 
-                                                            <th>Sexo</th>
-                                                            <th>Direccion</th>
-                                                            <th>Telefono</th>
-                                                            <th>Quintil</th>
-                                                            <th>Accion</th>
+                                                            <th>Apellidos</th>
                                                         </tr> 
                                                     </thead>
-                                                    <tbody id="tablaApoderados">
+                                                    <tbody id="tablaOpinion">
 
                                                     </tbody>
                                                 </table>
@@ -198,35 +189,26 @@ $perfil = $_SESSION["idPerfil"];
         <script>
             //APODERADOS
             $(function () {
-                cargarApoderados();
+                cargarOpinion();
             });
-            function cargarApoderados() {
-                $("#tablaApoderados").empty();
-                var url_json = '../Servlet/administrarApoderado.php?accion=LISTADOHABILITADOS';
+            function cargarOpinion() {
+                $("#tablaOpinion").empty();
+                var url_json = '../Servlet/administrarOpinion.php?accion=LISTADOAVISOS';
                 $.getJSON(
                         url_json,
                         function (datos) {
                             //console.log(datos);
                             $.each(datos, function (k, v) {
                                 var contenido = "<tr>";
-                                contenido += "<td>" + v.RunPersona + "</td>";
+                                contenido += "<td>" + v.Fecha + "</td>";
+                                contenido += "<td>" + v.Descripcion + "</td>";
                                 contenido += "<td>" + v.Nombres + "</td>";
                                 contenido += "<td>" + v.Apellidos + "</td>";
-                                contenido += "<td>" + v.Sexo + "</td>";
-                                contenido += "<td>" + v.Direccion + "</td>";
-                                contenido += "<td>" + v.Telefono + "</td>";
-                                contenido += "<td>" + v.SituacionSocioeconomica + "</td>";
-                                contenido += "<td>";
-                                contenido += "<button type='button' class='btn btn-warning btn-circle icon-pencil'  onclick='editar(" + v.RunPersona + ")'></button>";
-                                contenido += "</td>";
                                 contenido += "</tr>";
-                                $("#tablaApoderados").append(contenido);
+                                $("#tablaOpinion").append(contenido);
                             });
                         }
                 );
-            }
-            function editar(RunPersona) {
-                window.location = "editarApoderado.php?runApoderado=" + RunPersona;
             }
         </script>
     </body>

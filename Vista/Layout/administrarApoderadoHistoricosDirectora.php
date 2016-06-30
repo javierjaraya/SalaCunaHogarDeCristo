@@ -51,9 +51,9 @@ $perfil = $_SESSION["idPerfil"];
         if ($perfil == 1) {
             include '../Menus/directoraSuperior.php';
         } else if ($perfil == 2) {
-            include '../Menus/educadoraSuperior.php.php';
+            include '../Menus/educadoraSuperior.php';
         } else if ($perfil == 3) {
-            include '../Menus/apoderadoSuperior';
+            include '../Menus/apoderadoSuperior.php';
         }
         ?>
         <!-- FIN MENU SUPERIOR-->

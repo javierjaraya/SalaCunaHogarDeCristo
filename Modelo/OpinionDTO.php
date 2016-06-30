@@ -5,6 +5,8 @@ class OpinionDTO {
     public $Descripcion;
     public $IdTipoOpinion;
     public $RunPersona;
+    public $Nombres;
+    public $Apellidos;
 
     public function OpinionDTO(){
     }
@@ -16,8 +18,23 @@ class OpinionDTO {
     function setIdOpinion($IdOpinion) {
         return $this->IdOpinion = $IdOpinion;
     }
+    function getNombres() {
+        return $this->Nombres;
+    }
 
-    function getFecha() {
+    function getApellidos() {
+        return $this->Apellidos;
+    }
+
+    function setNombres($Nombres) {
+        $this->Nombres = $Nombres;
+    }
+
+    function setApellidos($Apellidos) {
+        $this->Apellidos = $Apellidos;
+    }
+
+        function getFecha() {
         return $this->Fecha;
     }
 

@@ -1,8 +1,10 @@
 <?php
+
 include_once 'Nucleo/ConexionMySQL.php';
 include_once '../../Modelo/OpinionDTO.php';
 
-class OpinionDAO{
+class OpinionDAO {
+
     private $conexion;
 
     public function OpinionDAO() {
@@ -11,7 +13,7 @@ class OpinionDAO{
 
     public function delete($IdOpinion) {
         $this->conexion->conectar();
-        $query = "DELETE FROM opinion WHERE  IdOpinion =  ".$IdOpinion." ";
+        $query = "DELETE FROM opinion WHERE  IdOpinion =  " . $IdOpinion . " ";
         $result = $this->conexion->ejecutar($query);
         $this->conexion->desconectar();
         return $result;
@@ -37,9 +39,112 @@ class OpinionDAO{
         return $opinions;
     }
 
+    public function findAllAvisos() {
+        $this->conexion->conectar();
+        $query = "SELECT  o.Fecha, o.Descripcion, p.Nombres, p.Apellidos FROM `opinion` as o "
+                . " JOIN persona as p ON o.RunPersona = p.RunPersona WHERE o.idOpinion=1";
+        $result = $this->conexion->ejecutar($query);
+        $i = 0;
+        $opinions = array();
+        while ($fila = $result->fetch_row()) {
+            $opinion = new OpinionDTO();
+            $opinion->setFecha($fila[0]);
+            $opinion->setDescripcion($fila[1]);
+
+            $opinion->setNombres($fila[2]);
+            $opinion->setApellidos($fila[3]);
+            $opinions[$i] = $opinion;
+            $i++;
+        }
+        $this->conexion->desconectar();
+        return $opinions;
+    }
+
+    public function findAllEmergencias() {
+        $this->conexion->conectar();
+        $query = "SELECT  o.Fecha, o.Descripcion, p.Nombres, p.Apellidos FROM `opinion` as o "
+                . " JOIN persona as p ON o.RunPersona = p.RunPersona WHERE o.idOpinion=2";
+        $result = $this->conexion->ejecutar($query);
+        $i = 0;
+        $opinions = array();
+        while ($fila = $result->fetch_row()) {
+            $opinion = new OpinionDTO();
+            $opinion->setFecha($fila[0]);
+            $opinion->setDescripcion($fila[1]);
+
+            $opinion->setNombres($fila[2]);
+            $opinion->setApellidos($fila[3]);
+            $opinions[$i] = $opinion;
+            $i++;
+        }
+        $this->conexion->desconectar();
+        return $opinions;
+    }
+
+    public function findAllSugerencias() {
+        $this->conexion->conectar();
+        $query = "SELECT  o.Fecha, o.Descripcion, p.Nombres, p.Apellidos FROM `opinion` as o "
+                . " JOIN persona as p ON o.RunPersona = p.RunPersona WHERE o.idOpinion=3";
+        $result = $this->conexion->ejecutar($query);
+        $i = 0;
+        $opinions = array();
+        while ($fila = $result->fetch_row()) {
+            $opinion = new OpinionDTO();
+            $opinion->setFecha($fila[0]);
+            $opinion->setDescripcion($fila[1]);
+
+            $opinion->setNombres($fila[2]);
+            $opinion->setApellidos($fila[3]);
+            $opinions[$i] = $opinion;
+            $i++;
+        }
+        $this->conexion->desconectar();
+        return $opinions;
+    }
+        public function findAllFelicitaciones() {
+        $this->conexion->conectar();
+        $query = "SELECT  o.Fecha, o.Descripcion, p.Nombres, p.Apellidos FROM `opinion` as o "
+                . " JOIN persona as p ON o.RunPersona = p.RunPersona WHERE o.idOpinion=4";
+        $result = $this->conexion->ejecutar($query);
+        $i = 0;
+        $opinions = array();
+        while ($fila = $result->fetch_row()) {
+            $opinion = new OpinionDTO();
+            $opinion->setFecha($fila[0]);
+            $opinion->setDescripcion($fila[1]);
+
+            $opinion->setNombres($fila[2]);
+            $opinion->setApellidos($fila[3]);
+            $opinions[$i] = $opinion;
+            $i++;
+        }
+        $this->conexion->desconectar();
+        return $opinions;
+    }
+        public function findAllReclamos() {
+        $this->conexion->conectar();
+        $query = "SELECT  o.Fecha, o.Descripcion, p.Nombres, p.Apellidos FROM `opinion` as o "
+                . " JOIN persona as p ON o.RunPersona = p.RunPersona WHERE o.idOpinion=5";
+        $result = $this->conexion->ejecutar($query);
+        $i = 0;
+        $opinions = array();
+        while ($fila = $result->fetch_row()) {
+            $opinion = new OpinionDTO();
+            $opinion->setFecha($fila[0]);
+            $opinion->setDescripcion($fila[1]);
+
+            $opinion->setNombres($fila[2]);
+            $opinion->setApellidos($fila[3]);
+            $opinions[$i] = $opinion;
+            $i++;
+        }
+        $this->conexion->desconectar();
+        return $opinions;
+    }
+
     public function findByID($IdOpinion) {
         $this->conexion->conectar();
-        $query = "SELECT * FROM opinion WHERE  IdOpinion =  ".$IdOpinion." ";
+        $query = "SELECT * FROM opinion WHERE  IdOpinion =  " . $IdOpinion . " ";
         $result = $this->conexion->ejecutar($query);
         $opinion = new OpinionDTO();
         while ($fila = $result->fetch_row()) {
@@ -52,9 +157,10 @@ class OpinionDAO{
         $this->conexion->desconectar();
         return $opinion;
     }
-public function findByTipoOpinion($IdTipoOpinion) {
+
+    public function findByTipoOpinion($IdTipoOpinion) {
         $this->conexion->conectar();
-        $query = "SELECT * FROM opinion WHERE  IdTipoOpinion =  ".$IdTipoOpinion." ";
+        $query = "SELECT * FROM opinion WHERE  IdTipoOpinion =  " . $IdTipoOpinion . " ";
         $result = $this->conexion->ejecutar($query);
         $opinion = new OpinionDTO();
         while ($fila = $result->fetch_row()) {
@@ -67,9 +173,10 @@ public function findByTipoOpinion($IdTipoOpinion) {
         $this->conexion->desconectar();
         return $opinion;
     }
+
     public function findLikeAtrr($cadena) {
         $this->conexion->conectar();
-        $query = "SELECT * FROM opinion WHERE  upper(IdOpinion) LIKE upper(".$cadena.")  OR  upper(Fecha) LIKE upper('".$cadena."')  OR  upper(Descripcion) LIKE upper('".$cadena."')  OR  upper(IdTipoOpinion) LIKE upper(".$cadena.")  OR  upper(RunPersona) LIKE upper('".$cadena."') ";
+        $query = "SELECT * FROM opinion WHERE  upper(IdOpinion) LIKE upper(" . $cadena . ")  OR  upper(Fecha) LIKE upper('" . $cadena . "')  OR  upper(Descripcion) LIKE upper('" . $cadena . "')  OR  upper(IdTipoOpinion) LIKE upper(" . $cadena . ")  OR  upper(RunPersona) LIKE upper('" . $cadena . "') ";
         $result = $this->conexion->ejecutar($query);
         $i = 0;
         $opinions = array();
@@ -90,7 +197,7 @@ public function findByTipoOpinion($IdTipoOpinion) {
     public function save($opinion) {
         $this->conexion->conectar();
         $query = "INSERT INTO opinion (IdOpinion,Fecha,Descripcion,IdTipoOpinion,RunPersona)"
-                . " VALUES ( ".$opinion->getIdOpinion()." , '".$opinion->getFecha()."' , '".$opinion->getDescripcion()."' ,  ".$opinion->getIdTipoOpinion()." , '".$opinion->getRunPersona()."' )";
+                . " VALUES ( " . $opinion->getIdOpinion() . " , '" . $opinion->getFecha() . "' , '" . $opinion->getDescripcion() . "' ,  " . $opinion->getIdTipoOpinion() . " , '" . $opinion->getRunPersona() . "' )";
         $result = $this->conexion->ejecutar($query);
         $this->conexion->desconectar();
         return $result;
@@ -99,13 +206,14 @@ public function findByTipoOpinion($IdTipoOpinion) {
     public function update($opinion) {
         $this->conexion->conectar();
         $query = "UPDATE opinion SET "
-                . "  Fecha = '".$opinion->getFecha()."' ,"
-                . "  Descripcion = '".$opinion->getDescripcion()."' ,"
-                . "  IdTipoOpinion =  ".$opinion->getIdTipoOpinion()." ,"
-                . "  RunPersona = '".$opinion->getRunPersona()."' "
-                . " WHERE  IdOpinion =  ".$opinion->getIdOpinion()." ";
+                . "  Fecha = '" . $opinion->getFecha() . "' ,"
+                . "  Descripcion = '" . $opinion->getDescripcion() . "' ,"
+                . "  IdTipoOpinion =  " . $opinion->getIdTipoOpinion() . " ,"
+                . "  RunPersona = '" . $opinion->getRunPersona() . "' "
+                . " WHERE  IdOpinion =  " . $opinion->getIdOpinion() . " ";
         $result = $this->conexion->ejecutar($query);
         $this->conexion->desconectar();
         return $result;
     }
+
 }

@@ -10,6 +10,26 @@ if ($accion != null) {
         $opinions = $control->getAllOpinions();
         $json = json_encode($opinions);
         echo $json;
+    }if ($accion == "LISTADOAVISOS") {
+        $opinions = $control->getAllOpinionsAvisos();
+        $json = json_encode($opinions);
+        echo $json;
+    }if ($accion == "LISTADOEMERGENCIAS") {
+        $opinions = $control->getAllOpinionsEmergencias();
+        $json = json_encode($opinions);
+        echo $json;
+    }if ($accion == "LISTADOFELICITACIONES") {
+        $opinions = $control->getAllOpinionsFelicitaciones();
+        $json = json_encode($opinions);
+        echo $json;
+    }if ($accion == "LISTADOSUGERENCIAS") {
+        $opinions = $control->getAllOpinionsSugerencias();
+        $json = json_encode($opinions);
+        echo $json;
+    }if ($accion == "LISTADORECLAMOS") {
+        $opinions = $control->getAllOpinionsReclamos();
+        $json = json_encode($opinions);
+        echo $json;
     } else if ($accion == "AGREGAR") {
         $IdOpinion = htmlspecialchars($_REQUEST['IdOpinion']);
         $Fecha = htmlspecialchars($_REQUEST['Fecha']);
@@ -66,12 +86,12 @@ if ($accion != null) {
         $IdTipoOpinion = htmlspecialchars($_REQUEST['IdTipoOpinion']);
         $RunPersona = htmlspecialchars($_REQUEST['RunPersona']);
 
-            $opinion = new OpinionDTO();
-            $opinion->setIdOpinion($IdOpinion);
-            $opinion->setFecha($Fecha);
-            $opinion->setDescripcion($Descripcion);
-            $opinion->setIdTipoOpinion($IdTipoOpinion);
-            $opinion->setRunPersona($RunPersona);
+        $opinion = new OpinionDTO();
+        $opinion->setIdOpinion($IdOpinion);
+        $opinion->setFecha($Fecha);
+        $opinion->setDescripcion($Descripcion);
+        $opinion->setIdTipoOpinion($IdTipoOpinion);
+        $opinion->setRunPersona($RunPersona);
 
         $result = $control->updateOpinion($opinion);
         if ($result) {
