@@ -149,6 +149,7 @@ class MensajeDAO {
                 . " FROM mensaje m JOIN persona p ON m.runDesde = p.runPersona "
                 . " JOIN persona pp ON m.runPara = pp.runPersona "
                 . " WHERE m.estado = 0 AND m.runPara = '".$runPara."' "
+                . " GROUP BY m.runDesde "
                 . " ORDER BY m.hora";
         $result = $this->conexion->ejecutar($query);
         $i = 0;
